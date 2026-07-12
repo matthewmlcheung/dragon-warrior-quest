@@ -4,142 +4,287 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dragon Warrior Quest - By Colette</title>
+    
+    <!-- Import Fonts for the Themes -->
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=VT323&display=swap" rel="stylesheet">
+    
     <style>
+        /* ==========================================
+           🎨 DYNAMIC THEME ENGINE
+           ========================================== */
+        
+        /* THEME 1: FUTURE (GLASSMORPHISM) - DEFAULT */
+        body.theme-future {
+            --font-main: 'Rajdhani', sans-serif;
+            --bg-color: #e0e7ff;
+            --bg-image: radial-gradient(circle at 15% 50%, rgba(255,255,255,0.8), transparent 25%), radial-gradient(circle at 85% 30%, rgba(6, 182, 212, 0.15), transparent 25%);
+            --panel-bg: rgba(255, 255, 255, 0.7);
+            --panel-border: rgba(255, 255, 255, 0.8);
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --accent: #3b82f6;
+            --portal: #06b6d4;
+            --trap: #f43f5e;
+            --btn-primary: linear-gradient(135deg, #0ea5e9, #3b82f6);
+            --btn-hover: linear-gradient(135deg, #38bdf8, #60a5fa);
+            --btn-ai: linear-gradient(135deg, #8b5cf6, #d946ef);
+            --btn-ai-hover: linear-gradient(135deg, #a78bfa, #e879f9);
+            --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+            --tile-bg: rgba(255, 255, 255, 0.8);
+            --tile-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            --log-bg: rgba(255, 255, 255, 0.85);
+            --log-text: #334155;
+            --board-bg: rgba(255, 255, 255, 0.4);
+            --border-radius: 24px;
+            --input-bg: rgba(255, 255, 255, 0.9);
+            --title-color: transparent;
+            --blur: blur(12px);
+        }
+
+        /* THEME 2: PIXELATE (8-BIT RETRO) */
+        body.theme-pixel {
+            --font-main: 'VT323', monospace;
+            --bg-color: #5c94fc;
+            --bg-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
+            --panel-bg: #f8f8f8;
+            --panel-border: #000;
+            --text-main: #000;
+            --text-muted: #444;
+            --accent: #e52521;
+            --portal: #00a8f3;
+            --trap: #e52521;
+            --btn-primary: #80d010;
+            --btn-hover: #92e811;
+            --btn-ai: #a040e0;
+            --btn-ai-hover: #bc55ff;
+            --shadow: 8px 8px 0 rgba(0, 0, 0, 1);
+            --tile-bg: #fff;
+            --tile-shadow: inset -3px -3px 0px rgba(0,0,0,0.2);
+            --log-bg: #0000a0;
+            --log-text: #fff;
+            --board-bg: #000;
+            --border-radius: 0px;
+            --input-bg: #fff;
+            --title-color: #f8d820;
+            --blur: none;
+        }
+
+        /* THEME 3: DARK (ORIGINAL) */
+        body.theme-dark {
+            --font-main: 'Trebuchet MS', sans-serif;
+            --bg-color: #111;
+            --bg-image: radial-gradient(circle at center, #2b2b2b, #111);
+            --panel-bg: linear-gradient(135deg, #3a3f44, #272b30);
+            --panel-border: #555;
+            --text-main: #ecf0f1;
+            --text-muted: #bdc3c7;
+            --accent: #f1c40f;
+            --portal: linear-gradient(135deg, #2980b9, #27ae60);
+            --trap: linear-gradient(135deg, #c0392b, #d35400);
+            --btn-primary: linear-gradient(to bottom, #e74c3c, #c0392b);
+            --btn-hover: linear-gradient(to bottom, #c0392b, #e74c3c);
+            --btn-ai: linear-gradient(135deg, #0984e3, #6c5ce7);
+            --btn-ai-hover: linear-gradient(135deg, #6c5ce7, #0984e3);
+            --shadow: 0 10px 20px rgba(0,0,0,0.8);
+            --tile-bg: linear-gradient(135deg, #7f8c8d, #636e72);
+            --tile-shadow: none;
+            --log-bg: #000;
+            --log-text: #2ecc71;
+            --board-bg: #1a1a1a;
+            --border-radius: 12px;
+            --input-bg: rgba(0,0,0,0.3);
+            --title-color: #f1c40f;
+            --blur: none;
+        }
+
+        /* ==========================================
+           CORE STYLES MAPPED TO VARIABLES
+           ========================================== */
         *, *::before, *::after { box-sizing: border-box; }
 
         body {
-            font-family: 'Trebuchet MS', sans-serif;
-            background: radial-gradient(circle at center, #2b2b2b, #111);
-            color: #ecf0f1;
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            background-image: var(--bg-image);
+            background-attachment: fixed;
+            background-size: auto;
+            color: var(--text-main);
             text-align: center;
             margin: 0;
-            padding: 10px;
+            padding: 20px 10px;
             overflow-x: hidden;
-            position: relative;
+            min-height: 100vh;
+            transition: background 0.3s, color 0.3s;
         }
 
-        /* Centered Language Selector */
-        .lang-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: 15px 0 5px 0;
-            z-index: 100;
-            width: 100%;
-        }
-        .lang-container select {
-            background: #222;
-            color: #f1c40f;
-            border: 2px solid #555;
+        /* Top Bar */
+        .top-bar { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;}
+        .top-bar select {
+            background: var(--input-bg);
+            color: var(--text-main);
+            border: 2px solid var(--panel-border);
             padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 16px;
+            border-radius: var(--border-radius);
+            font-size: clamp(14px, 3vw, 18px);
+            font-family: inherit;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.2s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            outline: none;
         }
-        .lang-container select:hover {
-            border-color: #f1c40f;
-            background: #333;
+
+        /* Headings */
+        h1 { 
+            font-size: clamp(28px, 5vw, 42px); 
+            margin: 0 0 5px 0; 
+            color: var(--title-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
-        
-        h1 { color: #f1c40f; text-transform: uppercase; letter-spacing: 2px; text-shadow: 2px 2px 5px #000; margin-bottom: 5px; font-size: clamp(20px, 5vw, 32px); }
-        h3 { margin-top: 0; color: #bdc3c7; font-style: italic; font-size: clamp(14px, 3vw, 18px); margin-bottom: 15px; }
-        
+        h3 { margin: 0 0 20px 0; color: var(--text-muted); font-size: clamp(16px, 3vw, 18px); font-weight: bold;}
+        h2 { color: var(--text-main); font-size: clamp(20px, 4vw, 24px); margin-bottom: 15px; font-weight: bold;}
+
+        /* Theme Specific Header Overrides */
+        body.theme-future h1 { background: var(--title-bg); -webkit-background-clip: text; }
+        body.theme-pixel h1 { text-shadow: 4px 4px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000; }
+        body.theme-dark h1 { text-shadow: 2px 2px 5px #000; }
+
+        /* Panels */
         #setup-screen, #game-screen {
-            background: linear-gradient(135deg, #3a3f44, #272b30);
-            width: 100%; max-width: 700px; margin: 0 auto; padding: 15px;
-            border-radius: 12px; border: 2px solid #555; box-shadow: 0 10px 20px rgba(0,0,0,0.8);
+            background: var(--panel-bg);
+            backdrop-filter: var(--blur);
+            -webkit-backdrop-filter: var(--blur);
+            width: 100%; 
+            max-width: 800px; 
+            margin: 0 auto; 
+            padding: 25px;
+            border-radius: var(--border-radius); 
+            border: 2px solid var(--panel-border); 
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
         }
         #game-screen { display: none; }
-        
-        /* Expandable Rules Box */
+
+        /* Rules Box */
         details.rules-box {
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid #f1c40f;
-            border-radius: 8px;
-            margin-bottom: 20px;
+            background: rgba(0,0,0,0.05);
+            border: 1px solid var(--panel-border);
+            border-radius: calc(var(--border-radius) / 2);
+            margin-bottom: 25px;
             text-align: left;
-            font-size: clamp(12px, 3vw, 15px);
-            color: #ecf0f1;
-            overflow: hidden;
+            font-size: 16px;
         }
         details.rules-box summary {
-            cursor: pointer;
-            font-weight: bold;
-            color: #f1c40f;
-            text-align: center;
-            font-size: 1.2em;
-            padding: 12px;
-            list-style: none;
-            background: rgba(255, 255, 255, 0.05);
-            transition: background 0.2s;
+            cursor: pointer; color: var(--accent); text-align: center; font-size: 18px; padding: 15px; font-weight: bold; list-style: none;
+            border-bottom: 1px solid var(--panel-border);
         }
         details.rules-box summary::-webkit-details-marker { display: none; }
-        details.rules-box summary:hover { background: rgba(255, 255, 255, 0.1); }
-        details.rules-box summary::before { content: '▶ '; display: inline-block; transition: transform 0.2s; font-size: 0.8em; }
-        details.rules-box[open] summary::before { transform: rotate(90deg); }
-        
-        .rules-content { padding: 0 15px 15px 15px; }
-        .rules-content ul { margin: 0; padding-left: 20px; line-height: 1.6; }
-        .rules-content li { margin-bottom: 8px; }
+        .rules-content { padding: 15px 20px; color: var(--text-main); }
+        .rules-content ul { margin: 0; padding-left: 25px; line-height: 1.6; }
+        .hl { color: var(--accent); font-weight: bold; }
 
-        .hl {
-            color: #e74c3c;
-            font-weight: bold;
-            text-shadow: 1px 1px 2px #000;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 2px 5px;
-            border-radius: 4px;
-            border-bottom: 1px solid #e74c3c;
+        /* Inputs & Layout */
+        input, select {
+            background: var(--input-bg); color: var(--text-main); padding: 10px 15px; margin: 5px; 
+            border-radius: calc(var(--border-radius) / 2); border: 1px solid var(--panel-border); 
+            font-size: 18px; font-family: inherit; font-weight: bold; outline: none; width: 100%;
+        }
+        
+        .player-setup-box { 
+            background: rgba(0,0,0,0.05); padding: 15px; margin-bottom: 15px; 
+            border-radius: calc(var(--border-radius) / 2); border: 1px solid var(--panel-border); 
+        }
+        .player-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+        .skill-desc { font-size: 15px; color: var(--text-muted); font-weight: bold; margin-top: 10px; display: block; }
+
+        /* Buttons */
+        button { 
+            background: var(--btn-primary); color: #fff; cursor: pointer; font-weight: bold; font-family: inherit;
+            border: none; border-radius: calc(var(--border-radius) / 2); padding: 14px 24px; font-size: 18px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2); transition: all 0.2s; width: 100%;
+        }
+        button:hover:not(:disabled) { transform: translateY(-2px); background: var(--btn-hover); }
+        button:disabled { opacity: 0.6; cursor: not-allowed; filter: grayscale(50%); }
+        .ai-btn { background: var(--btn-ai); }
+        .ai-btn:hover:not(:disabled) { background: var(--btn-ai-hover); }
+        
+        body.theme-pixel button { border: 4px solid #000; box-shadow: 4px 4px 0 #000; text-shadow: 2px 2px 0 #000;}
+        body.theme-pixel button:active:not(:disabled) { transform: translate(4px, 4px); box-shadow: 0px 0px 0 #000;}
+        
+        .setup-actions { display: flex; flex-direction: column; align-items: center; gap: 15px; margin-top: 20px; }
+        .setup-actions-top { display: flex; justify-content: center; gap: 15px; width: 100%; }
+
+        /* Stats & Game Controls */
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-bottom: 20px; }
+        .player-stat { 
+            padding: 12px 15px; border-radius: calc(var(--border-radius) / 2); background: var(--input-bg); 
+            border: 2px solid var(--panel-border); text-align: left; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .stat-header { display: flex; justify-content: space-between; font-weight: bold; font-size: 18px; }
+        .stat-ability { color: var(--text-muted); font-size: 14px; margin-top: 5px; display: block; border-top: 1px dashed var(--panel-border); padding-top: 5px;}
+
+        .game-controls { 
+            display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; 
+            background: rgba(0,0,0,0.05); padding: 15px; border-radius: calc(var(--border-radius) / 2); border: 1px solid var(--panel-border);
+        }
+        #turn-indicator { font-size: 24px; margin: 0; padding: 0;}
+        
+        /* Board */
+        #board { 
+            display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; margin: 20px 0 0 0; 
+            padding: 8px; background: var(--board-bg); border: 2px solid var(--panel-border); 
+            border-radius: var(--border-radius); width: 100%; 
+        }
+        .tile { 
+            background: var(--tile-bg); aspect-ratio: 1; display: flex; align-items: center; justify-content: center; 
+            font-size: clamp(12px, 2.5vw, 18px); font-weight: bold; position: relative; color: var(--text-main); 
+            border-radius: calc(var(--border-radius) / 3); border: 1px solid var(--panel-border);
+            box-shadow: var(--tile-shadow); 
+        }
+        .dest-label { 
+            position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%); font-size: 10px; 
+            background: rgba(0,0,0,0.8); color: #fff; padding: 2px 4px; border-radius: 4px; z-index: 5; white-space: nowrap; 
         }
 
-        input, select, button { padding: 10px; margin: 5px; border-radius: 6px; border: 1px solid #222; font-size: clamp(14px, 3vw, 16px); font-weight: bold; width: 100%; }
+        .tile.portal { background: var(--portal); color: #fff; }
+        .tile.trap { background: var(--trap); color: #fff; }
+        .tile.start { background: rgba(0,0,0,0.2); }
+        .tile.end { background: var(--accent); color: #000; box-shadow: 0 0 10px var(--accent); }
         
-        .player-setup-box { background: #222; padding: 10px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #444; }
-        .player-row { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 5px; }
-        .skill-desc { font-size: clamp(12px, 2.5vw, 14px); color: #f1c40f; font-style: italic; margin-top: 5px; display: block; }
-        
-        .ai-btn { background: linear-gradient(135deg, #0984e3, #6c5ce7); color: white; border: 1px solid #a29bfe; box-shadow: 0 0 8px rgba(108, 92, 231, 0.5); }
-        .ai-btn:hover { background: linear-gradient(135deg, #6c5ce7, #0984e3); box-shadow: 0 0 12px rgba(108, 92, 231, 0.8); }
+        .player-token { 
+            position: absolute; font-size: clamp(18px, 4vw, 26px); line-height: 1; 
+            filter: drop-shadow(0px 3px 3px rgba(0,0,0,0.5)); transition: all 0.4s; z-index: 10; 
+        }
 
-        button { background: linear-gradient(to bottom, #e74c3c, #c0392b); color: white; cursor: pointer; text-shadow: 1px 1px 2px black; box-shadow: 0 4px 6px rgba(0,0,0,0.5); transition: all 0.2s; padding: 12px 24px; }
-        button:hover { transform: translateY(2px); box-shadow: 0 2px 3px rgba(0,0,0,0.5); }
-        button:disabled { opacity: 0.6; cursor: not-allowed; }
-        
-        #log { height: 120px; overflow-y: auto; background: #000; color: #2ecc71; padding: 10px; border-radius: 5px; text-align: left; font-family: monospace; font-size: clamp(12px, 2.5vw, 14px); margin: 10px 0 15px 0; border: 1px solid #555; }
+        /* Log */
+        #log { 
+            height: 150px; overflow-y: auto; background: var(--log-bg); color: var(--log-text); 
+            padding: 15px; border-radius: calc(var(--border-radius) / 2); text-align: left; 
+            font-family: monospace; font-size: 15px; font-weight: bold; margin: 15px 0; border: 2px solid var(--panel-border); 
+        }
+        #log div { margin-bottom: 6px; opacity: 0.9;}
+        #log div:first-child { opacity: 1; color: var(--accent); font-weight: bold; }
 
-        #board { display: grid; grid-template-columns: repeat(10, 1fr); gap: 2px; margin: 15px 0 0 0; padding: 4px; background: #1a1a1a; border: 3px solid #f1c40f; border-radius: 8px; box-shadow: inset 0 0 10px black; width: 100%; }
-        .tile { background: linear-gradient(135deg, #7f8c8d, #636e72); aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: clamp(10px, 2.5vw, 14px); font-weight: bold; position: relative; color: #fff; border-radius: 3px; border: 1px solid #444; }
-        .dest-label { position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%); font-size: clamp(7px, 2vw, 11px); background: rgba(0,0,0,0.7); color: #fff; padding: 1px 4px; border-radius: 4px; z-index: 5; white-space: nowrap; }
+        /* Pixel Theme Log Overrides */
+        body.theme-pixel #log { border: 4px solid #fff; box-shadow: 0 0 0 4px #000, inset 0 0 0 2px #000; text-shadow: 2px 2px 0 #000;}
+        body.theme-pixel #log div:first-child { color: #f8d820; }
 
-        .tile.portal { background: linear-gradient(135deg, #2980b9, #27ae60); border-color: #2ecc71; animation: pulse-portal 2s infinite; }
-        .tile.portal::after { content: '🌀'; position: absolute; font-size: clamp(14px, 3vw, 24px); opacity: 0.4; z-index: 1; }
-        .tile.trap { background: linear-gradient(135deg, #c0392b, #d35400); border-color: #e74c3c; animation: pulse-trap 2s infinite; }
-        .tile.trap::after { content: '🔥'; position: absolute; font-size: clamp(14px, 3vw, 24px); opacity: 0.4; z-index: 1; }
-
-        @keyframes pulse-portal { 0% { box-shadow: 0 0 3px #2ecc71; } 50% { box-shadow: 0 0 15px #2ecc71, inset 0 0 8px rgba(255, 255, 255, 0.5); } 100% { box-shadow: 0 0 3px #2ecc71; } }
-        @keyframes pulse-trap { 0% { box-shadow: 0 0 3px #e74c3c; } 50% { box-shadow: 0 0 15px #e74c3c, inset 0 0 8px rgba(0,0,0,0.8); } 100% { box-shadow: 0 0 3px #e74c3c; } }
-        
-        .tile.start { background: #34495e; color: #3498db; }
-        .tile.end { background: linear-gradient(45deg, #f1c40f, #e67e22); font-size: clamp(16px, 4vw, 24px); box-shadow: 0 0 10px #f1c40f; }
-        
-        .player-token { position: absolute; font-size: clamp(14px, 3.5vw, 22px); line-height: 1; text-shadow: 2px 2px 4px rgba(0,0,0,0.8); transition: all 0.4s ease-in-out; z-index: 10; }
-        
-        .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 10px; background: #111; padding: 10px; border-radius: 8px; }
-        @media (max-width: 500px) { .stats { grid-template-columns: 1fr; } }
-
-        .player-stat { padding: 10px; border-radius: 5px; background: #222; font-size: clamp(12px, 2.5vw, 14px); text-align: left; }
-        .stat-header { display: flex; justify-content: space-between; font-weight: bold; font-size: 1.1em; }
-        .stat-ability { color: #bdc3c7; font-size: 0.85em; font-style: italic; margin-top: 4px; display: block; border-top: 1px dashed #444; padding-top: 4px;}
-        
-        .setup-actions { display: flex; flex-direction: column; align-items: center; gap: 5px; margin-top: 15px; }
-        .setup-actions-top { display: flex; justify-content: center; gap: 10px; width: 100%; }
+        @media (max-width: 600px) {
+            .setup-actions-top { flex-direction: column; }
+            .game-controls { flex-direction: column; gap: 15px; align-items: stretch; text-align: center; }
+            .top-bar { flex-direction: column; }
+        }
     </style>
 </head>
-<body>
+<body class="theme-future">
 
-    <div class="lang-container">
+    <!-- Theme & Language Top Bar -->
+    <div class="top-bar">
+        <select id="theme-select" onchange="changeTheme()">
+            <option value="theme-future">🚀 Future Style</option>
+            <option value="theme-pixel">🕹️ Pixelate Style</option>
+            <option value="theme-dark">🌙 Dark Style</option>
+        </select>
         <select id="lang-select" onchange="changeLanguage()">
             <option value="en">English</option>
             <option value="zh">繁體中文</option>
@@ -151,8 +296,8 @@
     <h1 data-i18n="title">Dragon Warrior Quest 🐉</h1>
     <h3 data-i18n="designer">Game Design by Colette</h3>
 
+    <!-- Setup Screen -->
     <div id="setup-screen">
-        
         <details class="rules-box" open>
             <summary data-i18n="rulesTitle">📜 Quest Rules</summary>
             <div class="rules-content">
@@ -167,7 +312,7 @@
         </details>
 
         <h2 data-i18n="prepBattle">⚔️ Prepare for Battle ⚔️</h2>
-        <select id="player-count" onchange="updatePlayerInputs()" style="max-width: 150px;">
+        <select id="player-count" onchange="updatePlayerInputs()" style="max-width: 180px; margin-bottom: 15px;">
             <option value="1">1 Player</option>
             <option value="2">2 Players</option>
             <option value="3">3 Players</option>
@@ -178,23 +323,24 @@
         
         <div class="setup-actions">
             <div class="setup-actions-top">
-                <button onclick="randomizeHeroes()" style="flex: 1; max-width: 200px;" data-i18n="btnRandom">🎲 Randomize</button>
-                <button onclick="startGame()" style="flex: 1; max-width: 200px;" data-i18n="btnStart">Start Quest</button>
+                <button onclick="randomizeHeroes()" style="flex: 1; max-width: 250px; background: var(--text-muted);" data-i18n="btnRandom">🎲 Randomize</button>
+                <button onclick="startGame()" style="flex: 1; max-width: 250px;" data-i18n="btnStart">Start Quest</button>
             </div>
-            <button id="ai-names-btn" onclick="generateAllAINames()" class="ai-btn" style="max-width: 410px; width: 100%;" data-i18n="btnAINames">✨ AI Auto-Name All Players</button>
+            <button id="ai-names-btn" onclick="generateAllAINames()" class="ai-btn" style="max-width: 515px; width: 100%;" data-i18n="btnAINames">✨ AI Auto-Name All Players</button>
         </div>
     </div>
 
+    <!-- Game Screen -->
     <div id="game-screen">
         <div class="stats" id="stats-container"></div>
         
         <div class="game-controls">
-            <h2 id="turn-indicator" style="font-size: clamp(16px, 4vw, 24px); margin: 0; text-align: left; flex: 1;"></h2>
-            <button onclick="resetGame()" style="background: linear-gradient(to bottom, #7f8c8d, #636e72); padding: 8px 12px; font-size: clamp(12px, 3vw, 14px); width: auto;" data-i18n="btnMenu">⬅️ Menu</button>
+            <h2 id="turn-indicator"></h2>
+            <button onclick="resetGame()" style="background: var(--text-muted); padding: 10px 16px; width: auto;" data-i18n="btnMenu">⬅️ Menu</button>
         </div>
         
-        <button id="roll-btn" onclick="takeTurn()" style="max-width: 250px;" data-i18n="btnRoll">Roll Dice 🎲</button>
-        <p id="dice-result" style="font-weight: bold; font-size: clamp(14px, 3vw, 18px); color: #f1c40f; margin: 10px 0; min-height: 22px;"></p>
+        <button id="roll-btn" onclick="takeTurn()" style="max-width: 300px; padding: 16px; font-size: 22px;" data-i18n="btnRoll">Roll Dice 🎲</button>
+        <p id="dice-result" style="font-weight: bold; font-size: clamp(18px, 4vw, 22px); color: var(--accent); margin: 15px 0; min-height: 24px;"></p>
         
         <div id="log"></div>
         <div id="board"></div>
@@ -202,9 +348,17 @@
 
     <script>
         // ==========================================
+        // UI THEME SWITCHER
+        // ==========================================
+        function changeTheme() {
+            const theme = document.getElementById('theme-select').value;
+            document.body.className = theme;
+            localStorage.setItem('preferred-theme', theme);
+        }
+
+        // ==========================================
         // ⚠️ AI CONFIGURATION (FAST AI + BULLETPROOF PARSER)
         // ==========================================
-        
         const BACKUP_NAMES = {
             en: [
                 "Kael", "Lyra", "Draven", "Elara", "Sylas", "Maeve", "Soren", "Aria", "Fenrir", "Nyx",
@@ -212,20 +366,17 @@
                 "Aragorn", "Legolas", "Gimli", "Gandalf", "Frodo", "Samwise", "Galadriel", "Elrond", "Sauron", "Aslan", "Caspian", "Dumbledore", "Sirius", "Severus", "Geralt", "Ciri", "Yennefer", "Triss", "Dandelion", "Vesemir", 
                 "Jon", "Daenerys", "Arya", "Tyrion", "Jaime", "Brienne", "Sandor", "Drizzt", "Elminster", "Rand", "Matrim", "Perrin", "Kaladin", "Shallan", "Dalinar", "Kvothe", "Conan", "Red Sonja"
             ],
-            
             zh: [
                 "翩翩", "落羽", "紅紫朋", "墨淵", "關魂風", "星瑩", "飛影", "寒烈冰", "風政", "飛雲", "零破天", "幻援", "青書", "王傲雪", "張晨", "展逐夢", "鄭孤雲", "子影", "李龍", "鳳舞千", "劍心", "驚雲", "破軍", "力狂瀾", "幽若", "夜", "張星魂", "飛星", "周傲天", "孫悟空", "月", "絕塵", "趙落刃", "袁霜華", "赤子心", "夏侯皓軒", "墨宇", "冼聽雨", "葛斷崖", "殘月", "星星", "黎追風", "幻凝霜", "尋飛仙", "劉淵", "黃紫夜", "龍魂", "陳鳳華", "雲", "司徒孤影", "梁幻生",
                 "諸葛亮", "司馬懿", "曹操", "周瑜", "孫堅", "劉備", "孫策", "呂布", "陸遜", "荀彧", "魯肅", "龐統", "郭嘉", "孫權", "呂蒙", "袁方", "趙雲", "鄧艾", "陸抗", "姜維", "張遼", "羊祜", "賈詡", "關羽", "曹真", "董卓", "馬隆", "張任", "張飛", "張郃", "徐晃", "司馬昭", "司馬師", "杜預", "諸葛瑾", "趙昇", "高順", "鍾會", "馬超", "司馬炎", "夏侯惇", "太史慈", "甘寧", "袁紹", "滿寵", "鄧芝", "朱然", "陳群", "黃忠", "陳登", "程昱", "郝昭", "丁奉", "諸葛誕", "張既", "樂進", "龐德", "劉寵", "朱桓", "荀攸", "魏延", "夏侯淵", "程普", "文鴦", "法正", "牽招", "于禁", "黃蓋", "費禕", "蔣琬", "步騭", "張角", "田豫", "公孫瓚", "張悌", "向寵", "曹丕", "徐盛", "曹仁", "沮授", "諸葛瞻", "夏侯霸", "孫桓", "陳宮", "徐庶", "周泰", "王異", "李嚴", "文醜", "孫尚香", "嚴顏", "審配", "凌統", "韓當", "典韋", "孫禮", "賀齊", "許褚",
                 "令狐沖", "楊過", "小龍女", "東方不敗", "張無忌", "喬峰", "段譽", "虛竹", "郭靖", "黃蓉", "洪七公", "黃藥師", "歐陽鋒", "一燈", "王重陽", "周伯通", "郭襄", "張三丰", "趙敏", "周芷若", "謝遜", "韋一笑", "楊逍", "范遙", "任我行", "向問天", "岳不群", "林平之", "狄雲", "胡斐", "苗人鳳", "陳家洛", "袁承志", "韋小寶", "李尋歡", "楚留香", "陸小鳳", "西門吹雪", "葉孤城", "花滿樓", "傅紅雪", "葉開", "公子羽", "沈浪", "燕南天", "小魚兒", "花無缺", "邀月", "阿飛", "練霓裳", "卓一航", "張丹楓", "步驚雲", "聶風", "無名", "項少龍", "寇仲", "徐子陵", "跋鋒寒", "師妃暄", "婠婠", "浪翻雲", "龐斑", "蕭炎", "林動", "牧塵", "唐三", "葉凡", "石昊", "韓立", "白小純"
             ],
-            
             ja: [
                 "ケン", "サクラ", "リュウ", "ユキ", "アキラ", "レン", "ソラ", "ハル", "シノブ", "カイ", "ゼロ", "ライト", "カゲ", "クロウ", "レイ",
                 "信長", "秀吉", "家康", "幸村", "政宗", "半蔵", "武蔵", "小次郎", "信玄", "謙信", "忠勝", "光秀", "慶次", "左近", "三成", "清正", "宗茂", "小太郎", "五右衛門", "龍馬", "新選組",
                 "アマテラス", "スサノオ", "ツクヨミ", "オロチ", "桃太郎", "金太郎", "浦島太郎", "かぐや", "酒呑童子", "茨木童子", "玉藻前", "天狗", "雷神", "風神",
                 "ナルト", "サスケ", "カカシ", "イタチ", "悟空", "ベジータ", "ピッコロ", "ルフィ", "ゾロ", "サンジ", "イチゴ", "ルキア", "クラウド", "セフィロス", "エアリス", "ティファ", "スコール", "ジタン", "ティーダ", "ユウナ", "ライトニング", "ノクティス", "リンク", "ゼルダ", "ガノンドロフ", "ガッツ", "グリフィス", "剣心", "志々雄", "リヴァイ", "エレン", "ミカサ", "炭治郎", "禰豆子", "善逸", "伊之助", "煉獄", "五条", "虎杖", "伏黒", "宿儺", "エドワード", "アルフォンス", "承太郎", "ディオ", "ジョルノ", "キリト", "アスナ", "セイバー", "アーチャー", "ギルガメッシュ"
             ],
-            
             es: [
                 "Alano", "Elara", "Kaelo", "Briana", "Darian", "Galen", "Ilario", "Lario", "Yael", "Catina"
             ]
@@ -255,10 +406,7 @@
             aiBtn.disabled = true;
 
             const langMap = {
-                'en': 'English',
-                'zh': 'Traditional Chinese (繁體中文)', 
-                'ja': 'Japanese',
-                'es': 'Spanish'
+                'en': 'English', 'zh': 'Traditional Chinese (繁體中文)', 'ja': 'Japanese', 'es': 'Spanish'
             };
             const targetLanguage = langMap[currentLang] || currentLang;
 
@@ -525,7 +673,7 @@
         // ==========================================
 
         const WINNING_TILE = 100;
-        const COLORS = ['#e74c3c', '#3498db', '#9b59b6', '#2ecc71']; 
+        const COLORS = ['#ef4444', '#3b82f6', '#8b5cf6', '#10b981']; 
         const HERO_KEYS = ['🛡️', '🏹', '🧙', '🥷', '🧛', '🧚', '🐺', '👑', '🦉'];
         
         let PORTALS = {}; 
@@ -535,6 +683,11 @@
         let gameWon = false;
 
         window.onload = function() {
+            // Load saved theme on startup
+            const savedTheme = localStorage.getItem('preferred-theme') || 'theme-future';
+            document.getElementById('theme-select').value = savedTheme;
+            document.body.className = savedTheme;
+            
             document.getElementById('lang-select').value = currentLang;
             changeLanguage();
         };
@@ -570,7 +723,7 @@
                 container.innerHTML += `
                     <div class="player-setup-box">
                         <div class="player-row">
-                            <select id="p${i}-icon" onchange="changeHeroDesc(${i})" style="flex: 1; min-width: 120px;">${iconOptionsHTML}</select>
+                            <select id="p${i}-icon" onchange="changeHeroDesc(${i})" style="flex: 1; min-width: 140px;">${iconOptionsHTML}</select>
                             <input type="text" id="p${i}-name" placeholder="Name" value="${defaultName}" style="flex: 2; min-width: 150px;">
                         </div>
                         <span id="p${i}-desc" class="skill-desc">${i18n[currentLang].classes['🛡️'].desc}</span>
@@ -802,9 +955,6 @@
                     }
                 } 
                 else {
-                    // ==========================================
-                    // 🧛 VAMPIRE CHAOS SWAP
-                    // ==========================================
                     if (p.token === '🧛') {
                         const playersAhead = players.filter(other => other.position > p.position);
                         
@@ -913,7 +1063,7 @@
                 let classDesc = i18n[currentLang].classes[p.token].desc;
                 
                 statsHTML += `
-                <div class="player-stat" style="border-left: 4px solid ${p.color}">
+                <div class="player-stat" style="border-left: 6px solid ${p.color};">
                     <div class="stat-header">
                         <span>${displayToken} ${p.name}${wardIcon}</span>
                         <span>💎 ${p.jewels} | Tile: ${p.position}</span>
