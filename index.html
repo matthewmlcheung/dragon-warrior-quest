@@ -103,7 +103,7 @@
         .player-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
         .skill-desc { font-size: 15px; color: var(--text-muted); font-weight: bold; margin-top: 10px; display: block; }
 
-        button { background: var(--btn-primary); color: #fff; cursor: pointer; font-weight: bold; font-family: inherit; border: none; border-radius: calc(var(--border-radius) / 2); padding: 14px 24px; font-size: 18px; box-shadow: 0 4px 6px rgba(0,0,0,0.2); transition: all 0.2s; width: 100%; position: relative; overflow: hidden;}
+        button { background: var(--btn-primary); color: #fff; cursor: pointer; font-weight: bold; font-family: inherit; border: none; border-radius: calc(var(--border-radius) / 2); padding: 14px 24px; font-size: 18px; box-shadow: 0 4px 6px rgba(0,0,0,0.2); transition: all 0.2s; position: relative; overflow: hidden;}
         button:hover:not(:disabled) { transform: translateY(-2px); background: var(--btn-hover); }
         button:disabled { opacity: 0.6; cursor: not-allowed; filter: grayscale(50%); }
         .ai-btn { background: var(--btn-ai); }
@@ -243,7 +243,11 @@
             <button onclick="resetGame()" style="background: var(--text-muted); padding: 10px 16px; width: auto;" data-i18n="btnMenu">⬅️ Menu</button>
         </div>
         
-        <button id="roll-btn" onclick="takeTurn()" style="max-width: 300px; padding: 16px; font-size: 22px;" data-i18n="btnRoll">Roll Dice 🎲</button>
+        <!-- Action Buttons (Roll & Simulate) -->
+        <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+            <button id="roll-btn" onclick="takeTurn()" style="flex: 1; max-width: 300px; padding: 16px; font-size: 22px;" data-i18n="btnRoll">Roll Dice 🎲</button>
+            <button id="sim-btn" onclick="toggleSimulation()" class="ai-btn" style="display: none; flex: 1; max-width: 300px; padding: 16px; font-size: 22px;" data-i18n="btnSimulate">Fast Forward ⏩</button>
+        </div>
         <p id="dice-result" style="font-weight: bold; font-size: clamp(18px, 4vw, 22px); color: var(--accent); margin: 15px 0; min-height: 24px;"></p>
         
         <div id="log"></div>
@@ -252,11 +256,64 @@
 
     <script>
         // ==========================================
+        // SIMULATION ENGINE (Fast Forward)
+        // ==========================================
+        let simulationInterval = null;
+        let isSimulating = false;
+        let isSimButtonUnlocked = false;
+
+        // Secret Developer Hotkey to reveal Simulation Button
+        document.addEventListener('keydown', (e) => {
+            // Prevent triggering if typing in an input field (like a player name)
+            if (e.target.tagName === 'INPUT') return; 
+            
+            if (e.key.toLowerCase() === 'h') {
+                isSimButtonUnlocked = !isSimButtonUnlocked;
+                const simBtn = document.getElementById('sim-btn');
+                if (simBtn && !gameWon && document.getElementById('game-screen').style.display !== 'none') {
+                    simBtn.style.display = isSimButtonUnlocked ? 'inline-block' : 'none';
+                }
+            }
+        });
+
+        function toggleSimulation() {
+            if (gameWon) return; 
+            
+            const simBtn = document.getElementById('sim-btn');
+            const rollBtn = document.getElementById('roll-btn');
+            
+            if (isSimulating) {
+                // Pause simulation
+                clearInterval(simulationInterval);
+                isSimulating = false;
+                simBtn.innerHTML = i18n[currentLang].btnSimulate;
+                rollBtn.disabled = false;
+            } else {
+                // Start simulation
+                isSimulating = true;
+                simBtn.innerHTML = i18n[currentLang].btnStopSim;
+                rollBtn.disabled = true;
+                
+                // Runs rapidly!
+                simulationInterval = setInterval(() => {
+                    takeTurn();
+                    if (gameWon) {
+                        clearInterval(simulationInterval);
+                        isSimulating = false;
+                    }
+                }, 50);
+            }
+        }
+
+        // ==========================================
         // AUDIO ENGINE (Web Audio API)
         // ==========================================
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         
         function playSound(type) {
+            // Suppress standard sounds during simulation to prevent audio glitches
+            if (isSimulating && type !== 'win') return; 
+
             if(audioCtx.state === 'suspended') audioCtx.resume();
             const osc = audioCtx.createOscillator(); const gainNode = audioCtx.createGain();
             osc.connect(gainNode); gainNode.connect(audioCtx.destination);
@@ -288,6 +345,9 @@
         }
 
         function triggerParticles(emoji, count) {
+            // Suppress non-essential particles during fast-forward
+            if (isSimulating && emoji !== '🎉' && emoji !== '🐉') return; 
+
             const container = document.getElementById('game-screen');
             const rect = container.getBoundingClientRect();
             for(let i=0; i<count; i++) {
@@ -299,6 +359,7 @@
         }
 
         function triggerBoardAnim(type) {
+            if (isSimulating) return; // Prevent lag during simulation
             const b = document.getElementById('board'); b.classList.remove('anim-shake', 'anim-flash'); void b.offsetWidth;
             b.classList.add(`anim-${type}`); setTimeout(() => b.classList.remove(`anim-${type}`), 800);
         }
@@ -377,6 +438,7 @@
                 ruleClasses: "<strong>Hero Classes:</strong> Every Hero has a <span class='hl'>unique ability</span>.",
                 prepBattle: "⚔️ Prepare for Battle ⚔️", btnRandom: "🎲 Randomize", btnStart: "Start Quest", btnMenu: "⬅️ Menu", btnRoll: "Roll Dice 🎲",
                 btnAINames: "✨ AI Auto-Name", btnSummoning: "⏳ Summoning...",
+                btnSimulate: "Fast Forward ⏩", btnStopSim: "Stop ⏸",
                 classes: {
                     '🛡️': { name: 'Knight', desc: 'Trap shields cost 2 Jewels. Gains extra +1 Jewel from Milestones.' },
                     '🏹': { name: 'Ranger', desc: '+1 to every dice roll, except when rolling a 6.' },
@@ -422,6 +484,7 @@
                 ruleClasses: "<strong>英雄職業：</strong>每個英雄都有 <span class='hl'>獨特技能</span>。",
                 prepBattle: "⚔️ 準備戰鬥 ⚔️", btnRandom: "🎲 隨機分配", btnStart: "開始任務", btnMenu: "⬅️ 菜單", btnRoll: "擲骰子 🎲",
                 btnAINames: "✨ AI 自動命名", btnSummoning: "⏳ 召喚中...",
+                btnSimulate: "快進 ⏩", btnStopSim: "停止 ⏸",
                 classes: {
                     '🛡️': { name: '騎士', desc: '護盾僅需2顆寶石。里程碑額外獲得+1寶石。' }, 
                     '🏹': { name: '遊俠', desc: '每次擲骰子點數+1（擲出6除外）。' },
@@ -467,6 +530,7 @@
                 ruleClasses: "<strong>ヒーロークラス:</strong> 全てのヒーローに <span class='hl'>固有の能力</span> がある！",
                 prepBattle: "⚔️ 戦闘の準備 ⚔️", btnRandom: "🎲 ランダム", btnStart: "クエスト開始", btnMenu: "⬅️ メニュー", btnRoll: "サイコロ 🎲",
                 btnAINames: "✨ AI自動命名", btnSummoning: "⏳ 召喚中...",
+                btnSimulate: "早送り ⏩", btnStopSim: "停止 ⏸",
                 classes: {
                     '🛡️': { name: '騎士', desc: '盾のコストが2宝石。宝箱から+1宝石。' }, '🏹': { name: 'レンジャー', desc: 'サイコロの目に常に+1（6を出した時を除く）。' },
                     '🧙': { name: '魔法使い', desc: 'ポータルで3宝石獲得。5宝石を自動消費し前方へワープ。' }, '🥷': { name: '忍者', desc: '6を出すと追加ターン。' },
@@ -508,6 +572,7 @@
                 ruleClasses: "<strong>Clases:</strong> Cada Héroe tiene una <span class='hl'>habilidad única</span>.",
                 prepBattle: "⚔️ Preparar Batalla ⚔️", btnRandom: "🎲 Aleatorio", btnStart: "Iniciar", btnMenu: "⬅️ Menú", btnRoll: "Tirar 🎲",
                 btnAINames: "✨ IA Auto-nombrar", btnSummoning: "⏳ Invocando...",
+                btnSimulate: "Avance Rápido ⏩", btnStopSim: "Detener ⏸",
                 classes: {
                     '🛡️': { name: 'Caballero', desc: 'El escudo cuesta 2 Joyas. +1 Joya de Cofres.' }, '🏹': { name: 'Explorador', desc: '+1 a cada tirada de dado, excepto al sacar un 6.' },
                     '🧙': { name: 'Mago', desc: 'Gana 3 Joyas en Portales. Gasta 5 Joyas para forjar portal.' }, '🥷': { name: 'Ninja', desc: 'Sacar un 6 otorga turno extra.' },
@@ -549,6 +614,12 @@
                 const key = el.getAttribute('data-i18n');
                 if (i18n[currentLang][key]) el.innerHTML = i18n[currentLang][key];
             });
+            
+            let simBtn = document.getElementById('sim-btn');
+            if (simBtn) {
+                simBtn.innerHTML = isSimulating ? i18n[currentLang].btnStopSim : i18n[currentLang].btnSimulate;
+            }
+
             if (document.getElementById('setup-screen').style.display !== 'none') updatePlayerInputs();
             else updateUI();
         }
@@ -606,12 +677,24 @@
         }
 
         function resetGame() {
-            players = []; currentPlayerIndex = 0; gameWon = false; suddenDeathTriggered = false;
+            if (simulationInterval) clearInterval(simulationInterval);
+            
+            players = []; currentPlayerIndex = 0; gameWon = false; suddenDeathTriggered = false; isSimulating = false;
             document.body.classList.remove('sudden-death-active');
             document.getElementById('game-screen').style.display = 'none';
             document.getElementById('setup-screen').style.display = 'block';
             document.getElementById('board').innerHTML = ''; document.getElementById('log').innerHTML = '';
-            document.getElementById('dice-result').innerText = ''; document.getElementById('roll-btn').style.display = 'inline-block';
+            document.getElementById('dice-result').innerText = ''; 
+            
+            let simBtn = document.getElementById('sim-btn');
+            if(simBtn) {
+                simBtn.innerHTML = i18n[currentLang].btnSimulate;
+                simBtn.style.display = isSimButtonUnlocked ? 'inline-block' : 'none';
+            }
+            
+            document.getElementById('roll-btn').disabled = false;
+            document.getElementById('roll-btn').style.display = '';
+            
             updatePlayerInputs(); 
         }
 
@@ -860,7 +943,9 @@
             updateUI();
 
             if (p.position === WINNING_TILE) {
-                gameWon = true; document.getElementById('roll-btn').style.display = 'none';
+                gameWon = true; 
+                document.getElementById('roll-btn').style.display = 'none';
+                document.getElementById('sim-btn').style.display = 'none';
                 logMessage(i18n[currentLang].logs.logWin(displayToken, p.name));
                 document.getElementById('turn-indicator').innerHTML = i18n[currentLang].logs.turnWin(displayToken, p.name);
                 playSound('win'); triggerParticles('🎉', 40); triggerParticles('🐉', 5);
@@ -920,7 +1005,10 @@
 
         function logMessage(msg) {
             const log = document.getElementById('log');
-            log.innerHTML = `<div>> ${msg}</div>` + log.innerHTML;
+            // Use insertAdjacentHTML for ultra-fast DOM updates during Simulation
+            log.insertAdjacentHTML('afterbegin', `<div>> ${msg}</div>`);
+            // Trim memory to keep simulation lighting fast
+            if (log.children.length > 50) log.lastElementChild.remove();
         }
     </script>
 </body>
