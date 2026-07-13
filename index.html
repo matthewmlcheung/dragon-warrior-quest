@@ -5,204 +5,105 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dragon Warrior Quest - By Colette</title>
     
-    <!-- Import Fonts for the Themes -->
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=VT323&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&family=Rajdhani:wght@400;600;700&family=VT323&display=swap" rel="stylesheet">
     
     <style>
         /* ==========================================
            🎨 DYNAMIC THEME ENGINE
            ========================================== */
         
-        /* THEME 1: FUTURE (GLASSMORPHISM) - DEFAULT */
         body.theme-future {
-            --font-main: 'Rajdhani', sans-serif;
-            --bg-color: #e0e7ff;
+            --font-main: 'Rajdhani', sans-serif; --bg-color: #e0e7ff; 
             --bg-image: radial-gradient(circle at 15% 50%, rgba(255,255,255,0.8), transparent 25%), radial-gradient(circle at 85% 30%, rgba(6, 182, 212, 0.15), transparent 25%);
-            --panel-bg: rgba(255, 255, 255, 0.7);
-            --panel-border: rgba(255, 255, 255, 0.8);
-            --text-main: #0f172a;
-            --text-muted: #475569;
-            --accent: #3b82f6;
-            --portal: #06b6d4;
-            --trap: #f43f5e;
-            --btn-primary: linear-gradient(135deg, #0ea5e9, #3b82f6);
-            --btn-hover: linear-gradient(135deg, #38bdf8, #60a5fa);
-            --btn-ai: linear-gradient(135deg, #8b5cf6, #d946ef);
-            --btn-ai-hover: linear-gradient(135deg, #a78bfa, #e879f9);
-            --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
-            --tile-bg: rgba(255, 255, 255, 0.8);
-            --tile-shadow: 0 2px 4px rgba(0,0,0,0.02);
-            --log-bg: rgba(255, 255, 255, 0.85);
-            --log-text: #334155;
-            --board-bg: rgba(255, 255, 255, 0.4);
-            --border-radius: 24px;
-            --input-bg: rgba(255, 255, 255, 0.9);
-            --title-color: transparent;
-            --blur: blur(12px);
+            --panel-bg: rgba(255, 255, 255, 0.7); --panel-border: rgba(255, 255, 255, 0.8);
+            --text-main: #0f172a; --text-muted: #475569; --accent: #3b82f6; --portal: #06b6d4; --trap: #f43f5e;
+            --btn-primary: linear-gradient(135deg, #0ea5e9, #3b82f6); --btn-hover: linear-gradient(135deg, #38bdf8, #60a5fa);
+            --btn-ai: linear-gradient(135deg, #8b5cf6, #d946ef); --btn-ai-hover: linear-gradient(135deg, #a78bfa, #e879f9);
+            --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1); --tile-bg: rgba(255, 255, 255, 0.8);
+            --tile-shadow: 0 2px 4px rgba(0,0,0,0.02); --log-bg: rgba(255, 255, 255, 0.85); --log-text: #334155;
+            --board-bg: rgba(255, 255, 255, 0.4); --border-radius: 24px; --input-bg: rgba(255, 255, 255, 0.9);
+            --title-color: transparent; --title-bg: linear-gradient(to right, #2563eb, #06b6d4); --blur: blur(12px);
         }
 
-        /* THEME 2: PIXELATE (8-BIT RETRO) */
+        body.theme-cute {
+            --font-main: 'Nunito', sans-serif; --bg-color: #fdf2f8; 
+            --bg-image: radial-gradient(circle at top left, #fff1f2, transparent 50%), radial-gradient(circle at bottom right, #fce7f3, transparent 50%);
+            --panel-bg: #ffffff; --panel-border: #fbcfe8; --text-main: #500724; --text-muted: #9d174d; --accent: #f43f5e;
+            --portal: #c084fc; --trap: #f43f5e; --btn-primary: linear-gradient(135deg, #f472b6, #fb7185);
+            --btn-hover: linear-gradient(135deg, #fb7185, #f43f5e); --btn-ai: linear-gradient(135deg, #c084fc, #a855f7);
+            --btn-ai-hover: linear-gradient(135deg, #a855f7, #9333ea); --shadow: 0 10px 25px rgba(244, 114, 182, 0.2);
+            --tile-bg: #fff1f2; --tile-shadow: inset 0 -4px 0 rgba(251, 113, 133, 0.15); --log-bg: #fff; --log-text: #831843;
+            --board-bg: #fce7f3; --border-radius: 35px; --input-bg: #fff; --title-color: #be185d; --blur: none;
+        }
+
         body.theme-pixel {
-            --font-main: 'VT323', monospace;
-            --bg-color: #5c94fc;
+            --font-main: 'VT323', monospace; --bg-color: #5c94fc;
             --bg-image: linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px);
-            --panel-bg: #f8f8f8;
-            --panel-border: #000;
-            --text-main: #000;
-            --text-muted: #444;
-            --accent: #e52521;
-            --portal: #00a8f3;
-            --trap: #e52521;
-            --btn-primary: #80d010;
-            --btn-hover: #92e811;
-            --btn-ai: #a040e0;
-            --btn-ai-hover: #bc55ff;
-            --shadow: 8px 8px 0 rgba(0, 0, 0, 1);
-            --tile-bg: #fff;
-            --tile-shadow: inset -3px -3px 0px rgba(0,0,0,0.2);
-            --log-bg: #0000a0;
-            --log-text: #fff;
-            --board-bg: #000;
-            --border-radius: 0px;
-            --input-bg: #fff;
-            --title-color: #f8d820;
-            --blur: none;
+            --panel-bg: #f8f8f8; --panel-border: #000; --text-main: #000; --text-muted: #444; --accent: #e52521;
+            --portal: #00a8f3; --trap: #e52521; --btn-primary: #80d010; --btn-hover: #92e811; --btn-ai: #a040e0;
+            --btn-ai-hover: #bc55ff; --shadow: 8px 8px 0 rgba(0, 0, 0, 1); --tile-bg: #fff;
+            --tile-shadow: inset -3px -3px 0px rgba(0,0,0,0.2); --log-bg: #0000a0; --log-text: #fff;
+            --board-bg: #000; --border-radius: 0px; --input-bg: #fff; --title-color: #f8d820; --blur: none;
         }
 
-        /* THEME 3: DARK (ORIGINAL) */
         body.theme-dark {
-            --font-main: 'Trebuchet MS', sans-serif;
-            --bg-color: #111;
-            --bg-image: radial-gradient(circle at center, #2b2b2b, #111);
-            --panel-bg: linear-gradient(135deg, #3a3f44, #272b30);
-            --panel-border: #555;
-            --text-main: #ecf0f1;
-            --text-muted: #bdc3c7;
-            --accent: #f1c40f;
-            --portal: linear-gradient(135deg, #2980b9, #27ae60);
-            --trap: linear-gradient(135deg, #c0392b, #d35400);
-            --btn-primary: linear-gradient(to bottom, #e74c3c, #c0392b);
-            --btn-hover: linear-gradient(to bottom, #c0392b, #e74c3c);
-            --btn-ai: linear-gradient(135deg, #0984e3, #6c5ce7);
-            --btn-ai-hover: linear-gradient(135deg, #6c5ce7, #0984e3);
-            --shadow: 0 10px 20px rgba(0,0,0,0.8);
-            --tile-bg: linear-gradient(135deg, #7f8c8d, #636e72);
-            --tile-shadow: none;
-            --log-bg: #000;
-            --log-text: #2ecc71;
-            --board-bg: #1a1a1a;
-            --border-radius: 12px;
-            --input-bg: rgba(0,0,0,0.3);
-            --title-color: #f1c40f;
-            --blur: none;
+            --font-main: 'Trebuchet MS', sans-serif; --bg-color: #111; --bg-image: radial-gradient(circle at center, #2b2b2b, #111);
+            --panel-bg: linear-gradient(135deg, #3a3f44, #272b30); --panel-border: #555; --text-main: #ecf0f1;
+            --text-muted: #bdc3c7; --accent: #f1c40f; --portal: linear-gradient(135deg, #2980b9, #27ae60);
+            --trap: linear-gradient(135deg, #c0392b, #d35400); --btn-primary: linear-gradient(to bottom, #e74c3c, #c0392b);
+            --btn-hover: linear-gradient(to bottom, #c0392b, #e74c3c); --btn-ai: linear-gradient(135deg, #0984e3, #6c5ce7);
+            --btn-ai-hover: linear-gradient(135deg, #6c5ce7, #0984e3); --shadow: 0 10px 20px rgba(0,0,0,0.8);
+            --tile-bg: linear-gradient(135deg, #7f8c8d, #636e72); --tile-shadow: none; --log-bg: #000; --log-text: #2ecc71;
+            --board-bg: #1a1a1a; --border-radius: 12px; --input-bg: rgba(0,0,0,0.3); --title-color: #f1c40f; --blur: none;
         }
 
         /* ==========================================
-           CORE STYLES MAPPED TO VARIABLES
+           CORE STYLES
            ========================================== */
         *, *::before, *::after { box-sizing: border-box; }
 
         body {
-            font-family: var(--font-main);
-            background-color: var(--bg-color);
-            background-image: var(--bg-image);
-            background-attachment: fixed;
-            background-size: auto;
-            color: var(--text-main);
-            text-align: center;
-            margin: 0;
-            padding: 20px 10px;
-            overflow-x: hidden;
-            min-height: 100vh;
-            transition: background 0.3s, color 0.3s;
+            font-family: var(--font-main); background-color: var(--bg-color); background-image: var(--bg-image);
+            background-attachment: fixed; background-size: auto; color: var(--text-main); text-align: center;
+            margin: 0; padding: 20px 10px; overflow-x: hidden; min-height: 100vh; transition: background 0.3s, color 0.3s;
         }
 
-        /* Top Bar */
         .top-bar { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; flex-wrap: wrap;}
         .top-bar select {
-            background: var(--input-bg);
-            color: var(--text-main);
-            border: 2px solid var(--panel-border);
-            padding: 8px 16px;
-            border-radius: var(--border-radius);
-            font-size: clamp(14px, 3vw, 18px);
-            font-family: inherit;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            outline: none;
+            background: var(--input-bg); color: var(--text-main); border: 2px solid var(--panel-border); padding: 8px 16px;
+            border-radius: var(--border-radius); font-size: clamp(14px, 3vw, 18px); font-family: inherit; font-weight: bold;
+            cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none;
         }
 
-        /* Headings */
-        h1 { 
-            font-size: clamp(28px, 5vw, 42px); 
-            margin: 0 0 5px 0; 
-            color: var(--title-color);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
+        h1 { font-size: clamp(28px, 5vw, 42px); margin: 0 0 5px 0; color: var(--title-color); text-transform: uppercase; letter-spacing: 2px; position: relative;}
         h3 { margin: 0 0 20px 0; color: var(--text-muted); font-size: clamp(16px, 3vw, 18px); font-weight: bold;}
         h2 { color: var(--text-main); font-size: clamp(20px, 4vw, 24px); margin-bottom: 15px; font-weight: bold;}
 
-        /* Theme Specific Header Overrides */
-        body.theme-future h1 { background: var(--title-bg); -webkit-background-clip: text; }
+        body.theme-future h1 { background: var(--title-bg); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
         body.theme-pixel h1 { text-shadow: 4px 4px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000; }
         body.theme-dark h1 { text-shadow: 2px 2px 5px #000; }
+        body.theme-cute h1 { text-shadow: 3px 3px 0 #fbcfe8; font-weight: 800; letter-spacing: 1px;}
 
-        /* Panels */
         #setup-screen, #game-screen {
-            background: var(--panel-bg);
-            backdrop-filter: var(--blur);
-            -webkit-backdrop-filter: var(--blur);
-            width: 100%; 
-            max-width: 800px; 
-            margin: 0 auto; 
-            padding: 25px;
-            border-radius: var(--border-radius); 
-            border: 2px solid var(--panel-border); 
-            box-shadow: var(--shadow);
-            transition: all 0.3s;
+            background: var(--panel-bg); backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur);
+            width: 100%; max-width: 800px; margin: 0 auto; padding: 25px; border-radius: var(--border-radius); 
+            border: 2px solid var(--panel-border); box-shadow: var(--shadow); transition: all 0.3s; position: relative;
         }
         #game-screen { display: none; }
 
-        /* Rules Box */
-        details.rules-box {
-            background: rgba(0,0,0,0.05);
-            border: 1px solid var(--panel-border);
-            border-radius: calc(var(--border-radius) / 2);
-            margin-bottom: 25px;
-            text-align: left;
-            font-size: 16px;
-        }
-        details.rules-box summary {
-            cursor: pointer; color: var(--accent); text-align: center; font-size: 18px; padding: 15px; font-weight: bold; list-style: none;
-            border-bottom: 1px solid var(--panel-border);
-        }
+        details.rules-box { background: rgba(0,0,0,0.05); border: 1px solid var(--panel-border); border-radius: calc(var(--border-radius) / 2); margin-bottom: 25px; text-align: left; font-size: 16px; }
+        details.rules-box summary { cursor: pointer; color: var(--accent); text-align: center; font-size: 18px; padding: 15px; font-weight: bold; list-style: none; border-bottom: 1px solid var(--panel-border); }
         details.rules-box summary::-webkit-details-marker { display: none; }
         .rules-content { padding: 15px 20px; color: var(--text-main); }
         .rules-content ul { margin: 0; padding-left: 25px; line-height: 1.6; }
         .hl { color: var(--accent); font-weight: bold; }
 
-        /* Inputs & Layout */
-        input, select {
-            background: var(--input-bg); color: var(--text-main); padding: 10px 15px; margin: 5px; 
-            border-radius: calc(var(--border-radius) / 2); border: 1px solid var(--panel-border); 
-            font-size: 18px; font-family: inherit; font-weight: bold; outline: none; width: 100%;
-        }
-        
-        .player-setup-box { 
-            background: rgba(0,0,0,0.05); padding: 15px; margin-bottom: 15px; 
-            border-radius: calc(var(--border-radius) / 2); border: 1px solid var(--panel-border); 
-        }
+        input, select { background: var(--input-bg); color: var(--text-main); padding: 10px 15px; margin: 5px; border-radius: calc(var(--border-radius) / 2); border: 1px solid var(--panel-border); font-size: 18px; font-family: inherit; font-weight: bold; outline: none; width: 100%; }
+        .player-setup-box { background: rgba(0,0,0,0.05); padding: 15px; margin-bottom: 15px; border-radius: calc(var(--border-radius) / 2); border: 1px solid var(--panel-border); }
         .player-row { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
         .skill-desc { font-size: 15px; color: var(--text-muted); font-weight: bold; margin-top: 10px; display: block; }
 
-        /* Buttons */
-        button { 
-            background: var(--btn-primary); color: #fff; cursor: pointer; font-weight: bold; font-family: inherit;
-            border: none; border-radius: calc(var(--border-radius) / 2); padding: 14px 24px; font-size: 18px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.2); transition: all 0.2s; width: 100%;
-        }
+        button { background: var(--btn-primary); color: #fff; cursor: pointer; font-weight: bold; font-family: inherit; border: none; border-radius: calc(var(--border-radius) / 2); padding: 14px 24px; font-size: 18px; box-shadow: 0 4px 6px rgba(0,0,0,0.2); transition: all 0.2s; width: 100%; position: relative; overflow: hidden;}
         button:hover:not(:disabled) { transform: translateY(-2px); background: var(--btn-hover); }
         button:disabled { opacity: 0.6; cursor: not-allowed; filter: grayscale(50%); }
         .ai-btn { background: var(--btn-ai); }
@@ -214,58 +115,29 @@
         .setup-actions { display: flex; flex-direction: column; align-items: center; gap: 15px; margin-top: 20px; }
         .setup-actions-top { display: flex; justify-content: center; gap: 15px; width: 100%; }
 
-        /* Stats & Game Controls */
         .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-bottom: 20px; }
-        .player-stat { 
-            padding: 12px 15px; border-radius: calc(var(--border-radius) / 2); background: var(--input-bg); 
-            border: 2px solid var(--panel-border); text-align: left; box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
+        .player-stat { padding: 12px 15px; border-radius: calc(var(--border-radius) / 2); background: var(--input-bg); border: 2px solid var(--panel-border); text-align: left; box-shadow: 0 2px 5px rgba(0,0,0,0.1); transition: transform 0.3s;}
         .stat-header { display: flex; justify-content: space-between; font-weight: bold; font-size: 18px; }
         .stat-ability { color: var(--text-muted); font-size: 14px; margin-top: 5px; display: block; border-top: 1px dashed var(--panel-border); padding-top: 5px;}
 
-        .game-controls { 
-            display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; 
-            background: rgba(0,0,0,0.05); padding: 15px; border-radius: calc(var(--border-radius) / 2); border: 1px solid var(--panel-border);
-        }
+        .game-controls { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; background: rgba(0,0,0,0.05); padding: 15px; border-radius: calc(var(--border-radius) / 2); border: 1px solid var(--panel-border); }
         #turn-indicator { font-size: 24px; margin: 0; padding: 0;}
         
-        /* Board */
-        #board { 
-            display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; margin: 20px 0 0 0; 
-            padding: 8px; background: var(--board-bg); border: 2px solid var(--panel-border); 
-            border-radius: var(--border-radius); width: 100%; 
-        }
-        .tile { 
-            background: var(--tile-bg); aspect-ratio: 1; display: flex; align-items: center; justify-content: center; 
-            font-size: clamp(12px, 2.5vw, 18px); font-weight: bold; position: relative; color: var(--text-main); 
-            border-radius: calc(var(--border-radius) / 3); border: 1px solid var(--panel-border);
-            box-shadow: var(--tile-shadow); 
-        }
-        .dest-label { 
-            position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%); font-size: 10px; 
-            background: rgba(0,0,0,0.8); color: #fff; padding: 2px 4px; border-radius: 4px; z-index: 5; white-space: nowrap; 
-        }
+        #board { display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; margin: 20px 0 0 0; padding: 8px; background: var(--board-bg); border: 2px solid var(--panel-border); border-radius: var(--border-radius); width: 100%; position: relative; z-index: 1;}
+        .tile { background: var(--tile-bg); aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: clamp(12px, 2.5vw, 18px); font-weight: bold; position: relative; color: var(--text-main); border-radius: calc(var(--border-radius) / 3); border: 1px solid var(--panel-border); box-shadow: var(--tile-shadow); transition: transform 0.2s;}
+        .dest-label { position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%); font-size: 10px; background: rgba(0,0,0,0.8); color: #fff; padding: 2px 4px; border-radius: 4px; z-index: 5; white-space: nowrap; }
 
         .tile.portal { background: var(--portal); color: #fff; }
         .tile.trap { background: var(--trap); color: #fff; }
         .tile.start { background: rgba(0,0,0,0.2); }
         .tile.end { background: var(--accent); color: #000; box-shadow: 0 0 10px var(--accent); }
         
-        .player-token { 
-            position: absolute; font-size: clamp(18px, 4vw, 26px); line-height: 1; 
-            filter: drop-shadow(0px 3px 3px rgba(0,0,0,0.5)); transition: all 0.4s; z-index: 10; 
-        }
+        .player-token { position: absolute; font-size: clamp(18px, 4vw, 26px); line-height: 1; filter: drop-shadow(0px 3px 3px rgba(0,0,0,0.5)); transition: all 0.4s; z-index: 10; }
 
-        /* Log */
-        #log { 
-            height: 150px; overflow-y: auto; background: var(--log-bg); color: var(--log-text); 
-            padding: 15px; border-radius: calc(var(--border-radius) / 2); text-align: left; 
-            font-family: monospace; font-size: 15px; font-weight: bold; margin: 15px 0; border: 2px solid var(--panel-border); 
-        }
+        #log { height: 150px; overflow-y: auto; background: var(--log-bg); color: var(--log-text); padding: 15px; border-radius: calc(var(--border-radius) / 2); text-align: left; font-family: monospace; font-size: 15px; font-weight: bold; margin: 15px 0; border: 2px solid var(--panel-border); }
         #log div { margin-bottom: 6px; opacity: 0.9;}
         #log div:first-child { opacity: 1; color: var(--accent); font-weight: bold; }
 
-        /* Pixel Theme Log Overrides */
         body.theme-pixel #log { border: 4px solid #fff; box-shadow: 0 0 0 4px #000, inset 0 0 0 2px #000; text-shadow: 2px 2px 0 #000;}
         body.theme-pixel #log div:first-child { color: #f8d820; }
 
@@ -274,6 +146,34 @@
             .game-controls { flex-direction: column; gap: 15px; align-items: stretch; text-align: center; }
             .top-bar { flex-direction: column; }
         }
+
+        /* ==========================================
+           🌟 GAME JUICE & SUDDEN DEATH ANIMATIONS
+           ========================================== */
+        @keyframes shake {
+            0%, 100% { transform: translate(0, 0); }
+            20% { transform: translate(-3px, 2px); }
+            40% { transform: translate(3px, -2px); }
+            60% { transform: translate(-3px, -2px); }
+            80% { transform: translate(3px, 2px); }
+        }
+        .anim-shake { animation: shake 0.4s ease-in-out; border-color: var(--trap) !important; box-shadow: 0 0 20px var(--trap) !important; }
+        
+        @keyframes flash {
+            0%, 100% { box-shadow: 0 0 0px var(--portal); transform: scale(1); }
+            50% { box-shadow: 0 0 40px var(--portal); transform: scale(1.02); }
+        }
+        .anim-flash { animation: flash 0.8s ease-out; }
+
+        @keyframes sudden-death-glow {
+            0%, 100% { border-color: #ef4444; box-shadow: 0 0 10px rgba(239, 68, 68, 0.5), inset 0 0 10px rgba(239, 68, 68, 0.5); }
+            50% { border-color: #ff0000; box-shadow: 0 0 35px rgba(255, 0, 0, 0.8), inset 0 0 20px rgba(255, 0, 0, 0.6); }
+        }
+        body.sudden-death-active #board { animation: sudden-death-glow 1.5s infinite alternate !important; }
+        body.sudden-death-active #game-screen { box-shadow: 0 0 30px rgba(239, 68, 68, 0.3) !important; border-color: rgba(239, 68, 68, 0.5) !important; transition: border-color 0.5s; }
+
+        .particle { position: absolute; pointer-events: none; z-index: 1000; animation: float-up 1.5s ease-out forwards; font-size: 24px; filter: drop-shadow(0px 2px 2px rgba(0,0,0,0.5)); }
+        @keyframes float-up { 0% { opacity: 1; transform: translateY(0) scale(0.5); } 50% { transform: translateY(-30px) scale(1.2); } 100% { opacity: 0; transform: translateY(-60px) scale(1) rotate(15deg); } }
     </style>
 </head>
 <body class="theme-future">
@@ -282,6 +182,7 @@
     <div class="top-bar">
         <select id="theme-select" onchange="changeTheme()">
             <option value="theme-future">🚀 Future Style</option>
+            <option value="theme-cute">🎀 Cute Style</option>
             <option value="theme-pixel">🕹️ Pixelate Style</option>
             <option value="theme-dark">🌙 Dark Style</option>
         </select>
@@ -312,11 +213,14 @@
         </details>
 
         <h2 data-i18n="prepBattle">⚔️ Prepare for Battle ⚔️</h2>
+        <!-- MAX PLAYERS INCREASED TO 6! -->
         <select id="player-count" onchange="updatePlayerInputs()" style="max-width: 180px; margin-bottom: 15px;">
             <option value="1">1 Player</option>
             <option value="2">2 Players</option>
             <option value="3">3 Players</option>
             <option value="4">4 Players</option>
+            <option value="5">5 Players</option>
+            <option value="6">6 Players</option>
         </select>
         
         <div id="player-inputs"></div>
@@ -348,6 +252,58 @@
 
     <script>
         // ==========================================
+        // AUDIO ENGINE (Web Audio API)
+        // ==========================================
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        
+        function playSound(type) {
+            if(audioCtx.state === 'suspended') audioCtx.resume();
+            const osc = audioCtx.createOscillator(); const gainNode = audioCtx.createGain();
+            osc.connect(gainNode); gainNode.connect(audioCtx.destination);
+            const now = audioCtx.currentTime;
+            
+            if (type === 'roll') {
+                osc.type = 'square'; osc.frequency.setValueAtTime(400, now); osc.frequency.exponentialRampToValueAtTime(600, now + 0.1);
+                gainNode.gain.setValueAtTime(0.05, now); gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+                osc.start(now); osc.stop(now + 0.1);
+            } else if (type === 'portal') {
+                osc.type = 'sine'; osc.frequency.setValueAtTime(300, now); osc.frequency.exponentialRampToValueAtTime(1200, now + 0.5);
+                gainNode.gain.setValueAtTime(0, now); gainNode.gain.linearRampToValueAtTime(0.1, now + 0.2); gainNode.gain.linearRampToValueAtTime(0, now + 0.5);
+                osc.start(now); osc.stop(now + 0.5);
+            } else if (type === 'trap') {
+                osc.type = 'sawtooth'; osc.frequency.setValueAtTime(150, now); osc.frequency.exponentialRampToValueAtTime(40, now + 0.4);
+                gainNode.gain.setValueAtTime(0.15, now); gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
+                osc.start(now); osc.stop(now + 0.4);
+            } else if (type === 'jewel') {
+                osc.type = 'sine'; osc.frequency.setValueAtTime(1200, now);
+                gainNode.gain.setValueAtTime(0.05, now); gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+                osc.start(now); osc.stop(now + 0.3);
+            } else if (type === 'win') {
+                [440, 554.37, 659.25].forEach(f => {
+                    const o = audioCtx.createOscillator(); const g = audioCtx.createGain(); o.type = 'triangle'; o.frequency.value = f;
+                    o.connect(g); g.connect(audioCtx.destination); g.gain.setValueAtTime(0.05, now); g.gain.linearRampToValueAtTime(0.1, now + 0.2);
+                    g.gain.exponentialRampToValueAtTime(0.01, now + 1.5); o.start(now); o.stop(now + 1.5);
+                });
+            }
+        }
+
+        function triggerParticles(emoji, count) {
+            const container = document.getElementById('game-screen');
+            const rect = container.getBoundingClientRect();
+            for(let i=0; i<count; i++) {
+                let p = document.createElement('div'); p.className = 'particle'; p.innerText = emoji;
+                let x = (Math.random() * rect.width * 0.8) + (rect.width * 0.1); let y = (Math.random() * rect.height * 0.5) + (rect.height * 0.2);
+                p.style.left = `${x}px`; p.style.top = `${y}px`; p.style.animationDelay = `${Math.random() * 0.2}s`;
+                container.appendChild(p); setTimeout(() => p.remove(), 2000);
+            }
+        }
+
+        function triggerBoardAnim(type) {
+            const b = document.getElementById('board'); b.classList.remove('anim-shake', 'anim-flash'); void b.offsetWidth;
+            b.classList.add(`anim-${type}`); setTimeout(() => b.classList.remove(`anim-${type}`), 800);
+        }
+
+        // ==========================================
         // UI THEME SWITCHER
         // ==========================================
         function changeTheme() {
@@ -357,112 +313,59 @@
         }
 
         // ==========================================
-        // ⚠️ AI CONFIGURATION (FAST AI + BULLETPROOF PARSER)
+        // AI CONFIGURATION
         // ==========================================
         const BACKUP_NAMES = {
-            en: [
-                "Kael", "Lyra", "Draven", "Elara", "Sylas", "Maeve", "Soren", "Aria", "Fenrir", "Nyx",
-                "Arthur", "Merlin", "Lancelot", "Gawain", "Guinevere", "Morgana", "Percival", "Galahad", "Mordred", "Robin", "Beowulf", "Achilles", "Hector", "Odysseus", "Hercules", "Leonidas", "Ragnar", "Bjorn", "Lagertha", "Rollo", "Sigurd", "Odin", "Thor", "Loki", "Freya", "Valkyrie",
-                "Aragorn", "Legolas", "Gimli", "Gandalf", "Frodo", "Samwise", "Galadriel", "Elrond", "Sauron", "Aslan", "Caspian", "Dumbledore", "Sirius", "Severus", "Geralt", "Ciri", "Yennefer", "Triss", "Dandelion", "Vesemir", 
-                "Jon", "Daenerys", "Arya", "Tyrion", "Jaime", "Brienne", "Sandor", "Drizzt", "Elminster", "Rand", "Matrim", "Perrin", "Kaladin", "Shallan", "Dalinar", "Kvothe", "Conan", "Red Sonja"
-            ],
-            zh: [
-                "翩翩", "落羽", "紅紫朋", "墨淵", "關魂風", "星瑩", "飛影", "寒烈冰", "風政", "飛雲", "零破天", "幻援", "青書", "王傲雪", "張晨", "展逐夢", "鄭孤雲", "子影", "李龍", "鳳舞千", "劍心", "驚雲", "破軍", "力狂瀾", "幽若", "夜", "張星魂", "飛星", "周傲天", "孫悟空", "月", "絕塵", "趙落刃", "袁霜華", "赤子心", "夏侯皓軒", "墨宇", "冼聽雨", "葛斷崖", "殘月", "星星", "黎追風", "幻凝霜", "尋飛仙", "劉淵", "黃紫夜", "龍魂", "陳鳳華", "雲", "司徒孤影", "梁幻生",
-                "諸葛亮", "司馬懿", "曹操", "周瑜", "孫堅", "劉備", "孫策", "呂布", "陸遜", "荀彧", "魯肅", "龐統", "郭嘉", "孫權", "呂蒙", "袁方", "趙雲", "鄧艾", "陸抗", "姜維", "張遼", "羊祜", "賈詡", "關羽", "曹真", "董卓", "馬隆", "張任", "張飛", "張郃", "徐晃", "司馬昭", "司馬師", "杜預", "諸葛瑾", "趙昇", "高順", "鍾會", "馬超", "司馬炎", "夏侯惇", "太史慈", "甘寧", "袁紹", "滿寵", "鄧芝", "朱然", "陳群", "黃忠", "陳登", "程昱", "郝昭", "丁奉", "諸葛誕", "張既", "樂進", "龐德", "劉寵", "朱桓", "荀攸", "魏延", "夏侯淵", "程普", "文鴦", "法正", "牽招", "于禁", "黃蓋", "費禕", "蔣琬", "步騭", "張角", "田豫", "公孫瓚", "張悌", "向寵", "曹丕", "徐盛", "曹仁", "沮授", "諸葛瞻", "夏侯霸", "孫桓", "陳宮", "徐庶", "周泰", "王異", "李嚴", "文醜", "孫尚香", "嚴顏", "審配", "凌統", "韓當", "典韋", "孫禮", "賀齊", "許褚",
-                "令狐沖", "楊過", "小龍女", "東方不敗", "張無忌", "喬峰", "段譽", "虛竹", "郭靖", "黃蓉", "洪七公", "黃藥師", "歐陽鋒", "一燈", "王重陽", "周伯通", "郭襄", "張三丰", "趙敏", "周芷若", "謝遜", "韋一笑", "楊逍", "范遙", "任我行", "向問天", "岳不群", "林平之", "狄雲", "胡斐", "苗人鳳", "陳家洛", "袁承志", "韋小寶", "李尋歡", "楚留香", "陸小鳳", "西門吹雪", "葉孤城", "花滿樓", "傅紅雪", "葉開", "公子羽", "沈浪", "燕南天", "小魚兒", "花無缺", "邀月", "阿飛", "練霓裳", "卓一航", "張丹楓", "步驚雲", "聶風", "無名", "項少龍", "寇仲", "徐子陵", "跋鋒寒", "師妃暄", "婠婠", "浪翻雲", "龐斑", "蕭炎", "林動", "牧塵", "唐三", "葉凡", "石昊", "韓立", "白小純"
-            ],
-            ja: [
-                "ケン", "サクラ", "リュウ", "ユキ", "アキラ", "レン", "ソラ", "ハル", "シノブ", "カイ", "ゼロ", "ライト", "カゲ", "クロウ", "レイ",
-                "信長", "秀吉", "家康", "幸村", "政宗", "半蔵", "武蔵", "小次郎", "信玄", "謙信", "忠勝", "光秀", "慶次", "左近", "三成", "清正", "宗茂", "小太郎", "五右衛門", "龍馬", "新選組",
-                "アマテラス", "スサノオ", "ツクヨミ", "オロチ", "桃太郎", "金太郎", "浦島太郎", "かぐや", "酒呑童子", "茨木童子", "玉藻前", "天狗", "雷神", "風神",
-                "ナルト", "サスケ", "カカシ", "イタチ", "悟空", "ベジータ", "ピッコロ", "ルフィ", "ゾロ", "サンジ", "イチゴ", "ルキア", "クラウド", "セフィロス", "エアリス", "ティファ", "スコール", "ジタン", "ティーダ", "ユウナ", "ライトニング", "ノクティス", "リンク", "ゼルダ", "ガノンドロフ", "ガッツ", "グリフィス", "剣心", "志々雄", "リヴァイ", "エレン", "ミカサ", "炭治郎", "禰豆子", "善逸", "伊之助", "煉獄", "五条", "虎杖", "伏黒", "宿儺", "エドワード", "アルフォンス", "承太郎", "ディオ", "ジョルノ", "キリト", "アスナ", "セイバー", "アーチャー", "ギルガメッシュ"
-            ],
-            es: [
-                "Alano", "Elara", "Kaelo", "Briana", "Darian", "Galen", "Ilario", "Lario", "Yael", "Catina"
-            ]
+            en: ["Kael", "Lyra", "Draven", "Elara", "Sylas", "Maeve", "Soren", "Aria", "Fenrir", "Nyx", "Arthur", "Merlin", "Lancelot", "Gawain", "Guinevere", "Morgana"],
+            zh: ["翩翩", "落羽", "紅紫朋", "墨淵", "關魂風", "星瑩", "飛影", "寒烈冰", "風政", "飛雲", "零破天", "諸葛亮", "司馬懿", "曹操", "周瑜", "孫堅"],
+            ja: ["ケン", "サクラ", "リュウ", "ユキ", "アキラ", "レン", "ソラ", "ハル", "シノブ", "カイ", "信長", "秀吉", "家康", "幸村", "政宗"],
+            es: ["Alano", "Elara", "Kaelo", "Briana", "Darian", "Galen", "Ilario", "Lario", "Yael", "Catina"]
         };
 
         async function generateAllAINames() {
             const count = parseInt(document.getElementById('player-count').value);
-            const aiBtn = document.getElementById('ai-names-btn');
-            const originalBtnText = aiBtn.innerHTML;
-            
-            const originalNames = [];
-            const classNames = [];
+            const aiBtn = document.getElementById('ai-names-btn'); const originalBtnText = aiBtn.innerHTML;
+            const originalNames = []; const classNames = [];
             
             for (let i = 1; i <= count; i++) {
                 const inputField = document.getElementById(`p${i}-name`);
                 const selectedIcon = document.getElementById(`p${i}-icon`).value;
                 const heroClass = i18n[currentLang].classes[selectedIcon].name;
-                
-                originalNames[i] = inputField.value.trim() || heroClass;
-                classNames.push(heroClass);
-                
-                inputField.value = "Summoning...";
-                inputField.disabled = true;
+                originalNames[i] = inputField.value.trim() || heroClass; classNames.push(heroClass);
+                inputField.value = "Summoning..."; inputField.disabled = true;
             }
-
-            aiBtn.innerHTML = i18n[currentLang].btnSummoning || "⏳ Summoning...";
-            aiBtn.disabled = true;
-
-            const langMap = {
-                'en': 'English', 'zh': 'Traditional Chinese (繁體中文)', 'ja': 'Japanese', 'es': 'Spanish'
-            };
-            const targetLanguage = langMap[currentLang] || currentLang;
-
+            aiBtn.innerHTML = i18n[currentLang].btnSummoning || "⏳ Summoning..."; aiBtn.disabled = true;
+            const langMap = {'en': 'English', 'zh': 'Traditional Chinese', 'ja': 'Japanese', 'es': 'Spanish'};
             let apiSuccess = false;
 
             try {
-                const prompt = `Generate exactly ${count} real names for: ${classNames.join(', ')}. Language: ${targetLanguage}. Reply with ONLY the names separated by commas. No intro text, no numbers, no bullet points.`;
-                const seed = Math.floor(Math.random() * 1000000);
-                const url = `https://text.pollinations.ai/${encodeURIComponent(prompt)}?seed=${seed}`;
-
-                const response = await fetch(url);
+                const prompt = `Generate exactly ${count} real names for: ${classNames.join(', ')}. Language: ${langMap[currentLang] || currentLang}. Reply with ONLY the names separated by commas. No intro text.`;
+                const response = await fetch(`https://text.pollinations.ai/${encodeURIComponent(prompt)}?seed=${Math.floor(Math.random() * 1000000)}`);
                 if (!response.ok) throw new Error("API Error");
-
-                const textResponse = await response.text();
-                console.log("Raw AI Output:", textResponse); 
-                
-                let cleanText = textResponse;
-                cleanText = cleanText.replace(/\n/g, ",");
-                cleanText = cleanText.replace(/[0-9]+\.|-|\*|"|'/g, "");
-                cleanText = cleanText.replace(/Here are.*:|Sure.*:|These are.*:/gi, "");
-                
-                let generatedNames = cleanText.split(',')
-                    .map(n => n.trim())
-                    .filter(n => n.length > 0 && !n.toLowerCase().includes("sure") && !n.toLowerCase().includes("names"));
+                let cleanText = (await response.text()).replace(/\n/g, ",").replace(/[0-9]+\.|-|\*|"|'/g, "").replace(/Here are.*:|Sure.*:|These are.*:/gi, "");
+                let generatedNames = cleanText.split(',').map(n => n.trim()).filter(n => n.length > 0 && !n.toLowerCase().includes("sure"));
 
                 if (generatedNames.length >= count) {
                     for (let i = 1; i <= count; i++) {
-                        const inputField = document.getElementById(`p${i}-name`);
-                        let finalName = generatedNames[i-1].split(" ")[0]; 
-                        inputField.value = finalName || originalNames[i];
-                        inputField.disabled = false;
+                        document.getElementById(`p${i}-name`).value = generatedNames[i-1].split(" ")[0] || originalNames[i];
+                        document.getElementById(`p${i}-name`).disabled = false;
                     }
                     apiSuccess = true; 
                 }
-                
-            } catch (error) {
-                console.error("AI Generation Failed:", error);
-            }
+            } catch (error) { console.error("AI Gen Failed:", error); }
 
             if (!apiSuccess) {
-                let selectedLanguage = BACKUP_NAMES[currentLang] ? currentLang : 'en';
-                let shuffled = [...BACKUP_NAMES[selectedLanguage]].sort(() => 0.5 - Math.random());
-                
+                let shuffled = [...BACKUP_NAMES[currentLang] || BACKUP_NAMES['en']].sort(() => 0.5 - Math.random());
                 for (let i = 1; i <= count; i++) {
-                    const inputField = document.getElementById(`p${i}-name`);
-                    inputField.value = shuffled[i - 1] || originalNames[i]; 
-                    inputField.disabled = false;
+                    document.getElementById(`p${i}-name`).value = shuffled[i - 1] || originalNames[i]; 
+                    document.getElementById(`p${i}-name`).disabled = false;
                 }
             }
-
-            aiBtn.innerHTML = originalBtnText;
-            aiBtn.disabled = false;
+            aiBtn.innerHTML = originalBtnText; aiBtn.disabled = false;
         }
 
         // ==========================================
-        // LOCALIZATION (i18n) & DYNAMIC LOGS
+        // LOCALIZATION (i18n)
         // ==========================================
         const i18n = {
             en: {
@@ -471,45 +374,43 @@
                 rulePortals: "<strong>Portals & Traps:</strong> <span class='hl'>Magic Portals 🌀</span> jump you forward. <span class='hl'>Dragon Traps 🔥</span> drop you backward.",
                 ruleShield: "<strong>Jewel Shield:</strong> Spend <span class='hl'>💎 Jewels x 3</span> automatically to shatter a trap and stay safe!",
                 ruleMilestone: "<strong>Milestones:</strong> Passing tiles <span class='hl'>25, 50, and 75</span> yields <span class='hl'>Treasure Chests</span> containing 💎 Jewels x 1.",
-                ruleClasses: "<strong>Hero Classes:</strong> Every Hero has a <span class='hl'>unique ability</span>. Pick your favorite or Randomize!",
+                ruleClasses: "<strong>Hero Classes:</strong> Every Hero has a <span class='hl'>unique ability</span>.",
                 prepBattle: "⚔️ Prepare for Battle ⚔️", btnRandom: "🎲 Randomize", btnStart: "Start Quest", btnMenu: "⬅️ Menu", btnRoll: "Roll Dice 🎲",
-                btnAINames: "✨ AI Auto-Name All Players", btnSummoning: "⏳ Summoning...", btnWaking: "💤 Waking AI...",
+                btnAINames: "✨ AI Auto-Name", btnSummoning: "⏳ Summoning...",
                 classes: {
                     '🛡️': { name: 'Knight', desc: 'Trap shields cost 2 Jewels. Gains extra +1 Jewel from Milestones.' },
-                    '🏹': { name: 'Ranger', desc: '+1 to every dice roll.' },
+                    '🏹': { name: 'Ranger', desc: '+1 to every dice roll, except when rolling a 6.' },
                     '🧙': { name: 'Mage', desc: 'Earns 3 Jewels from Portals. Auto-spends 5 Jewels to Forge a Portal forward.' },
                     '🥷': { name: 'Ninja', desc: 'Rolling a 6 grants a bonus turn.' },
-                    '🧛': { name: 'Vampire', desc: 'Swaps with a random player ahead when trapped. If leading, gains 3 Jewels instead.' },
+                    '🧛': { name: 'Vampire', desc: 'Costs 1 Jewel to swap with a player ahead when trapped, but skips next turn to sleep. If leading, gains 1 Jewel instead.' },
                     '🧚': { name: 'Fairy', desc: 'Starts with 3 Jewels. Rolling 6 shields everyone and taxes 1 Jewel each.' },
                     '🐺': { name: 'Werewolf', desc: 'Immune to 1 Trap as a Wolf. Changes to Human after a trap, and back to Wolf after next.' },
                     '👑': { name: 'Royal', desc: 'Never bounces back at the end of the board.' },
-                    '🦉': { name: 'Scholar', desc: 'Closes Portals. Deepens Traps, pushing their destination lower after use.' }
+                    '🦉': { name: 'Scholar', desc: 'Studies the board. Earns 1 Jewel whenever ANY player (including themselves) triggers a Portal.' },
+                    '🦹': { name: 'Rogue', desc: 'On odd rolls (1, 3, 5), steals 1 Jewel from the richest player (skips next turn if target is Knight/Royal). If Rogue is already the richest, gives 1 Jewel to the poorest instead.' },
+                    '🔮': { name: 'Oracle', desc: 'Foresight: Dice rolls are always strictly larger than the previous roll. Resets after rolling a 6.' }
                 },
                 logs: {
-                    logStart: "System: The Quest begins!",
-                    logRoll: (t, n, r) => `${t} ${n} rolled a ${r}!`,
-                    logRangerBonus: " (+1 Ranger Speed)",
-                    logFairyMagic: "🧚 FAIRY MAGIC! Rolled a 6! Everyone gets Trap Immunity for 1 turn, and pays tribute!",
-                    logTribute: (g, r) => `💎 ${g} gave 1 Jewel to ${r}.`,
-                    logRoyalStop: (n) => `👑 ${n} used Royal privilege to stop exactly at the Lair!`,
-                    logBounce: (t, n, p) => `${t} ${n} overshot! Bounced back to ${p}.`,
-                    logPortal: (t, n, j, p) => `✨ PORTAL! ${t} ${n} earned 💎 ${j} Jewel(s) and jumped to ${p}!`,
-                    logScholarClose: (p) => `🦉 KNOWLEDGE! The Scholar permanently closed the portal at ${p}!`,
-                    logWerewolfImmune: (p) => `🐺 ROAR! The Werewolf is immune to the trap at ${p}! (Transforms to Human 👨)`,
-                    logFairyWard: (t, n, p) => `🧚 FAIRY WARD! ${t} ${n} is immune to the trap at ${p}!`,
-                    logShielded: (t, n, c, p) => `🛡️ SHIELDED! ${t} ${n} spent 💎 ${c} Jewel(s) to shatter the trap at ${p}!`,
-                    logWolfTransform: (n) => `🐺 FULL MOON! ${n} transforms back into a Werewolf!`,
-                    logVampireFeed: (n, p) => `🔥 TRAP! 🧛 ${n} fell to ${p}! The Vampire fed in the dark and gained 💎 3 Jewels!`,
-                    logVampireSwap: (n1, n2, p) => `🔥 TRAP! 🧛 BLOOD MAGIC! ${n1} swapped places with ${n2}! ${n2} is dragged down to ${p}!`,
-                    logTrap: (t, n, s, e) => `🔥 TRAP! ${t} ${n} fell from ${s} back to ${e}!`,
-                    logScholarTrap: (s, e) => `🦉 ALCHEMY! The Scholar deepened the trap at ${s}! The next victim will fall all the way to ${e}!`,
-                    logMoveSafe: (t, n, p) => `${t} ${n} moved safely to tile ${p}.`,
-                    logMilestone: (t, n, p, a) => `🎁 MILESTONE! ${t} ${n} crossed tile ${p} and found a Treasure Chest with 💎 ${a} Jewels!`,
-                    logMagePortal: (t, n, s, e) => `🌌 FORGE PORTAL! ${t} ${n} automatically spent 5 Jewels and ripped space to permanently spawn a portal from ${s} to ${e}!`,
-                    logWin: (t, n) => `⚔️ EPIC BATTLE! ⚔️ ${t} ${n} defeated the Dragon!`,
-                    turnWin: (t, n) => `👑 ${t} ${n} WINS! 👑`,
-                    logNinja: (n) => `🥷 NINJA REFLEXES! ${n} rolled a 6 and gets a bonus turn!`,
-                    turnIndicator: (t, n) => `${t} ${n}'s Turn`
+                    logStart: "System: The Quest begins!", logRoll: (t, n, r) => `${t} ${n} rolled a ${r}!`, logRangerBonus: " (+1 Ranger Speed)",
+                    logOracleForesight: " (🔮 Foresight Active)", logUnderdog: " (🔥 +1 Underdog Boost!)", logSuddenDeath: "⚠️ SUDDEN DEATH! A player reached Tile 90! The Dragon awakens...",
+                    logRogueSteal: (n1, n2) => `🦹 PICKPOCKET! ${n1} rolled odd and stole 1 Jewel from the wealthiest player, ${n2}!`,
+                    logRogueGive: (n1, n2) => `🏹 ROBIN HOOD! ${n1} is the richest and gave 1 Jewel to the poorest player, ${n2}!`,
+                    logRogueCaught: (n1, n2) => `🚨 CAUGHT! ${n2} is heavily guarded! ${n1} is caught stealing and skips their next turn!`,
+                    logFairyMagic: "🧚 FAIRY MAGIC! Rolled a 6! Everyone gets Trap Immunity for 1 turn, and pays tribute!", logTribute: (g, r) => `💎 ${g} gave 1 Jewel to ${r}.`,
+                    logRoyalStop: (n) => `👑 ${n} used Royal privilege to stop exactly at the Lair!`, logBounce: (t, n, p) => `${t} ${n} overshot! Bounced back to ${p}.`,
+                    logPortal: (t, n, j, p) => `✨ PORTAL! ${t} ${n} earned 💎 ${j} Jewel(s) and jumped to ${p}!`, 
+                    logScholarPassive: (n) => `🦉 OBSERVATION! ${n} studied the portal jump and earned 💎 1 Jewel!`,
+                    logWerewolfImmune: (p) => `🐺 ROAR! The Werewolf is immune to the trap at ${p}! (Transforms to Human 👨)`, logFairyWard: (t, n, p) => `🧚 FAIRY WARD! ${t} ${n} is immune to the trap at ${p}!`,
+                    logShielded: (t, n, c, p) => `🛡️ SHIELDED! ${t} ${n} spent 💎 ${c} Jewel(s) to shatter the trap at ${p}!`, logWolfTransform: (n) => `🐺 FULL MOON! ${n} transforms back into a Werewolf!`,
+                    logVampireFeed: (n, p) => `🔥 TRAP! 🧛 ${n} fell to ${p}! The Vampire fed in the dark and gained 💎 1 Jewel!`, 
+                    logVampireSwap: (n1, n2, p) => `🔥 TRAP! 🧛 BLOOD MAGIC! ${n1} paid 1 Jewel to swap places with ${n2}! ${n2} is dragged down to ${p}!`,
+                    logVampireFail: (n, p) => `🔥 TRAP! 🧛 ${n} fell to ${p}! Not enough blood (Jewels) to cast swap magic!`,
+                    logVampireSleep: (n) => `🦇 BAT SLUMBER! ${n} is exhausted and skips this turn!`,
+                    logResting: (n) => `⏳ ${n} is resting and skips this turn!`,
+                    logTrap: (t, n, s, e) => `🔥 TRAP! ${t} ${n} fell from ${s} back to ${e}!`, 
+                    logMoveSafe: (t, n, p) => `${t} ${n} moved safely to tile ${p}.`, logMilestone: (t, n, p, a) => `🎁 MILESTONE! ${t} ${n} crossed tile ${p} and found a Treasure Chest with 💎 ${a} Jewels!`,
+                    logMagePortal: (t, n, s, e) => `🌌 FORGE PORTAL! ${t} ${n} automatically spent 5 Jewels and ripped space to permanently spawn a portal from ${s} to ${e}!`, logWin: (t, n) => `⚔️ EPIC BATTLE! ⚔️ ${t} ${n} defeated the Dragon!`,
+                    turnWin: (t, n) => `👑 ${t} ${n} WINS! 👑`, logNinja: (n) => `🥷 NINJA REFLEXES! ${n} rolled a 6 and gets a bonus turn!`, turnIndicator: (t, n) => `${t} ${n}'s Turn`
                 }
             },
             zh: {
@@ -518,205 +419,170 @@
                 rulePortals: "<strong>傳送門與陷阱：</strong><span class='hl'>魔法傳送門 🌀</span> 讓你前進。<span class='hl'>巨龍陷阱 🔥</span> 讓你後退。",
                 ruleShield: "<strong>寶石護盾：</strong>自動消耗 <span class='hl'>💎 寶石 x 3</span>（花費取決於職業）摧毀陷阱，保你安全！",
                 ruleMilestone: "<strong>里程碑：</strong>經過 <span class='hl'>25, 50, 75</span> 號格子會獲得包含 💎 寶石 x 1 的 <span class='hl'>寶箱</span>。",
-                ruleClasses: "<strong>英雄職業：</strong>每個英雄都有 <span class='hl'>獨特技能</span>。選擇你最喜歡的，或隨機分配！",
+                ruleClasses: "<strong>英雄職業：</strong>每個英雄都有 <span class='hl'>獨特技能</span>。",
                 prepBattle: "⚔️ 準備戰鬥 ⚔️", btnRandom: "🎲 隨機分配", btnStart: "開始任務", btnMenu: "⬅️ 菜單", btnRoll: "擲骰子 🎲",
-                btnAINames: "✨ AI 自動命名所有玩家", btnSummoning: "⏳ 召喚中...", btnWaking: "💤 喚醒 AI...",
+                btnAINames: "✨ AI 自動命名", btnSummoning: "⏳ 召喚中...",
                 classes: {
-                    '🛡️': { name: '騎士', desc: '護盾僅需2顆寶石。里程碑額外獲得+1寶石。' },
-                    '🏹': { name: '遊俠', desc: '每次擲骰子點數+1。' },
-                    '🧙': { name: '法師', desc: '傳送門獲得3寶石。自動消耗5寶石在前方開啟傳送門。' },
+                    '🛡️': { name: '騎士', desc: '護盾僅需2顆寶石。里程碑額外獲得+1寶石。' }, 
+                    '🏹': { name: '遊俠', desc: '每次擲骰子點數+1（擲出6除外）。' },
+                    '🧙': { name: '法師', desc: '傳送門獲得3寶石。自動消耗5寶石在前方開啟傳送門。' }, 
                     '🥷': { name: '忍者', desc: '擲出6可獲得額外回合。' },
-                    '🧛': { name: '吸血鬼', desc: '觸發陷阱時與前方隨機一名玩家互換位置。若自己領先，則獲得3寶石。' },
+                    '🧛': { name: '吸血鬼', desc: '觸發陷阱時，可消耗1寶石與前方隨機玩家互換位置，但須暫停一回合。若自己領先，則獲得1寶石。' }, 
                     '🧚': { name: '仙女', desc: '開局3寶石。擲出6時全員獲得1回合護盾，並各向你上貢1寶石。' },
-                    '🐺': { name: '狼人', desc: '狼形態免疫1次陷阱。觸發後變回人類，再次觸發陷阱後變回狼。' },
+                    '🐺': { name: '狼人', desc: '狼形態免疫1次陷阱。觸發後變回人類，再次觸發陷阱後變回狼。' }, 
                     '👑': { name: '皇室', desc: '在終點永遠不會被反彈後退。' },
-                    '🦉': { name: '學者', desc: '使用後關閉傳送門。加深陷阱，將其目的地推向更低的格子。' }
+                    '🦉': { name: '學者', desc: '觀察全局。當【任何】玩家觸發傳送門時，學者獲得1顆寶石。' },
+                    '🦹': { name: '俠盗', desc: '擲出奇數(1,3,5)時，從最富有的玩家奪取1寶石(若目標為騎士或皇室則下回合暫停)。若自己已是最富有，則將1寶石送給最貧窮的玩家。' },
+                    '🔮': { name: '先知', desc: '先知預見：每次擲出的點數必大於上一次。擲出6後重新計算。' }
                 },
                 logs: {
-                    logStart: "系統：任務開始！",
-                    logRoll: (t, n, r) => `${t} ${n} 擲出了 ${r}！`,
-                    logRangerBonus: " (+1 遊俠速度)",
-                    logFairyMagic: "🧚 仙女魔法！擲出了 6！所有人獲得1回合陷阱免疫，並進貢！",
-                    logTribute: (g, r) => `💎 ${g} 給了 ${r} 1 顆寶石。`,
-                    logRoyalStop: (n) => `👑 ${n} 使用皇室特權，精準停在龍穴！`,
-                    logBounce: (t, n, p) => `${t} ${n} 走過頭了！反彈回到 ${p}。`,
-                    logPortal: (t, n, j, p) => `✨ 傳送門！${t} ${n} 獲得了 💎 ${j} 顆寶石並跳躍到 ${p}！`,
-                    logScholarClose: (p) => `🦉 知識！學者永久關閉了 ${p} 的傳送門！`,
-                    logWerewolfImmune: (p) => `🐺 吼！狼人對 ${p} 的陷阱免疫！（變回人類 👨）`,
-                    logFairyWard: (t, n, p) => `🧚 仙女護衛！${t} ${n} 對 ${p} 的陷阱免疫！`,
-                    logShielded: (t, n, c, p) => `🛡️ 護盾抵擋！${t} ${n} 消耗 💎 ${c} 顆寶石粉碎了 ${p} 的陷阱！`,
-                    logWolfTransform: (n) => `🐺 滿月！${n} 變回了狼人！`,
-                    logVampireFeed: (n, p) => `🔥 陷阱！🧛 ${n} 掉落到了 ${p}！吸血鬼在暗中吸血，獲得了 💎 3 顆寶石！`,
-                    logVampireSwap: (n1, n2, p) => `🔥 陷阱！🧛 鮮血魔法！${n1} 與 ${n2} 交換了位置！${n2} 被拖下到 ${p}！`,
-                    logTrap: (t, n, s, e) => `🔥 陷阱！${t} ${n} 從 ${s} 掉落回 ${e}！`,
-                    logScholarTrap: (s, e) => `🦉 煉金術！學者加深了 ${s} 的陷阱！下一個受害者將一直掉落到 ${e}！`,
-                    logMoveSafe: (t, n, p) => `${t} ${n} 安全移動到格子 ${p}。`,
-                    logMilestone: (t, n, p, a) => `🎁 里程碑！${t} ${n} 跨越了格子 ${p}，找到一個裝有 💎 ${a} 顆寶石的寶箱！`,
-                    logMagePortal: (t, n, s, e) => `🌌 鍛造傳送門！${t} ${n} 自動消耗 5 顆寶石撕裂空間，從 ${s} 跳躍到 ${e}！`,
-                    logWin: (t, n) => `⚔️ 史詩之戰！⚔️ ${t} ${n} 擊敗了巨龍！`,
-                    turnWin: (t, n) => `👑 ${t} ${n} 獲勝！👑`,
-                    logNinja: (n) => `🥷 忍者反射！${n} 擲出了 6，獲得額外回合！`,
-                    turnIndicator: (t, n) => `${t} ${n} 的回合`
+                    logStart: "系統：任務開始！", logRoll: (t, n, r) => `${t} ${n} 擲出了 ${r}！`, logRangerBonus: " (+1 遊俠速度)",
+                    logOracleForesight: " (🔮 先知預見)", logUnderdog: " (🔥 +1 落後補償！)", logSuddenDeath: "⚠️ 死亡突圍！有玩家到達90號格子！巨龍甦醒了...",
+                    logRogueSteal: (n1, n2) => `🦹 妙手空空！${n1} 擲出奇數，從最富有的玩家 ${n2} 身上奪走1顆寶石！`,
+                    logRogueGive: (n1, n2) => `🏹 劫富濟貧！${n1} 已是最富有，將1顆寶石送給了最貧窮的 ${n2}！`,
+                    logRogueCaught: (n1, n2) => `🚨 守衛森嚴！${n2} 戒備森嚴！${n1} 行跡敗露，暫停一回合！`,
+                    logFairyMagic: "🧚 仙女魔法！所有人獲得1回合陷阱免疫，並進貢！", logTribute: (g, r) => `💎 ${g} 給了 ${r} 1 顆寶石。`,
+                    logRoyalStop: (n) => `👑 ${n} 使用皇室特權，精準停在龍穴！`, logBounce: (t, n, p) => `${t} ${n} 走過頭了！反彈回到 ${p}。`,
+                    logPortal: (t, n, j, p) => `✨ 傳送門！${t} ${n} 獲得了 💎 ${j} 顆寶石並跳躍到 ${p}！`, 
+                    logScholarPassive: (n) => `🦉 觀察！學者 ${n} 紀錄了傳送門數據，獲得 💎 1 顆寶石！`,
+                    logWerewolfImmune: (p) => `🐺 吼！狼人對 ${p} 的陷阱免疫！（變回人類 👨）`, logFairyWard: (t, n, p) => `🧚 仙女護衛！${t} ${n} 對 ${p} 的陷阱免疫！`,
+                    logShielded: (t, n, c, p) => `🛡️ 護盾抵擋！消耗 💎 ${c} 顆寶石粉碎陷阱！`, logWolfTransform: (n) => `🐺 滿月！${n} 變回了狼人！`,
+                    logVampireFeed: (n, p) => `🔥 陷阱！🧛 吸血鬼在暗中吸血，獲得了 💎 1 顆寶石！`, 
+                    logVampireSwap: (n1, n2, p) => `🔥 陷阱！🧛 鮮血魔法！${n1} 消耗1寶石與 ${n2} 交換了位置！`,
+                    logVampireFail: (n, p) => `🔥 陷阱！🧛 ${n} 掉落到了 ${p}！沒有足夠的寶石施展互換魔法！`,
+                    logVampireSleep: (n) => `🦇 沉睡！${n} 筋疲力盡，暫停一回合！`,
+                    logResting: (n) => `⏳ ${n} 正在休息，暫停一回合！`,
+                    logTrap: (t, n, s, e) => `🔥 陷阱！${t} ${n} 從 ${s} 掉落回 ${e}！`, 
+                    logMoveSafe: (t, n, p) => `${t} ${n} 安全移動到格子 ${p}。`, logMilestone: (t, n, p, a) => `🎁 里程碑！找到寶箱，獲得 💎 ${a} 顆寶石！`,
+                    logMagePortal: (t, n, s, e) => `🌌 鍛造傳送門！${t} ${n} 自動消耗 5 顆寶石撕裂空間！`, logWin: (t, n) => `⚔️ 史詩之戰！⚔️ ${t} ${n} 擊敗了巨龍！`,
+                    turnWin: (t, n) => `👑 ${t} ${n} 獲勝！👑`, logNinja: (n) => `🥷 忍者反射！${n} 擲出了 6，獲得額外回合！`, turnIndicator: (t, n) => `${t} ${n} 的回合`
                 }
             },
             ja: {
                 title: "ドラゴンウォリアークエスト 🐉", designer: "ゲームデザイン: Colette", rulesTitle: "📜 クエストのルール",
-                ruleGoal: "<strong>目標:</strong> 正確に <span class='hl'>100マス目</span> に到達してドラゴンを倒せ！行き過ぎると戻される。",
+                ruleGoal: "<strong>目標:</strong> 正確に <span class='hl'>100マス目</span> に到達してドラゴンを倒せ！",
                 rulePortals: "<strong>ポータルと罠:</strong> <span class='hl'>魔法のポータル 🌀</span> は前進。<span class='hl'>ドラゴンの罠 🔥</span> は後退。",
-                ruleShield: "<strong>宝石の盾:</strong> 自動で <span class='hl'>💎 宝石 x 3</span> を消費して罠を破壊し、安全を確保！",
-                ruleMilestone: "<strong>マイルストーン:</strong> <span class='hl'>25, 50, 75</span> マスを通過すると 💎 宝石 x 1 が入った <span class='hl'>宝箱</span> を獲得。",
-                ruleClasses: "<strong>ヒーロークラス:</strong> 全てのヒーローに <span class='hl'>固有の能力</span> がある！選ぶかランダムで決めよう！",
-                prepBattle: "⚔️ 戦闘の準備 ⚔️", btnRandom: "🎲 ランダム", btnStart: "クエスト開始", btnMenu: "⬅️ メニュー", btnRoll: "サイコロを振る 🎲",
-                btnAINames: "✨ AIで全プレイヤーの名前を生成", btnSummoning: "⏳ 召喚中...", btnWaking: "💤 AI起動中...",
+                ruleShield: "<strong>宝石の盾:</strong> 自動で <span class='hl'>💎 宝石 x 3</span> を消費して罠を破壊！",
+                ruleMilestone: "<strong>マイルストーン:</strong> <span class='hl'>25, 50, 75</span> マスで 💎 宝石 x 1 が入った <span class='hl'>宝箱</span> を獲得。",
+                ruleClasses: "<strong>ヒーロークラス:</strong> 全てのヒーローに <span class='hl'>固有の能力</span> がある！",
+                prepBattle: "⚔️ 戦闘の準備 ⚔️", btnRandom: "🎲 ランダム", btnStart: "クエスト開始", btnMenu: "⬅️ メニュー", btnRoll: "サイコロ 🎲",
+                btnAINames: "✨ AI自動命名", btnSummoning: "⏳ 召喚中...",
                 classes: {
-                    '🛡️': { name: '騎士', desc: '盾のコストが2宝石。宝箱から+1宝石。' },
-                    '🏹': { name: 'レンジャー', desc: 'サイコロの目に常に+1。' },
-                    '🧙': { name: '魔法使い', desc: 'ポータルで3宝石獲得。5宝石を自動消費し前方へワープ。' },
-                    '🥷': { name: '忍者', desc: '6を出すと追加ターン。' },
-                    '🧛': { name: '吸血鬼', desc: '罠にかかると前方にいるランダムなプレイヤーと場所を入れ替える。自身が先頭なら3宝石獲得。' },
-                    '🧚': { name: '妖精', desc: '初期宝石3。6を出すと全員に盾を付与し、各プレイヤーから1宝石徴収。' },
-                    '🐺': { name: '人狼', desc: '狼形態で罠を1回無効化。罠後人間に戻り、次の罠で再び狼になる。' },
-                    '👑': { name: '王族', desc: 'ゴールで行き過ぎても戻されない。' },
-                    '🦉': { name: '学者', desc: '使用後ポータルを閉じる。罠を深くし、落下先をさらに下へ移動させる。' }
+                    '🛡️': { name: '騎士', desc: '盾のコストが2宝石。宝箱から+1宝石。' }, '🏹': { name: 'レンジャー', desc: 'サイコロの目に常に+1（6を出した時を除く）。' },
+                    '🧙': { name: '魔法使い', desc: 'ポータルで3宝石獲得。5宝石を自動消費し前方へワープ。' }, '🥷': { name: '忍者', desc: '6を出すと追加ターン。' },
+                    '🧛': { name: '吸血鬼', desc: '罠で1宝石を消費し前方のプレイヤーと場所を入れ替えるが、次のターンは1回休み。先頭なら1宝石獲得。' }, '🧚': { name: '妖精', desc: '初期宝石3。6を出すと全員に盾を付与し、1宝石徴収。' },
+                    '🐺': { name: '人狼', desc: '狼形態で罠を1回無効化。' }, '👑': { name: '王族', desc: 'ゴールで行き過ぎても戻されない。' },
+                    '🦉': { name: '学者', desc: '盤面を研究する。誰か（自身を含む）がポータルを使うたびに1宝石を獲得する。' },
+                    '🦹': { name: '盗賊', desc: '奇数(1,3,5)で一番裕福なプレイヤーから1宝石を盗む(騎士/王族から盗むと次ターン休み)。自分が一番裕福な場合、代わりに一番貧しいプレイヤーに1宝石を与える。' },
+                    '🔮': { name: '預言者', desc: '予知：サイコロの目は常に前回の目より大きくなる。6を出した後にリセットされる。' }
                 },
                 logs: {
-                    logStart: "システム: クエスト開始！",
-                    logRoll: (t, n, r) => `${t} ${n} は ${r} を出した！`,
-                    logRangerBonus: " (+1 レンジャースピード)",
-                    logFairyMagic: "🧚 妖精の魔法！6を出した！全員が1ターンの罠免疫を得て、貢ぎ物を支払う！",
-                    logTribute: (g, r) => `💎 ${g} が ${r} に1宝石を渡した。`,
-                    logRoyalStop: (n) => `👑 ${n} は王族の特権を使い、ドラゴンの巣にぴったり止まった！`,
-                    logBounce: (t, n, p) => `${t} ${n} は行き過ぎた！ ${p} に戻される。`,
-                    logPortal: (t, n, j, p) => `✨ ポータル！${t} ${n} は 💎 ${j} 宝石を獲得し、 ${p} にワープした！`,
-                    logScholarClose: (p) => `🦉 知識！学者が ${p} のポータルを永久に閉じた！`,
-                    logWerewolfImmune: (p) => `🐺 ガオー！人狼は ${p} の罠を無効化した！（人間に戻る 👨）`,
-                    logFairyWard: (t, n, p) => `🧚 妖精の守護！${t} ${n} は ${p} の罠を無効化した！`,
-                    logShielded: (t, n, c, p) => `🛡️ 盾発動！${t} ${n} は 💎 ${c} 宝石を消費し、 ${p} の罠を破壊した！`,
-                    logWolfTransform: (n) => `🐺 満月！${n} は人狼に戻った！`,
-                    logVampireFeed: (n, p) => `🔥 罠！🧛 ${n} は ${p} に落ちた！吸血鬼は闇の中で血を吸い、💎 3 宝石を獲得した！`,
-                    logVampireSwap: (n1, n2, p) => `🔥 罠！🧛 血の魔法！${n1} と ${n2} の場所を入れ替えた！`,
-                    logTrap: (t, n, s, e) => `🔥 罠！${t} ${n} は ${s} から ${e} に落ちた！`,
-                    logScholarTrap: (s, e) => `🦉 錬金術！学者が ${s} の罠を深くした！`,
-                    logMoveSafe: (t, n, p) => `${t} ${n} は安全にマス ${p} に移動した。`,
-                    logMilestone: (t, n, p, a) => `🎁 マイルストーン！${t} ${n} は ${p} マスを通過し、宝箱から 💎 ${a} 宝石を獲得した！`,
-                    logMagePortal: (t, n, s, e) => `🌌 空間創造！${t} ${n} は自動で5宝石を消費し、${s} から ${e} へのポータルを永久に生成した！`,
-                    logWin: (t, n) => `⚔️ 壮絶な戦い！⚔️ ${t} ${n} はドラゴンを倒した！`,
-                    turnWin: (t, n) => `👑 ${t} ${n} の勝利！👑`,
-                    logNinja: (n) => `🥷 忍者の反射神経！${n} は6を出し、追加ターンを得た！`,
-                    turnIndicator: (t, n) => `${t} ${n}のターン`
+                    logStart: "システム: クエスト開始！", logRoll: (t, n, r) => `${t} ${n} は ${r} を出した！`, logRangerBonus: " (+1 レンジャー)",
+                    logOracleForesight: " (🔮 予知能力)", logUnderdog: " (🔥 +1 アンダードッグ・ブースト！)", logSuddenDeath: "⚠️ サドンデス！誰かが90マス目に到達した！ドラゴンが目覚める...",
+                    logRogueSteal: (n1, n2) => `🦹 スリ！${n1} は奇数を出し、一番裕福な ${n2} から1宝石を盗んだ！`,
+                    logRogueGive: (n1, n2) => `🏹 義賊！${n1} は一番裕福なため、一番貧しい ${n2} に1宝石を与えた！`,
+                    logRogueCaught: (n1, n2) => `🚨 逮捕！${n2} のガードは固い！${n1} は捕まり、次のターンを休む！`,
+                    logFairyMagic: "🧚 妖精の魔法！全員が免疫を得て、貢ぎ物を支払う！", logTribute: (g, r) => `💎 ${g} が ${r} に1宝石を渡した。`,
+                    logRoyalStop: (n) => `👑 ${n} は王族の特権を使い、ドラゴンの巣に止まった！`, logBounce: (t, n, p) => `${t} ${n} は行き過ぎた！ ${p} に戻る。`,
+                    logPortal: (t, n, j, p) => `✨ ポータル！💎 ${j} 宝石を獲得し ${p} にワープ！`, 
+                    logScholarPassive: (n) => `🦉 観察！学者 ${n} はポータルを研究し 💎 1 宝石を獲得した！`,
+                    logWerewolfImmune: (p) => `🐺 ガオー！罠を無効化した！（人間に戻る 👨）`, logFairyWard: (t, n, p) => `🧚 妖精の守護！罠を無効化した！`,
+                    logShielded: (t, n, c, p) => `🛡️ 盾発動！💎 ${c} 宝石を消費！`, logWolfTransform: (n) => `🐺 満月！${n} は人狼に戻った！`,
+                    logVampireFeed: (n, p) => `🔥 罠！🧛 吸血鬼は💎 1 宝石を獲得した！`, 
+                    logVampireSwap: (n1, n2, p) => `🔥 罠！🧛 血の魔法！${n1} は1宝石を支払い ${n2} と場所を入れ替えた！`,
+                    logVampireFail: (n, p) => `🔥 罠！🧛 ${n} は ${p} に落ちた！血（宝石）が足りず入れ替え魔法が失敗した！`,
+                    logVampireSleep: (n) => `🦇 眠り！${n} はこのターンを休む！`,
+                    logResting: (n) => `⏳ ${n} は休んでおり、このターンをスキップします！`,
+                    logTrap: (t, n, s, e) => `🔥 罠！${t} ${n} は ${s} から ${e} に落ちた！`, 
+                    logMoveSafe: (t, n, p) => `${t} ${n} は安全に移動した。`, logMilestone: (t, n, p, a) => `🎁 マイルストーン！宝箱から 💎 ${a} 宝石を獲得！`,
+                    logMagePortal: (t, n, s, e) => `🌌 空間創造！自動で5宝石を消費しポータル生成！`, logWin: (t, n) => `⚔️ 壮絶な戦い！⚔️ ${t} ${n} はドラゴンを倒した！`,
+                    turnWin: (t, n) => `👑 ${t} ${n} の勝利！👑`, logNinja: (n) => `🥷 忍者の反射神経！追加ターンを得た！`, turnIndicator: (t, n) => `${t} ${n}のターン`
                 }
             },
             es: {
-                title: "Búsqueda del Guerrero Dragón 🐉", designer: "Diseño de juego por Colette", rulesTitle: "📜 Reglas de la Misión",
-                ruleGoal: "<strong>El Objetivo:</strong> ¡Llega exactamente a la <span class='hl'>Casilla 100</span> para vencer al Dragón! Si te pasas, rebotas.",
-                rulePortals: "<strong>Portales y Trampas:</strong> Los <span class='hl'>Portales Mágicos 🌀</span> te adelantan. Las <span class='hl'>Trampas de Dragón 🔥</span> te retrasan.",
-                ruleShield: "<strong>Escudo de Joyas:</strong> ¡Gasta automáticamente <span class='hl'>💎 Joyas x 3</span> para destruir una trampa y mantenerte a salvo!",
-                ruleMilestone: "<strong>Hitos:</strong> Pasar las casillas <span class='hl'>25, 50 y 75</span> te otorga <span class='hl'>Cofres del Tesoro</span> con 💎 Joyas x 1.",
-                ruleClasses: "<strong>Clases de Héroes:</strong> Cada Héroe tiene una <span class='hl'>habilidad única</span>. ¡Elige o hazlo Aleatorio!",
-                prepBattle: "⚔️ Prepárate para la Batalla ⚔️", btnRandom: "🎲 Aleatorio", btnStart: "Iniciar Misión", btnMenu: "⬅️ Menú", btnRoll: "Tirar Dado 🎲",
-                btnAINames: "✨ IA Auto-nombrar a todos", btnSummoning: "⏳ Invocando...", btnWaking: "💤 Despertando IA...",
+                title: "Guerrero Dragón 🐉", designer: "Diseño por Colette", rulesTitle: "📜 Reglas",
+                ruleGoal: "<strong>El Objetivo:</strong> ¡Llega a la <span class='hl'>Casilla 100</span> para vencer al Dragón!",
+                rulePortals: "<strong>Portales y Trampas:</strong> <span class='hl'>Portales 🌀</span> te adelantan. <span class='hl'>Trampas 🔥</span> te retrasan.",
+                ruleShield: "<strong>Escudo:</strong> ¡Gasta <span class='hl'>💎 Joyas x 3</span> para destruir una trampa!",
+                ruleMilestone: "<strong>Hitos:</strong> Pasar <span class='hl'>25, 50 y 75</span> te otorga <span class='hl'>Cofres</span> con 💎 Joyas x 1.",
+                ruleClasses: "<strong>Clases:</strong> Cada Héroe tiene una <span class='hl'>habilidad única</span>.",
+                prepBattle: "⚔️ Preparar Batalla ⚔️", btnRandom: "🎲 Aleatorio", btnStart: "Iniciar", btnMenu: "⬅️ Menú", btnRoll: "Tirar 🎲",
+                btnAINames: "✨ IA Auto-nombrar", btnSummoning: "⏳ Invocando...",
                 classes: {
-                    '🛡️': { name: 'Caballero', desc: 'El escudo cuesta 2 Joyas. Gana +1 Joya extra de los Cofres.' },
-                    '🏹': { name: 'Explorador', desc: '+1 a cada tirada de dado.' },
-                    '🧙': { name: 'Mago', desc: 'Gana 3 Joyas en Portales. Gasta 5 Joyas auto para forjar un portal adelante.' },
-                    '🥷': { name: 'Ninja', desc: 'Sacar un 6 otorga un turno extra.' },
-                    '🧛': { name: 'Vampiro', desc: 'Cambia posición con un jugador al azar por delante en trampas. Si lidera, gana 3 Joyas.' },
-                    '🧚': { name: 'Hada', desc: 'Empieza con 3 Joyas. Sacar 6 escuda a todos y le pagan 1 Joya cada uno.' },
-                    '🐺': { name: 'Hombre Lobo', desc: 'Inmune a 1 trampa como Lobo. Cambia a Humano tras una trampa, y vuelve a Lobo en la siguiente.' },
-                    '👑': { name: 'Realeza', desc: 'Nunca rebota al final del tablero.' },
-                    '🦉': { name: 'Erudito', desc: 'Cierra Portales tras usarlos. Profundiza las Trampas, bajando su destino.' }
+                    '🛡️': { name: 'Caballero', desc: 'El escudo cuesta 2 Joyas. +1 Joya de Cofres.' }, '🏹': { name: 'Explorador', desc: '+1 a cada tirada de dado, excepto al sacar un 6.' },
+                    '🧙': { name: 'Mago', desc: 'Gana 3 Joyas en Portales. Gasta 5 Joyas para forjar portal.' }, '🥷': { name: 'Ninja', desc: 'Sacar un 6 otorga turno extra.' },
+                    '🧛': { name: 'Vampiro', desc: 'Cuesta 1 Joya cambiar con un jugador delante en trampas, pero pierde su próximo turno. Si lidera, gana 1 Joya.' }, '🧚': { name: 'Hada', desc: 'Empieza con 3 Joyas. Sacar 6 escuda a todos.' },
+                    '🐺': { name: 'Lobo', desc: 'Inmune a 1 trampa.' }, '👑': { name: 'Realeza', desc: 'Nunca rebota al final.' },
+                    '🦉': { name: 'Erudito', desc: 'Estudia el tablero. Gana 1 Joya cada vez que CUALQUIER jugador use un Portal.' },
+                    '🦹': { name: 'Pícaro', desc: 'En tiradas impares (1, 3, 5) roba 1 Joya al jugador más rico (pierde su próximo turno si roba al Caballero o Realeza). Si ya es el más rico, le da 1 Joya al más pobre.' },
+                    '🔮': { name: 'Oráculo', desc: 'Visión: Sus tiradas siempre son mayores que su tirada anterior. Se reinicia al sacar 6.' }
                 },
                 logs: {
-                    logStart: "Sistema: ¡La misión comienza!",
-                    logRoll: (t, n, r) => `¡${t} ${n} sacó un ${r}!`,
-                    logRangerBonus: " (+1 Velocidad de Explorador)",
-                    logFairyMagic: "🧚 ¡MAGIA DE HADA! ¡Sacó un 6! ¡Todos obtienen Inmunidad a Trampas por 1 turno y pagan tributo!",
-                    logTribute: (g, r) => `💎 ${g} le dio 1 Joya a ${r}.`,
-                    logRoyalStop: (n) => `👑 ¡${n} usó el privilegio Real para detenerse exactamente en la Guarida!`,
-                    logBounce: (t, n, p) => `¡${t} ${n} se pasó! Rebotó a la casilla ${p}.`,
-                    logPortal: (t, n, j, p) => `✨ ¡PORTAL! ¡${t} ${n} ganó 💎 ${j} Joya(s) y saltó a ${p}!`,
-                    logScholarClose: (p) => `🦉 ¡CONOCIMIENTO! ¡El Erudito cerró permanentemente el portal en ${p}!`,
-                    logWerewolfImmune: (p) => `🐺 ¡ROAR! ¡El Hombre Lobo es inmune a la trampa en ${p}! (Se transforma en Humano 👨)`,
-                    logFairyWard: (t, n, p) => `🧚 ¡PROTECCIÓN DE HADA! ¡${t} ${n} es inmune a la trampa en ${p}!`,
-                    logShielded: (t, n, c, p) => `🛡️ ¡ESCUDADO! ¡${t} ${n} gastó 💎 ${c} Joya(s) para destruir la trampa en ${p}!`,
-                    logWolfTransform: (n) => `🐺 ¡LUNA LLENA! ¡${n} se transforma de nuevo en Hombre Lobo!`,
-                    logVampireFeed: (n, p) => `🔥 ¡TRAMPA! 🧛 ¡${n} cayó a ${p}! ¡El Vampiro se alimentó en la oscuridad y ganó 💎 3 Joyas!`,
-                    logVampireSwap: (n1, n2, p) => `🔥 ¡TRAMPA! 🧛 ¡MAGIA DE SANGRE! ¡Asignó lugar con ${n2}!`,
-                    logTrap: (t, n, s, e) => `🔥 ¡TRAMPA! ¡${t} ${n} cayó desde ${s} hasta ${e}!`,
-                    logScholarTrap: (s, e) => `🦉 ¡ALQUIMIA! ¡El Erudito profundizó la trampa en ${s}!`,
-                    logMoveSafe: (t, n, p) => `${t} ${n} se movió con seguridad a la casilla ${p}.`,
-                    logMilestone: (t, n, p, a) => `🎁 ¡HITO! ¡${t} ${n} cruzó la casilla ${p} y encontró un Cofre del Tesoro con 💎 ${a} Joyas!`,
-                    logMagePortal: (t, n, s, e) => `🌌 ¡FORJAR PORTAL! ¡${t} ${n} gastó automáticamente 5 Joyas y abrió el espacio para generar permanentemente un portal de ${s} a ${e}!`,
-                    logWin: (t, n) => `⚔️ ¡BATALLA ÉPICA! ⚔️ ¡${t} ${n} derrotó al Dragón!`,
-                    turnWin: (t, n) => `👑 ¡${t} ${n} GANA! 👑`,
-                    logNinja: (n) => `🥷 ¡REFLEJOS NINJA! ¡${n} sacó un 6 y obtiene un turno extra!`,
-                    turnIndicator: (t, n) => `Turno de ${t} ${n}`
+                    logStart: "Sistema: ¡Comienza!", logRoll: (t, n, r) => `¡${t} ${n} sacó un ${r}!`, logRangerBonus: " (+1 Velocidad)",
+                    logOracleForesight: " (🔮 Visión Activa)", logUnderdog: " (🔥 +1 Impulso de Perdedor!)", logSuddenDeath: "⚠️ ¡MUERTE SÚBITA! ¡Alguien llegó a la casilla 90! El dragón despierta...",
+                    logRogueSteal: (n1, n2) => `🦹 ¡ROBO! ¡${n1} sacó un número impar y robó 1 Joya del jugador más rico, ${n2}!`,
+                    logRogueGive: (n1, n2) => `🏹 ¡ROBIN HOOD! ¡${n1} es el más rico y le dio 1 Joya al jugador más pobre, ${n2}!`,
+                    logRogueCaught: (n1, n2) => `🚨 ¡ATRAPADO! ¡${n2} está muy bien guardado! ¡${n1} pierde su próximo turno!`,
+                    logFairyMagic: "🧚 ¡MAGIA DE HADA! ¡Inmunidad a Trampas!", logTribute: (g, r) => `💎 ${g} le dio 1 Joya a ${r}.`,
+                    logRoyalStop: (n) => `👑 ¡${n} se detuvo exactamente!`, logBounce: (t, n, p) => `¡Se pasó! Rebotó a ${p}.`,
+                    logPortal: (t, n, j, p) => `✨ ¡PORTAL! ¡Saltó a ${p}!`, 
+                    logScholarPassive: (n) => `🦉 ¡OBSERVACIÓN! ¡El Erudito ${n} estudió el portal y ganó 💎 1 Joya!`,
+                    logWerewolfImmune: (p) => `🐺 ¡ROAR! ¡Inmune a la trampa!`, logFairyWard: (t, n, p) => `🧚 ¡PROTECCIÓN DE HADA!`,
+                    logShielded: (t, n, c, p) => `🛡️ ¡ESCUDADO! Gastó 💎 ${c} Joya(s)!`, logWolfTransform: (n) => `🐺 ¡LUNA LLENA!`,
+                    logVampireFeed: (n, p) => `🔥 ¡TRAMPA! 🧛 ¡Ganó 💎 1 Joya!`, 
+                    logVampireSwap: (n1, n2, p) => `🔥 ¡TRAMPA! 🧛 ¡${n1} pagó 1 Joya para cambiar de lugar con ${n2}!`,
+                    logVampireFail: (n, p) => `🔥 ¡TRAMPA! 🧛 ¡${n} cayó a ${p}! ¡No hay suficientes Joyas para usar la magia de cambio!`,
+                    logVampireSleep: (n) => `🦇 ¡SUEÑO! ¡${n} pierde este turno!`,
+                    logResting: (n) => `⏳ ¡${n} está descansando y pierde este turno!`,
+                    logTrap: (t, n, s, e) => `🔥 ¡TRAMPA! Cayó a ${e}!`, 
+                    logMoveSafe: (t, n, p) => `Se movió con seguridad a ${p}.`, logMilestone: (t, n, p, a) => `🎁 ¡HITO! ¡Encontró 💎 ${a} Joyas!`,
+                    logMagePortal: (t, n, s, e) => `🌌 ¡FORJAR PORTAL!`, logWin: (t, n) => `⚔️ ¡${t} ${n} derrotó al Dragón!`,
+                    turnWin: (t, n) => `👑 ¡${t} ${n} GANA! 👑`, logNinja: (n) => `🥷 ¡REFLEJOS NINJA! ¡Turno extra!`, turnIndicator: (t, n) => `Turno de ${t} ${n}`
                 }
             }
         };
 
-        // Starts Game Mode in English
         let currentLang = 'en';
-        
         function changeLanguage() {
             currentLang = document.getElementById('lang-select').value;
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.getAttribute('data-i18n');
                 if (i18n[currentLang][key]) el.innerHTML = i18n[currentLang][key];
             });
-            if (document.getElementById('setup-screen').style.display !== 'none') {
-                updatePlayerInputs();
-            } else {
-                updateUI();
-            }
+            if (document.getElementById('setup-screen').style.display !== 'none') updatePlayerInputs();
+            else updateUI();
         }
-        // ==========================================
 
         const WINNING_TILE = 100;
-        const COLORS = ['#ef4444', '#3b82f6', '#8b5cf6', '#10b981']; 
-        const HERO_KEYS = ['🛡️', '🏹', '🧙', '🥷', '🧛', '🧚', '🐺', '👑', '🦉'];
+        const COLORS = ['#ef4444', '#3b82f6', '#8b5cf6', '#10b981', '#f59e0b', '#ec4899']; 
+        const HERO_KEYS = ['🛡️', '🏹', '🧙', '🥷', '🧛', '🧚', '🐺', '👑', '🦉', '🦹', '🔮'];
         
-        let PORTALS = {}; 
-        let TRAPS = {};  
-        let players = [];
-        let currentPlayerIndex = 0;
-        let gameWon = false;
+        let PORTALS = {}; let TRAPS = {};  let players = []; let currentPlayerIndex = 0; let gameWon = false;
+        let suddenDeathTriggered = false;
 
         window.onload = function() {
-            // Load saved theme on startup
             const savedTheme = localStorage.getItem('preferred-theme') || 'theme-future';
-            document.getElementById('theme-select').value = savedTheme;
-            document.body.className = savedTheme;
-            
-            document.getElementById('lang-select').value = currentLang;
-            changeLanguage();
+            document.getElementById('theme-select').value = savedTheme; document.body.className = savedTheme;
+            document.getElementById('lang-select').value = currentLang; changeLanguage();
         };
 
         function changeHeroDesc(playerIndex) {
             const selectedIcon = document.getElementById(`p${playerIndex}-icon`).value;
-            const descSpan = document.getElementById(`p${playerIndex}-desc`);
-            descSpan.innerText = i18n[currentLang].classes[selectedIcon].desc;
-            
-            const nameInput = document.getElementById(`p${playerIndex}-name`);
-            nameInput.value = i18n[currentLang].classes[selectedIcon].name;
+            document.getElementById(`p${playerIndex}-desc`).innerText = i18n[currentLang].classes[selectedIcon].desc;
+            document.getElementById(`p${playerIndex}-name`).value = i18n[currentLang].classes[selectedIcon].name;
         }
 
         function updatePlayerInputs() {
-            const count = document.getElementById('player-count').value;
+            const count = parseInt(document.getElementById('player-count').value);
             const container = document.getElementById('player-inputs');
-            
             const currentNames = [];
-            for (let i = 1; i <= 4; i++) {
+            for (let i = 1; i <= 6; i++) {
                 const input = document.getElementById(`p${i}-name`);
                 currentNames[i] = input ? input.value : null;
             }
-
             container.innerHTML = '';
-            
             let iconOptionsHTML = '';
-            for (const icon of HERO_KEYS) {
-                iconOptionsHTML += `<option value="${icon}">${icon} ${i18n[currentLang].classes[icon].name}</option>`;
-            }
+            for (const icon of HERO_KEYS) iconOptionsHTML += `<option value="${icon}">${icon} ${i18n[currentLang].classes[icon].name}</option>`;
 
             for (let i = 1; i <= count; i++) {
                 let defaultName = currentNames[i] || i18n[currentLang].classes['🛡️'].name;
@@ -734,142 +600,84 @@
         function randomizeHeroes() {
             const count = document.getElementById('player-count').value;
             for (let i = 1; i <= count; i++) {
-                const selectElement = document.getElementById(`p${i}-icon`);
-                const randomIcon = HERO_KEYS[Math.floor(Math.random() * HERO_KEYS.length)];
-                selectElement.value = randomIcon;
+                document.getElementById(`p${i}-icon`).value = HERO_KEYS[Math.floor(Math.random() * HERO_KEYS.length)];
                 changeHeroDesc(i);
             }
         }
 
         function resetGame() {
-            players = [];
-            currentPlayerIndex = 0;
-            gameWon = false;
-            
+            players = []; currentPlayerIndex = 0; gameWon = false; suddenDeathTriggered = false;
+            document.body.classList.remove('sudden-death-active');
             document.getElementById('game-screen').style.display = 'none';
             document.getElementById('setup-screen').style.display = 'block';
-            
-            document.getElementById('board').innerHTML = '';
-            document.getElementById('log').innerHTML = '';
-            document.getElementById('stats-container').innerHTML = '';
-            document.getElementById('dice-result').innerText = '';
-            document.getElementById('roll-btn').style.display = 'inline-block';
-            
+            document.getElementById('board').innerHTML = ''; document.getElementById('log').innerHTML = '';
+            document.getElementById('dice-result').innerText = ''; document.getElementById('roll-btn').style.display = 'inline-block';
             updatePlayerInputs(); 
         }
 
         function generateRandomMaze() {
-            PORTALS = {}; TRAPS = {};
-            let usedTiles = new Set([1, WINNING_TILE]); 
+            PORTALS = {}; TRAPS = {}; let usedTiles = new Set([1, WINNING_TILE]); 
+            for(let i=0; i<8; i++) { let s=getRandomTile(2,80,usedTiles); usedTiles.add(s); PORTALS[s]=getRandomTile(s+10,95,usedTiles); }
+            for(let i=0; i<8; i++) { let s=getRandomTile(20,95,usedTiles); usedTiles.add(s); TRAPS[s]=getRandomTile(5,s-10,usedTiles); }
 
-            for(let i = 0; i < 8; i++) {
-                let start = getRandomTile(2, 80, usedTiles); usedTiles.add(start);
-                let end = getRandomTile(start + 10, 95, usedTiles); PORTALS[start] = end;
-            }
-            for(let i = 0; i < 8; i++) {
-                let start = getRandomTile(20, 95, usedTiles); usedTiles.add(start);
-                let end = getRandomTile(5, start - 10, usedTiles); TRAPS[start] = end;
-            }
-
-            // ==========================================
-            // 🐍 ENDGAME TRAP ENFORCER
-            // ==========================================
-            let hasEndgameTrap = false;
-            for (let key in TRAPS) {
-                if (parseInt(key) > 95 && parseInt(key) < 100) {
-                    hasEndgameTrap = true;
-                    break;
-                }
-            }
-
+            let hasEndgameTrap = Object.keys(TRAPS).some(k => parseInt(k) > 95 && parseInt(k) < 100);
             if (!hasEndgameTrap) {
-                let trapStart = getRandomTile(96, 99, usedTiles);
-                usedTiles.add(trapStart);
-                let trapEnd = Math.floor(Math.random() * 20) + 40; 
-                TRAPS[trapStart] = trapEnd;
+                let trapStart = getRandomTile(96, 99, usedTiles); usedTiles.add(trapStart);
+                TRAPS[trapStart] = Math.floor(Math.random() * 20) + 40; 
             }
         }
 
         function getRandomTile(min, max, excludeSet) {
-            let tile;
-            do { tile = Math.floor(Math.random() * (max - min + 1)) + min; } while (excludeSet.has(tile));
-            return tile;
+            let tile; do { tile = Math.floor(Math.random() * (max - min + 1)) + min; } while (excludeSet.has(tile)); return tile;
         }
 
         function startGame() {
             const count = document.getElementById('player-count').value;
             for (let i = 1; i <= count; i++) {
-                let name = document.getElementById(`p${i}-name`).value || `Hero ${i}`;
                 let icon = document.getElementById(`p${i}-icon`).value;
-                let initialJewels = (icon === '🧚') ? 3 : 0; 
                 players.push({ 
-                    name: name, position: 1, jewels: initialJewels, token: icon, color: COLORS[i-1],
-                    milestones: { 25: false, 50: false, 75: false },
-                    fairyWardTurns: 0,
-                    isWerewolf: (icon === '🐺') ? true : false 
+                    name: document.getElementById(`p${i}-name`).value || `Hero ${i}`, position: 1, jewels: (icon === '🧚') ? 3 : 0, 
+                    token: icon, color: COLORS[i-1], milestones: { 25: false, 50: false, 75: false },
+                    fairyWardTurns: 0, isWerewolf: (icon === '🐺'), skipTurns: 0, lastRoll: 0
                 });
             }
-            
             generateRandomMaze(); 
-            
             document.getElementById('setup-screen').style.display = 'none';
             document.getElementById('game-screen').style.display = 'block';
-            
-            createBoard(); updateUI();
-            logMessage(i18n[currentLang].logs.logStart);
+            createBoard(); updateUI(); logMessage(i18n[currentLang].logs.logStart);
         }
 
         function createBoard() {
-            const board = document.getElementById('board');
-            board.innerHTML = ''; 
+            const board = document.getElementById('board'); board.innerHTML = ''; 
             for (let row = 9; row >= 0; row--) {
                 for (let col = 0; col < 10; col++) {
                     let tileNum = (row % 2 !== 0) ? (row * 10) + col + 1 : (row * 10) + (9 - col) + 1; 
+                    let tile = document.createElement('div'); tile.className = 'tile'; tile.id = 'tile-' + tileNum;
                     
-                    let tile = document.createElement('div');
-                    tile.className = 'tile';
-                    tile.id = 'tile-' + tileNum;
-                    
-                    let numLabel = document.createElement('span');
-                    numLabel.innerText = tileNum;
-                    numLabel.style.position = 'relative';
-                    numLabel.style.zIndex = '2';
-                    tile.appendChild(numLabel);
+                    let numLabel = document.createElement('span'); numLabel.innerText = tileNum; numLabel.style.zIndex = '2'; tile.appendChild(numLabel);
 
                     if (PORTALS[tileNum]) {
                         tile.classList.add('portal');
-                        let dest = document.createElement('div');
-                        dest.className = 'dest-label';
-                        dest.innerText = `↗ ${PORTALS[tileNum]}`;
-                        tile.appendChild(dest);
+                        let dest = document.createElement('div'); dest.className = 'dest-label'; dest.innerText = `↗ ${PORTALS[tileNum]}`; tile.appendChild(dest);
                     }
                     if (TRAPS[tileNum]) {
                         tile.classList.add('trap');
-                        let dest = document.createElement('div');
-                        dest.className = 'dest-label';
-                        dest.innerText = `↘ ${TRAPS[tileNum]}`;
-                        tile.appendChild(dest);
+                        let dest = document.createElement('div'); dest.className = 'dest-label'; dest.innerText = `↘ ${TRAPS[tileNum]}`; tile.appendChild(dest);
                     }
-                    
                     if (tileNum === 1) tile.classList.add('start');
-                    if (tileNum === WINNING_TILE) { 
-                        tile.classList.add('end'); 
-                        numLabel.innerText = '🐉'; 
-                    }
-                    
+                    if (tileNum === WINNING_TILE) { tile.classList.add('end'); numLabel.innerText = '🐉'; }
                     board.appendChild(tile);
                 }
             }
         }
 
         function checkMilestones(p, newPos) {
-            const tiers = [25, 50, 75];
-            tiers.forEach(ms => {
+            [25, 50, 75].forEach(ms => {
                 if (newPos >= ms && !p.milestones[ms]) {
                     p.milestones[ms] = true;
-                    let amount = (p.token === '🛡️') ? 2 : 1; 
-                    p.jewels += amount;
+                    let amount = (p.token === '🛡️') ? 2 : 1; p.jewels += amount;
                     logMessage(i18n[currentLang].logs.logMilestone(p.token, p.name, ms, amount));
+                    playSound('jewel'); triggerParticles('💎', 15);
                 }
             });
         }
@@ -878,124 +686,143 @@
             if (gameWon) return;
 
             let p = players[currentPlayerIndex];
-            let displayToken = (p.token === '🐺' && !p.isWerewolf) ? '👨' : p.token;
-            let baseRoll = Math.floor(Math.random() * 6) + 1;
-            let moveAmount = baseRoll;
             
-            let rollMsg = i18n[currentLang].logs.logRoll(displayToken, p.name, baseRoll);
+            // Check for Skip Turn Status
+            if (p.skipTurns > 0) {
+                if (p.token === '🧛') logMessage(i18n[currentLang].logs.logVampireSleep(p.name));
+                else logMessage(i18n[currentLang].logs.logResting(p.name)); 
+                
+                p.skipTurns--;
+                currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
+                updateUI();
+                return;
+            }
 
-            if (p.token === '🏹') { 
-                moveAmount += 1; 
-                rollMsg += i18n[currentLang].logs.logRangerBonus; 
+            let displayToken = (p.token === '🐺' && !p.isWerewolf) ? '👨' : p.token;
+            let baseRoll;
+            let rollMsg = "";
+
+            // 🔮 Oracle: Foresight Base Roll Logic
+            if (p.token === '🔮') {
+                let minRoll = (p.lastRoll === 6 || p.lastRoll === 0) ? 1 : p.lastRoll + 1;
+                baseRoll = Math.floor(Math.random() * (6 - minRoll + 1)) + minRoll;
+                p.lastRoll = baseRoll;
+                rollMsg = i18n[currentLang].logs.logRoll(displayToken, p.name, baseRoll) + i18n[currentLang].logs.logOracleForesight;
+            } else {
+                baseRoll = Math.floor(Math.random() * 6) + 1;
+                rollMsg = i18n[currentLang].logs.logRoll(displayToken, p.name, baseRoll);
             }
             
+            let moveAmount = baseRoll;
+            let leaderPos = Math.max(...players.map(pl => pl.position));
+            let isUnderdog = (leaderPos - p.position >= 25);
+            
+            playSound('roll');
+
+            // 🏹 Ranger is debuffed: +1 only if they don't roll a 6
+            if (p.token === '🏹' && baseRoll < 6) { moveAmount += 1; rollMsg += i18n[currentLang].logs.logRangerBonus; }
+            
+            // 🔥 Underdog boost: guaranteed +1 if far behind
+            if (isUnderdog) { moveAmount += 1; rollMsg += i18n[currentLang].logs.logUnderdog; }
+
+            // 🦹 Rogue Pickpocket / Robin Hood Logic
+            if (p.token === '🦹' && (baseRoll === 1 || baseRoll === 3 || baseRoll === 5)) {
+                let otherPlayers = players.filter(op => op !== p);
+                if (otherPlayers.length > 0) {
+                    let maxJewelsAll = Math.max(...players.map(pl => pl.jewels));
+                    
+                    if (p.jewels >= maxJewelsAll && p.jewels > 0) {
+                        // Robin Hood: Give to poorest
+                        let minJewelsOther = Math.min(...otherPlayers.map(op => op.jewels));
+                        let poorest = otherPlayers.filter(op => op.jewels === minJewelsOther);
+                        let target = poorest[Math.floor(Math.random() * poorest.length)];
+                        
+                        p.jewels--;
+                        target.jewels++;
+                        logMessage(i18n[currentLang].logs.logRogueGive(p.name, target.name));
+                        playSound('jewel');
+                    } else {
+                        // Pickpocket: Steal from richest other
+                        let maxJewelsOther = Math.max(...otherPlayers.map(op => op.jewels));
+                        if (maxJewelsOther > 0) {
+                            let wealthiest = otherPlayers.filter(op => op.jewels === maxJewelsOther);
+                            let target = wealthiest[Math.floor(Math.random() * wealthiest.length)];
+                            
+                            target.jewels--; 
+                            p.jewels++;
+                            logMessage(i18n[currentLang].logs.logRogueSteal(p.name, target.name));
+                            playSound('jewel');
+
+                            if (target.token === '🛡️' || target.token === '👑') {
+                                p.skipTurns = 1;
+                                logMessage(i18n[currentLang].logs.logRogueCaught(p.name, target.name));
+                                playSound('trap');
+                            }
+                        }
+                    }
+                }
+            }
+            
+            // 🧚 Fairy Magic
             if (p.token === '🧚' && baseRoll === 6) {
-                logMessage(i18n[currentLang].logs.logFairyMagic);
+                logMessage(i18n[currentLang].logs.logFairyMagic); playSound('jewel');
                 players.forEach(op => {
                     op.fairyWardTurns = (op === p) ? 2 : 1; 
-                    if (op !== p && op.jewels > 0) {
-                        op.jewels--;
-                        p.jewels++;
-                        logMessage(i18n[currentLang].logs.logTribute(op.name, p.name));
-                    }
+                    if (op !== p && op.jewels > 0) { op.jewels--; p.jewels++; logMessage(i18n[currentLang].logs.logTribute(op.name, p.name)); }
                 });
             }
 
             document.getElementById('dice-result').innerText = rollMsg;
-            
             p.position += moveAmount;
 
             if (p.position > WINNING_TILE) {
                 if (p.token === '👑') {
-                    p.position = WINNING_TILE;
-                    logMessage(i18n[currentLang].logs.logRoyalStop(p.name));
+                    p.position = WINNING_TILE; logMessage(i18n[currentLang].logs.logRoyalStop(p.name));
                 } else {
-                    p.position = WINNING_TILE - (p.position - WINNING_TILE);
-                    logMessage(i18n[currentLang].logs.logBounce(displayToken, p.name, p.position));
+                    p.position = WINNING_TILE - (p.position - WINNING_TILE); logMessage(i18n[currentLang].logs.logBounce(displayToken, p.name, p.position));
                 }
             }
 
             if (PORTALS[p.position]) {
-                let portalStart = p.position;
-                let earnedJewels = (p.token === '🧙') ? 3 : 1; 
-                p.jewels += earnedJewels;
+                let portalStart = p.position; let earnedJewels = (p.token === '🧙') ? 3 : 1; p.jewels += earnedJewels;
                 logMessage(i18n[currentLang].logs.logPortal(displayToken, p.name, earnedJewels, PORTALS[p.position]));
                 p.position = PORTALS[p.position];
+                triggerBoardAnim('flash'); playSound('portal'); triggerParticles('🌀', 10);
 
-                if (p.token === '🦉') {
-                    delete PORTALS[portalStart];
-                    logMessage(i18n[currentLang].logs.logScholarClose(portalStart));
-                    let oldTile = document.getElementById('tile-' + portalStart);
-                    if (oldTile) {
-                        oldTile.classList.remove('portal');
-                        let destLabel = oldTile.querySelector('.dest-label');
-                        if (destLabel) destLabel.remove();
-                    }
-                }
+                players.forEach(op => {
+                    if (op.token === '🦉') { op.jewels += 1; logMessage(i18n[currentLang].logs.logScholarPassive(op.name)); }
+                });
             } 
             else if (TRAPS[p.position]) {
-                let trapStart = p.position;
-                let trapEnd = TRAPS[trapStart];
-                let shieldCost = (p.token === '🛡️') ? 2 : 3; 
+                let trapStart = p.position; let trapEnd = TRAPS[trapStart]; let shieldCost = (p.token === '🛡️') ? 2 : 3; 
 
                 if (p.token === '🐺' && p.isWerewolf) {
-                    logMessage(i18n[currentLang].logs.logWerewolfImmune(p.position));
-                    p.isWerewolf = false; 
-                } 
-                else if (p.fairyWardTurns > 0) {
-                    logMessage(i18n[currentLang].logs.logFairyWard(displayToken, p.name, p.position));
-                    p.fairyWardTurns = 0; 
-                }
-                else if (p.jewels >= shieldCost) {
-                    p.jewels -= shieldCost;
-                    logMessage(i18n[currentLang].logs.logShielded(displayToken, p.name, shieldCost, p.position));
-                    if (p.token === '🐺' && !p.isWerewolf) {
-                        p.isWerewolf = true; 
-                        logMessage(i18n[currentLang].logs.logWolfTransform(p.name));
-                    }
-                } 
-                else {
+                    logMessage(i18n[currentLang].logs.logWerewolfImmune(p.position)); p.isWerewolf = false; 
+                } else if (p.fairyWardTurns > 0) {
+                    logMessage(i18n[currentLang].logs.logFairyWard(displayToken, p.name, p.position)); p.fairyWardTurns = 0; 
+                } else if (p.jewels >= shieldCost) {
+                    p.jewels -= shieldCost; logMessage(i18n[currentLang].logs.logShielded(displayToken, p.name, shieldCost, p.position)); playSound('jewel');
+                    if (p.token === '🐺' && !p.isWerewolf) { p.isWerewolf = true; logMessage(i18n[currentLang].logs.logWolfTransform(p.name)); }
+                } else {
+                    triggerBoardAnim('shake'); playSound('trap');
+                    
                     if (p.token === '🧛') {
                         const playersAhead = players.filter(other => other.position > p.position);
-                        
                         if (playersAhead.length === 0) {
-                            p.position = trapEnd;
-                            p.jewels += 3;
-                            logMessage(i18n[currentLang].logs.logVampireFeed(p.name, trapEnd));
-                        } else {
+                            p.position = trapEnd; p.jewels += 1; logMessage(i18n[currentLang].logs.logVampireFeed(p.name, trapEnd));
+                        } else if (p.jewels >= 1) {
+                            p.jewels -= 1;
                             const targetPlayer = playersAhead[Math.floor(Math.random() * playersAhead.length)];
-                            p.position = targetPlayer.position;
-                            targetPlayer.position = trapEnd;
+                            p.position = targetPlayer.position; targetPlayer.position = trapEnd;
+                            p.skipTurns = 1; // BAT SLUMBER TRIGGER
                             logMessage(i18n[currentLang].logs.logVampireSwap(p.name, targetPlayer.name, trapEnd));
+                        } else {
+                            p.position = trapEnd; logMessage(i18n[currentLang].logs.logVampireFail(p.name, trapEnd));
                         }
                     } else {
-                        logMessage(i18n[currentLang].logs.logTrap(displayToken, p.name, trapStart, trapEnd));
-                        p.position = trapEnd;
+                        logMessage(i18n[currentLang].logs.logTrap(displayToken, p.name, trapStart, trapEnd)); p.position = trapEnd;
                     }
-                    
-                    if (p.token === '🐺' && !p.isWerewolf) {
-                        p.isWerewolf = true; 
-                        logMessage(i18n[currentLang].logs.logWolfTransform(p.name));
-                    }
-                }
-
-                if (p.token === '🦉') {
-                    let validLowerDests = [];
-                    for (let i = 2; i < trapEnd; i++) {
-                        validLowerDests.push(i);
-                    }
-                    if (validLowerDests.length > 0) {
-                        let randomIndex = Math.floor(Math.random() * validLowerDests.length);
-                        let newTrapEnd = validLowerDests[randomIndex];
-                        TRAPS[trapStart] = newTrapEnd;
-                        logMessage(i18n[currentLang].logs.logScholarTrap(trapStart, newTrapEnd));
-                        
-                        let trapTile = document.getElementById('tile-' + trapStart);
-                        if (trapTile) {
-                            let destLabel = trapTile.querySelector('.dest-label');
-                            if (destLabel) destLabel.innerText = `↘ ${newTrapEnd}`;
-                        }
-                    }
+                    if (p.token === '🐺' && !p.isWerewolf) { p.isWerewolf = true; logMessage(i18n[currentLang].logs.logWolfTransform(p.name)); }
                 }
             } else {
                 logMessage(i18n[currentLang].logs.logMoveSafe(displayToken, p.name, p.position));
@@ -1004,70 +831,64 @@
             checkMilestones(p, p.position);
 
             if (p.token === '🧙' && p.jewels >= 5 && p.position < WINNING_TILE) {
-                let mageStart = p.position;
-                p.jewels -= 5;
-                let minTarget = Math.min(WINNING_TILE, mageStart + 6);
-                let maxTarget = WINNING_TILE;
-                let target = Math.floor(Math.random() * (maxTarget - minTarget + 1)) + minTarget;
-                
+                let mageStart = p.position; p.jewels -= 5;
+                let target = Math.floor(Math.random() * (WINNING_TILE - Math.min(WINNING_TILE, mageStart + 6) + 1)) + Math.min(WINNING_TILE, mageStart + 6);
                 PORTALS[mageStart] = target;
-                
                 let tileElem = document.getElementById('tile-' + mageStart);
                 if (tileElem) {
-                    tileElem.classList.remove('trap'); 
-                    if (!tileElem.classList.contains('portal')) {
-                        tileElem.classList.add('portal');
-                    }
-                    let existingLabel = tileElem.querySelector('.dest-label');
-                    if (existingLabel) existingLabel.remove();
-                    
-                    let dest = document.createElement('div');
-                    dest.className = 'dest-label';
-                    dest.innerText = `↗ ${target}`;
-                    tileElem.appendChild(dest);
+                    tileElem.classList.remove('trap'); tileElem.classList.add('portal');
+                    let el = tileElem.querySelector('.dest-label'); if (el) el.remove();
+                    let dest = document.createElement('div'); dest.className = 'dest-label'; dest.innerText = `↗ ${target}`; tileElem.appendChild(dest);
                 }
-                
                 logMessage(i18n[currentLang].logs.logMagePortal(p.token, p.name, mageStart, target));
-                p.position = target;
-                
+                p.position = target; triggerBoardAnim('flash'); playSound('portal'); triggerParticles('🌀', 5);
                 checkMilestones(p, p.position); 
+                
+                players.forEach(op => {
+                    if (op.token === '🦉') { op.jewels += 1; logMessage(i18n[currentLang].logs.logScholarPassive(op.name)); }
+                });
+            }
+
+            let maxPos = Math.max(...players.map(pl => pl.position));
+            if (!suddenDeathTriggered && maxPos >= 90 && maxPos < WINNING_TILE) {
+                suddenDeathTriggered = true;
+                document.body.classList.add('sudden-death-active');
+                logMessage(i18n[currentLang].logs.logSuddenDeath);
+                triggerBoardAnim('shake'); playSound('trap');
             }
 
             updateUI();
 
             if (p.position === WINNING_TILE) {
-                gameWon = true;
-                document.getElementById('roll-btn').style.display = 'none';
+                gameWon = true; document.getElementById('roll-btn').style.display = 'none';
                 logMessage(i18n[currentLang].logs.logWin(displayToken, p.name));
                 document.getElementById('turn-indicator').innerHTML = i18n[currentLang].logs.turnWin(displayToken, p.name);
+                playSound('win'); triggerParticles('🎉', 40); triggerParticles('🐉', 5);
                 return;
             }
 
             if (p.fairyWardTurns > 0) p.fairyWardTurns--;
-
-            if (p.token === '🥷' && baseRoll === 6) {
-                logMessage(i18n[currentLang].logs.logNinja(p.name));
-            } else {
-                currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
-            }
+            if (p.token === '🥷' && baseRoll === 6) logMessage(i18n[currentLang].logs.logNinja(p.name));
+            else currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
             
             updateTurnIndicator();
         }
 
         function updateUI() {
             let statsHTML = '';
+            let leaderPos = Math.max(...players.map(pl => pl.position));
+
             players.forEach(p => {
                 let displayToken = (p.token === '🐺' && !p.isWerewolf) ? '👨' : p.token;
                 let wardIcon = (p.fairyWardTurns > 0) ? ' 🧚🛡️' : '';
+                let sleepIcon = (p.skipTurns > 0) ? ' 💤' : '';
+                let underdogIcon = (leaderPos - p.position >= 25) ? ' 🔥' : '';
                 let className = i18n[currentLang].classes[p.token].name;
                 let classDesc = i18n[currentLang].classes[p.token].desc;
                 
                 statsHTML += `
                 <div class="player-stat" style="border-left: 6px solid ${p.color};">
-                    <div class="stat-header">
-                        <span>${displayToken} ${p.name}${wardIcon}</span>
-                        <span>💎 ${p.jewels} | Tile: ${p.position}</span>
-                    </div>
+                    <div class="stat-header"><span>${displayToken} ${p.name}${wardIcon}${sleepIcon}${underdogIcon}</span><span>💎 ${p.jewels} | Tile: ${p.position}</span></div>
                     <span class="stat-ability"><strong>${className}:</strong> ${classDesc}</span>
                 </div>`;
             });
@@ -1078,14 +899,13 @@
             players.forEach((p, index) => {
                 let tile = document.getElementById('tile-' + p.position);
                 if(tile) {
-                    let token = document.createElement('div');
-                    token.className = 'player-token';
+                    let token = document.createElement('div'); token.className = 'player-token';
                     token.innerText = (p.token === '🐺' && !p.isWerewolf) ? '👨' : p.token;
-                    token.style.transform = `translate(${(index % 2 === 0 ? 1 : -1) * 4}px, ${(index > 1 ? 1 : -1) * 4}px)`;
+                    const xOffset = (index % 3 - 1) * 6; const yOffset = (Math.floor(index / 3) - 0.5) * 6; 
+                    token.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
                     tile.appendChild(token);
                 }
             });
-
             updateTurnIndicator();
         }
 
