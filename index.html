@@ -5,13 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dragon Warrior Quest - By Colette</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&family=Rajdhani:wght@400;600;700&family=VT323&display=swap" rel="stylesheet">
+    <!-- Added Pangolin font for Colette's Style -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&family=Rajdhani:wght@400;600;700&family=VT323&family=Pangolin&display=swap" rel="stylesheet">
     
     <style>
         /* ==========================================
            🎨 DYNAMIC THEME ENGINE
            ========================================== */
-        
+           
+        body.theme-colette {
+            --font-main: 'Pangolin', 'Comic Sans MS', cursive; 
+            --bg-color: #fdfbf7; 
+            /* Notebook paper effect using CSS gradients */
+            --bg-image: linear-gradient(90deg, transparent 40px, #fca5a5 40px, #fca5a5 43px, transparent 43px), repeating-linear-gradient(transparent, transparent 29px, #bae6fd 29px, #bae6fd 31px);
+            --panel-bg: rgba(255, 255, 255, 0.95); --panel-border: #334155;
+            --text-main: #1e293b; --text-muted: #64748b; --accent: #ec4899; 
+            --portal: #8b5cf6; --trap: #ef4444; 
+            --btn-primary: #3b82f6; --btn-hover: #2563eb; 
+            --btn-ai: #10b981; --btn-ai-hover: #059669; 
+            --shadow: 5px 5px 0px rgba(0, 0, 0, 0.15); --tile-bg: #ffffff;
+            --tile-shadow: none; --log-bg: #fffbf1; --log-text: #1e293b;
+            --board-bg: rgba(255, 255, 255, 0.5); --border-radius: 8px; --input-bg: #ffffff;
+            --title-color: #e11d48; --title-bg: none; --blur: none;
+        }
+
+        /* Wobbly Hand-Drawn Borders specifically for Colette's Style */
+        body.theme-colette #setup-screen,
+        body.theme-colette #game-screen,
+        body.theme-colette .tile,
+        body.theme-colette button,
+        body.theme-colette input,
+        body.theme-colette select,
+        body.theme-colette .player-stat,
+        body.theme-colette #log {
+            border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+            border: 3px solid var(--panel-border);
+        }
+        body.theme-colette button { box-shadow: 4px 4px 0 var(--panel-border); border-width: 4px; }
+        body.theme-colette button:active:not(:disabled) { transform: translate(3px, 3px); box-shadow: 1px 1px 0 var(--panel-border); }
+        body.theme-colette .tile { border-width: 2px; }
+        body.theme-colette h1 { text-shadow: 3px 3px 0px #fde047; font-size: clamp(32px, 6vw, 50px); }
+        body.theme-colette h2, body.theme-colette h3 { font-weight: normal; }
+
         body.theme-future {
             --font-main: 'Rajdhani', sans-serif; --bg-color: #e0e7ff; 
             --bg-image: radial-gradient(circle at 15% 50%, rgba(255,255,255,0.8), transparent 25%), radial-gradient(circle at 85% 30%, rgba(6, 182, 212, 0.15), transparent 25%);
@@ -75,8 +110,8 @@
             cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.1); outline: none;
         }
 
-        h1 { font-size: clamp(28px, 5vw, 42px); margin: 0 0 5px 0; color: var(--title-color); text-transform: uppercase; letter-spacing: 2px; position: relative;}
-        h3 { margin: 0 0 20px 0; color: var(--text-muted); font-size: clamp(16px, 3vw, 18px); font-weight: bold;}
+        h1 { font-size: clamp(28px, 5vw, 42px); margin: 0 0 5px 0; color: var(--title-color); text-transform: uppercase; letter-spacing: 2px; position: relative; cursor: pointer; user-select: none;}
+        h3 { margin: 0 0 20px 0; color: var(--text-muted); font-size: clamp(16px, 3vw, 18px); font-weight: bold; cursor: pointer; user-select: none;}
         h2 { color: var(--text-main); font-size: clamp(20px, 4vw, 24px); margin-bottom: 15px; font-weight: bold;}
 
         body.theme-future h1 { background: var(--title-bg); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
@@ -104,7 +139,7 @@
         .skill-desc { font-size: 15px; color: var(--text-muted); font-weight: bold; margin-top: 10px; display: block; }
 
         button { background: var(--btn-primary); color: #fff; cursor: pointer; font-weight: bold; font-family: inherit; border: none; border-radius: calc(var(--border-radius) / 2); padding: 14px 24px; font-size: 18px; box-shadow: 0 4px 6px rgba(0,0,0,0.2); transition: all 0.2s; position: relative; overflow: hidden;}
-        button:hover:not(:disabled) { transform: translateY(-2px); background: var(--btn-hover); }
+        body:not(.theme-colette) button:hover:not(:disabled) { transform: translateY(-2px); background: var(--btn-hover); }
         button:disabled { opacity: 0.6; cursor: not-allowed; filter: grayscale(50%); }
         .ai-btn { background: var(--btn-ai); }
         .ai-btn:hover:not(:disabled) { background: var(--btn-ai-hover); }
@@ -176,11 +211,12 @@
         @keyframes float-up { 0% { opacity: 1; transform: translateY(0) scale(0.5); } 50% { transform: translateY(-30px) scale(1.2); } 100% { opacity: 0; transform: translateY(-60px) scale(1) rotate(15deg); } }
     </style>
 </head>
-<body class="theme-future">
+<body class="theme-colette">
 
     <!-- Theme & Language Top Bar -->
     <div class="top-bar">
         <select id="theme-select" onchange="changeTheme()">
+            <option value="theme-colette">🖍️ Colette's Style</option>
             <option value="theme-future">🚀 Future Style</option>
             <option value="theme-cute">🎀 Cute Style</option>
             <option value="theme-pixel">🕹️ Pixelate Style</option>
@@ -194,8 +230,9 @@
         </select>
     </div>
 
-    <h1 data-i18n="title">Dragon Warrior Quest 🐉</h1>
-    <h3 data-i18n="designer">Game Design by Colette</h3>
+    <!-- Mobile Secret Multi-Tap Targets -->
+    <h1 id="main-title" onclick="handleTitleTap()" data-i18n="title">Dragon Warrior Quest 🐉</h1>
+    <h3 id="sub-title" onclick="handleSubtitleTap()" data-i18n="designer">Game Design by Colette</h3>
 
     <!-- Setup Screen -->
     <div id="setup-screen">
@@ -207,13 +244,18 @@
                     <li data-i18n="rulePortals"><strong>Portals & Traps:</strong> <span class='hl'>Magic Portals 🌀</span> jump you forward. <span class='hl'>Dragon Traps 🔥</span> drop you backward.</li>
                     <li data-i18n="ruleShield"><strong>Jewel Shield:</strong> Spend <span class='hl'>💎 Jewels x 3</span> automatically to shatter a trap and stay safe!</li>
                     <li data-i18n="ruleMilestone"><strong>Milestones:</strong> Passing tiles <span class='hl'>25, 50, and 75</span> yields <span class='hl'>Treasure Chests</span> containing 💎 Jewels x 1.</li>
+                    <li data-i18n="ruleTile55"><strong>Special Tile:</strong> Landing on <span class='hl'>Tile 55</span> means you must CLAP YOUR HANDS in real life!</li>
                     <li data-i18n="ruleClasses"><strong>Hero Classes:</strong> Every Hero has a <span class='hl'>unique ability</span>. Pick your favorite or Randomize!</li>
                 </ul>
             </div>
         </details>
 
         <h2 data-i18n="prepBattle">⚔️ Prepare for Battle ⚔️</h2>
-        <!-- MAX PLAYERS INCREASED TO 6! -->
+        
+        <!-- Expert Mode Hint -->
+        <p id="expert-mode-notice" style="display: none; color: var(--accent); font-weight: bold; margin-top: -10px; margin-bottom: 15px;"></p>
+
+        <!-- MAX PLAYERS -->
         <select id="player-count" onchange="updatePlayerInputs()" style="max-width: 180px; margin-bottom: 15px;">
             <option value="1">1 Player</option>
             <option value="2">2 Players</option>
@@ -246,7 +288,7 @@
         <!-- Action Buttons (Roll & Simulate) -->
         <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
             <button id="roll-btn" onclick="takeTurn()" style="flex: 1; max-width: 300px; padding: 16px; font-size: 22px;" data-i18n="btnRoll">Roll Dice 🎲</button>
-            <button id="sim-btn" onclick="toggleSimulation()" class="ai-btn" style="display: none; flex: 1; max-width: 300px; padding: 16px; font-size: 22px;" data-i18n="btnSimulate">Fast Forward ⏩</button>
+            <button id="sim-btn" onclick="toggleSimulationEngine()" class="ai-btn" style="display: none; flex: 1; max-width: 300px; padding: 16px; font-size: 22px;" data-i18n="btnSimulate">Fast Forward ⏩</button>
         </div>
         <p id="dice-result" style="font-weight: bold; font-size: clamp(18px, 4vw, 22px); color: var(--accent); margin: 15px 0; min-height: 24px;"></p>
         
@@ -256,45 +298,86 @@
 
     <script>
         // ==========================================
-        // SIMULATION ENGINE (Fast Forward)
+        // SIMULATION ENGINE & SECRETS (Desktop & Mobile)
         // ==========================================
         let simulationInterval = null;
         let isSimulating = false;
         let isSimButtonUnlocked = false;
+        let showAdvancedRoles = false;
 
-        // Secret Developer Hotkey to reveal Simulation Button
+        const BASIC_HERO_KEYS = ['🛡️', '🏹', '🧙', '🥷', '🧛', '🧚', '🐺', '👑'];
+        const ADVANCED_HERO_KEYS = ['🦉', '🦹', '🔮'];
+
         document.addEventListener('keydown', (e) => {
-            // Prevent triggering if typing in an input field (like a player name)
             if (e.target.tagName === 'INPUT') return; 
-            
-            if (e.key.toLowerCase() === 'h') {
-                isSimButtonUnlocked = !isSimButtonUnlocked;
-                const simBtn = document.getElementById('sim-btn');
-                if (simBtn && !gameWon && document.getElementById('game-screen').style.display !== 'none') {
-                    simBtn.style.display = isSimButtonUnlocked ? 'inline-block' : 'none';
-                }
-            }
+            if (e.key.toLowerCase() === 'h') toggleSimButton();
+            if (e.key.toLowerCase() === 's') toggleAdvancedRoles();
         });
 
-        function toggleSimulation() {
+        let titleTaps = 0;
+        let titleTapTimer;
+        let subtitleTaps = 0;
+        let subtitleTapTimer;
+
+        function handleTitleTap() {
+            titleTaps++;
+            clearTimeout(titleTapTimer);
+            titleTapTimer = setTimeout(() => titleTaps = 0, 1000); 
+            if (titleTaps >= 5) {
+                titleTaps = 0;
+                toggleAdvancedRoles();
+            }
+        }
+
+        function handleSubtitleTap() {
+            subtitleTaps++;
+            clearTimeout(subtitleTapTimer);
+            subtitleTapTimer = setTimeout(() => subtitleTaps = 0, 1000); 
+            if (subtitleTaps >= 5) {
+                subtitleTaps = 0;
+                toggleSimButton();
+            }
+        }
+
+        function toggleSimButton() {
+            isSimButtonUnlocked = !isSimButtonUnlocked;
+            const simBtn = document.getElementById('sim-btn');
+            if (simBtn && !gameWon && document.getElementById('game-screen').style.display !== 'none') {
+                simBtn.style.display = isSimButtonUnlocked ? 'inline-block' : 'none';
+            }
+        }
+
+        function toggleAdvancedRoles() {
+            if (document.getElementById('setup-screen').style.display !== 'none') {
+                showAdvancedRoles = !showAdvancedRoles;
+                updatePlayerInputs();
+                
+                const notice = document.getElementById('expert-mode-notice');
+                if (showAdvancedRoles) {
+                    notice.style.display = 'block';
+                    notice.innerText = i18n[currentLang].expertUnlocked;
+                } else {
+                    notice.style.display = 'none';
+                }
+            }
+        }
+
+        function toggleSimulationEngine() {
             if (gameWon) return; 
             
             const simBtn = document.getElementById('sim-btn');
             const rollBtn = document.getElementById('roll-btn');
             
             if (isSimulating) {
-                // Pause simulation
                 clearInterval(simulationInterval);
                 isSimulating = false;
                 simBtn.innerHTML = i18n[currentLang].btnSimulate;
                 rollBtn.disabled = false;
             } else {
-                // Start simulation
                 isSimulating = true;
                 simBtn.innerHTML = i18n[currentLang].btnStopSim;
                 rollBtn.disabled = true;
                 
-                // Runs rapidly!
                 simulationInterval = setInterval(() => {
                     takeTurn();
                     if (gameWon) {
@@ -306,13 +389,37 @@
         }
 
         // ==========================================
-        // AUDIO ENGINE (Web Audio API)
+        // AUDIO ENGINE (Colette's Voice + Web Audio API)
         // ==========================================
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         
+        // Pre-load Colette's custom voice files from the 'audio' folder
+        const voiceTrap = new Audio('audio/bad.m4a');
+        const voiceWin = new Audio('audio/good job.m4a');
+        const voiceDragon = new Audio('audio/dragon.m4a');
+        const voiceStart = new Audio('audio/start.m4a');
+        
         function playSound(type) {
-            // Suppress standard sounds during simulation to prevent audio glitches
             if (isSimulating && type !== 'win') return; 
+
+            // Play Colette's Voice Overs
+            if (type === 'trap') {
+                voiceTrap.currentTime = 0;
+                voiceTrap.play().catch(e => console.log("Audio play blocked by browser:", e));
+                return;
+            } else if (type === 'win') {
+                voiceWin.currentTime = 0;
+                voiceWin.play().catch(e => console.log("Audio play blocked by browser:", e));
+                return;
+            } else if (type === 'dragon') {
+                voiceDragon.currentTime = 0;
+                voiceDragon.play().catch(e => console.log("Audio play blocked by browser:", e));
+                return;
+            } else if (type === 'start') {
+                voiceStart.currentTime = 0;
+                voiceStart.play().catch(e => console.log("Audio play blocked by browser:", e));
+                return;
+            }
 
             if(audioCtx.state === 'suspended') audioCtx.resume();
             const osc = audioCtx.createOscillator(); const gainNode = audioCtx.createGain();
@@ -327,25 +434,14 @@
                 osc.type = 'sine'; osc.frequency.setValueAtTime(300, now); osc.frequency.exponentialRampToValueAtTime(1200, now + 0.5);
                 gainNode.gain.setValueAtTime(0, now); gainNode.gain.linearRampToValueAtTime(0.1, now + 0.2); gainNode.gain.linearRampToValueAtTime(0, now + 0.5);
                 osc.start(now); osc.stop(now + 0.5);
-            } else if (type === 'trap') {
-                osc.type = 'sawtooth'; osc.frequency.setValueAtTime(150, now); osc.frequency.exponentialRampToValueAtTime(40, now + 0.4);
-                gainNode.gain.setValueAtTime(0.15, now); gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
-                osc.start(now); osc.stop(now + 0.4);
             } else if (type === 'jewel') {
                 osc.type = 'sine'; osc.frequency.setValueAtTime(1200, now);
                 gainNode.gain.setValueAtTime(0.05, now); gainNode.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
                 osc.start(now); osc.stop(now + 0.3);
-            } else if (type === 'win') {
-                [440, 554.37, 659.25].forEach(f => {
-                    const o = audioCtx.createOscillator(); const g = audioCtx.createGain(); o.type = 'triangle'; o.frequency.value = f;
-                    o.connect(g); g.connect(audioCtx.destination); g.gain.setValueAtTime(0.05, now); g.gain.linearRampToValueAtTime(0.1, now + 0.2);
-                    g.gain.exponentialRampToValueAtTime(0.01, now + 1.5); o.start(now); o.stop(now + 1.5);
-                });
             }
         }
 
         function triggerParticles(emoji, count) {
-            // Suppress non-essential particles during fast-forward
             if (isSimulating && emoji !== '🎉' && emoji !== '🐉') return; 
 
             const container = document.getElementById('game-screen');
@@ -359,7 +455,7 @@
         }
 
         function triggerBoardAnim(type) {
-            if (isSimulating) return; // Prevent lag during simulation
+            if (isSimulating) return; 
             const b = document.getElementById('board'); b.classList.remove('anim-shake', 'anim-flash'); void b.offsetWidth;
             b.classList.add(`anim-${type}`); setTimeout(() => b.classList.remove(`anim-${type}`), 800);
         }
@@ -426,7 +522,7 @@
         }
 
         // ==========================================
-        // LOCALIZATION (i18n)
+        // LOCALIZATION (i18n) & EASTER EGGS
         // ==========================================
         const i18n = {
             en: {
@@ -435,10 +531,12 @@
                 rulePortals: "<strong>Portals & Traps:</strong> <span class='hl'>Magic Portals 🌀</span> jump you forward. <span class='hl'>Dragon Traps 🔥</span> drop you backward.",
                 ruleShield: "<strong>Jewel Shield:</strong> Spend <span class='hl'>💎 Jewels x 3</span> automatically to shatter a trap and stay safe!",
                 ruleMilestone: "<strong>Milestones:</strong> Passing tiles <span class='hl'>25, 50, and 75</span> yields <span class='hl'>Treasure Chests</span> containing 💎 Jewels x 1.",
+                ruleTile55: "<strong>Special Tile:</strong> Landing on <span class='hl'>Tile 55</span> means you must CLAP YOUR HANDS in real life!",
                 ruleClasses: "<strong>Hero Classes:</strong> Every Hero has a <span class='hl'>unique ability</span>.",
                 prepBattle: "⚔️ Prepare for Battle ⚔️", btnRandom: "🎲 Randomize", btnStart: "Start Quest", btnMenu: "⬅️ Menu", btnRoll: "Roll Dice 🎲",
                 btnAINames: "✨ AI Auto-Name", btnSummoning: "⏳ Summoning...",
                 btnSimulate: "Fast Forward ⏩", btnStopSim: "Stop ⏸",
+                expertUnlocked: "🔓 Advanced Roles Unlocked!",
                 classes: {
                     '🛡️': { name: 'Knight', desc: 'Trap shields cost 2 Jewels. Gains extra +1 Jewel from Milestones.' },
                     '🏹': { name: 'Ranger', desc: '+1 to every dice roll, except when rolling a 6.' },
@@ -451,6 +549,17 @@
                     '🦉': { name: 'Scholar', desc: 'Studies the board. Earns 1 Jewel whenever ANY player (including themselves) triggers a Portal.' },
                     '🦹': { name: 'Rogue', desc: 'On odd rolls (1, 3, 5), steals 1 Jewel from the richest player (skips next turn if target is Knight/Royal). If Rogue is already the richest, gives 1 Jewel to the poorest instead.' },
                     '🔮': { name: 'Oracle', desc: 'Foresight: Dice rolls are always strictly larger than the previous roll. Resets after rolling a 6.' }
+                },
+                eggs: {
+                    'Colette': 'Designer Privilege: Starts with +10 Jewels.',
+                    'Claire': 'Best Friend Benefit: +1 Jewel when sharing a tile.',
+                    'Kingsley': 'Brother Sneak: Starts on Tile 10 (ignores trap/portal).',
+                    'Bonnie': "Teacher's Apple: Starts with +5 Jewels.",
+                    'Matthew': 'Dad Tax: Starts the game with -5 Jewels!',
+                    'Stella': 'VP Speed: +3 tiles on empty spaces (immune to destination trap/portal).',
+                    'Nikki': "Mum's Love: Shield cost is permanently 0 Jewels.",
+                    'Dodia': 'Specialty: +2 to every dice roll!',
+                    'Jenny': 'Talents: +2 extra Jewels from Milestones.'
                 },
                 logs: {
                     logStart: "System: The Quest begins!", logRoll: (t, n, r) => `${t} ${n} rolled a ${r}!`, logRangerBonus: " (+1 Ranger Speed)",
@@ -471,8 +580,10 @@
                     logResting: (n) => `⏳ ${n} is resting and skips this turn!`,
                     logTrap: (t, n, s, e) => `🔥 TRAP! ${t} ${n} fell from ${s} back to ${e}!`, 
                     logMoveSafe: (t, n, p) => `${t} ${n} moved safely to tile ${p}.`, logMilestone: (t, n, p, a) => `🎁 MILESTONE! ${t} ${n} crossed tile ${p} and found a Treasure Chest with 💎 ${a} Jewels!`,
+                    logClap: (n) => `👏 TILE 55! ${n} must CLAP THEIR HANDS in real life!`,
                     logMagePortal: (t, n, s, e) => `🌌 FORGE PORTAL! ${t} ${n} automatically spent 5 Jewels and ripped space to permanently spawn a portal from ${s} to ${e}!`, logWin: (t, n) => `⚔️ EPIC BATTLE! ⚔️ ${t} ${n} defeated the Dragon!`,
-                    turnWin: (t, n) => `👑 ${t} ${n} WINS! 👑`, logNinja: (n) => `🥷 NINJA REFLEXES! ${n} rolled a 6 and gets a bonus turn!`, turnIndicator: (t, n) => `${t} ${n}'s Turn`
+                    turnWin: (t, n) => `👑 ${t} ${n} WINS! 👑`, logNinja: (n) => `🥷 NINJA REFLEXES! ${n} rolled a 6 and gets a bonus turn!`, turnIndicator: (t, n) => `${t} ${n}'s Turn`,
+                    eggDodiaRoll: " (Specialty: +2 🎲)"
                 }
             },
             zh: {
@@ -481,10 +592,12 @@
                 rulePortals: "<strong>傳送門與陷阱：</strong><span class='hl'>魔法傳送門 🌀</span> 讓你前進。<span class='hl'>巨龍陷阱 🔥</span> 讓你後退。",
                 ruleShield: "<strong>寶石護盾：</strong>自動消耗 <span class='hl'>💎 寶石 x 3</span>（花費取決於職業）摧毀陷阱，保你安全！",
                 ruleMilestone: "<strong>里程碑：</strong>經過 <span class='hl'>25, 50, 75</span> 號格子會獲得包含 💎 寶石 x 1 的 <span class='hl'>寶箱</span>。",
+                ruleTile55: "<strong>特殊格子：</strong>停在 <span class='hl'>55號格子</span> 時，你必須在現實中拍手！",
                 ruleClasses: "<strong>英雄職業：</strong>每個英雄都有 <span class='hl'>獨特技能</span>。",
                 prepBattle: "⚔️ 準備戰鬥 ⚔️", btnRandom: "🎲 隨機分配", btnStart: "開始任務", btnMenu: "⬅️ 菜單", btnRoll: "擲骰子 🎲",
                 btnAINames: "✨ AI 自動命名", btnSummoning: "⏳ 召喚中...",
                 btnSimulate: "快進 ⏩", btnStopSim: "停止 ⏸",
+                expertUnlocked: "🔓 進階職業已解鎖！",
                 classes: {
                     '🛡️': { name: '騎士', desc: '護盾僅需2顆寶石。里程碑額外獲得+1寶石。' }, 
                     '🏹': { name: '遊俠', desc: '每次擲骰子點數+1（擲出6除外）。' },
@@ -497,6 +610,17 @@
                     '🦉': { name: '學者', desc: '觀察全局。當【任何】玩家觸發傳送門時，學者獲得1顆寶石。' },
                     '🦹': { name: '俠盗', desc: '擲出奇數(1,3,5)時，從最富有的玩家奪取1寶石(若目標為騎士或皇室則下回合暫停)。若自己已是最富有，則將1寶石送給最貧窮的玩家。' },
                     '🔮': { name: '先知', desc: '先知預見：每次擲出的點數必大於上一次。擲出6後重新計算。' }
+                },
+                eggs: {
+                    'Colette': '設計師特權：開局獲得 +10 顆寶石。',
+                    'Claire': '摯友福利：與其他玩家同格時 +1 顆寶石。',
+                    'Kingsley': '兄弟偷跑：從第 10 格開始 (無視該格陷阱/傳送門)。',
+                    'Bonnie': '教師蘋果：開局獲得 +5 顆寶石。',
+                    'Matthew': '老爸稅：開局 -5 顆寶石！',
+                    'Stella': '副校長加速：空地前進 +3 格 (無視目標格陷阱/傳送門)。',
+                    'Nikki': '媽媽之愛：護盾花費永遠為 0。',
+                    'Dodia': '校長專長：每次擲骰子 +2！',
+                    'Jenny': '校長天賦：里程碑額外獲得 +2 顆寶石。'
                 },
                 logs: {
                     logStart: "系統：任務開始！", logRoll: (t, n, r) => `${t} ${n} 擲出了 ${r}！`, logRangerBonus: " (+1 遊俠速度)",
@@ -517,8 +641,10 @@
                     logResting: (n) => `⏳ ${n} 正在休息，暫停一回合！`,
                     logTrap: (t, n, s, e) => `🔥 陷阱！${t} ${n} 從 ${s} 掉落回 ${e}！`, 
                     logMoveSafe: (t, n, p) => `${t} ${n} 安全移動到格子 ${p}。`, logMilestone: (t, n, p, a) => `🎁 里程碑！找到寶箱，獲得 💎 ${a} 顆寶石！`,
+                    logClap: (n) => `👏 55號格子！${n} 必須在現實中拍手！`,
                     logMagePortal: (t, n, s, e) => `🌌 鍛造傳送門！${t} ${n} 自動消耗 5 顆寶石撕裂空間！`, logWin: (t, n) => `⚔️ 史詩之戰！⚔️ ${t} ${n} 擊敗了巨龍！`,
-                    turnWin: (t, n) => `👑 ${t} ${n} 獲勝！👑`, logNinja: (n) => `🥷 忍者反射！${n} 擲出了 6，獲得額外回合！`, turnIndicator: (t, n) => `${t} ${n} 的回合`
+                    turnWin: (t, n) => `👑 ${t} ${n} 獲勝！👑`, logNinja: (n) => `🥷 忍者反射！${n} 擲出了 6，獲得額外回合！`, turnIndicator: (t, n) => `${t} ${n} 的回合`,
+                    eggDodiaRoll: " (校長專長：+2 🎲)"
                 }
             },
             ja: {
@@ -527,10 +653,12 @@
                 rulePortals: "<strong>ポータルと罠:</strong> <span class='hl'>魔法のポータル 🌀</span> は前進。<span class='hl'>ドラゴンの罠 🔥</span> は後退。",
                 ruleShield: "<strong>宝石の盾:</strong> 自動で <span class='hl'>💎 宝石 x 3</span> を消費して罠を破壊！",
                 ruleMilestone: "<strong>マイルストーン:</strong> <span class='hl'>25, 50, 75</span> マスで 💎 宝石 x 1 が入った <span class='hl'>宝箱</span> を獲得。",
+                ruleTile55: "<strong>特殊マス:</strong> <span class='hl'>55マス目</span> に止まったら、現実で手を叩かなければならない！",
                 ruleClasses: "<strong>ヒーロークラス:</strong> 全てのヒーローに <span class='hl'>固有の能力</span> がある！",
                 prepBattle: "⚔️ 戦闘の準備 ⚔️", btnRandom: "🎲 ランダム", btnStart: "クエスト開始", btnMenu: "⬅️ メニュー", btnRoll: "サイコロ 🎲",
                 btnAINames: "✨ AI自動命名", btnSummoning: "⏳ 召喚中...",
                 btnSimulate: "早送り ⏩", btnStopSim: "停止 ⏸",
+                expertUnlocked: "🔓 上級クラスが解放されました！",
                 classes: {
                     '🛡️': { name: '騎士', desc: '盾のコストが2宝石。宝箱から+1宝石。' }, '🏹': { name: 'レンジャー', desc: 'サイコロの目に常に+1（6を出した時を除く）。' },
                     '🧙': { name: '魔法使い', desc: 'ポータルで3宝石獲得。5宝石を自動消費し前方へワープ。' }, '🥷': { name: '忍者', desc: '6を出すと追加ターン。' },
@@ -539,6 +667,17 @@
                     '🦉': { name: '学者', desc: '盤面を研究する。誰か（自身を含む）がポータルを使うたびに1宝石を獲得する。' },
                     '🦹': { name: '盗賊', desc: '奇数(1,3,5)で一番裕福なプレイヤーから1宝石を盗む(騎士/王族から盗むと次ターン休み)。自分が一番裕福な場合、代わりに一番貧しいプレイヤーに1宝石を与える。' },
                     '🔮': { name: '預言者', desc: '予知：サイコロの目は常に前回の目より大きくなる。6を出した後にリセットされる。' }
+                },
+                eggs: {
+                    'Colette': 'デザイナー特権: 初期宝石+10個。',
+                    'Claire': '親友の恩恵: 他プレイヤーと同じマスで+1宝石。',
+                    'Kingsley': '兄弟の抜け駆け: 10マス目からスタート (罠/ポータル無効)。',
+                    'Bonnie': '先生のリンゴ: 初期宝石+5個。',
+                    'Matthew': 'パパ税: 初期宝石-5個！',
+                    'Stella': '教頭ブースト: 空きマスで+3歩 (移動先の罠/ポータル無効)。',
+                    'Nikki': 'ママの愛: 盾のコストが永久に0。',
+                    'Dodia': '園長の特技: 毎回サイコロの目+2！',
+                    'Jenny': '校長の才能: マイルストーンから+2個の追加宝石。'
                 },
                 logs: {
                     logStart: "システム: クエスト開始！", logRoll: (t, n, r) => `${t} ${n} は ${r} を出した！`, logRangerBonus: " (+1 レンジャー)",
@@ -559,8 +698,10 @@
                     logResting: (n) => `⏳ ${n} は休んでおり、このターンをスキップします！`,
                     logTrap: (t, n, s, e) => `🔥 罠！${t} ${n} は ${s} から ${e} に落ちた！`, 
                     logMoveSafe: (t, n, p) => `${t} ${n} は安全に移動した。`, logMilestone: (t, n, p, a) => `🎁 マイルストーン！宝箱から 💎 ${a} 宝石を獲得！`,
+                    logClap: (n) => `👏 55マス目！${n} は現実で手を叩いてください！`,
                     logMagePortal: (t, n, s, e) => `🌌 空間創造！自動で5宝石を消費しポータル生成！`, logWin: (t, n) => `⚔️ 壮絶な戦い！⚔️ ${t} ${n} はドラゴンを倒した！`,
-                    turnWin: (t, n) => `👑 ${t} ${n} の勝利！👑`, logNinja: (n) => `🥷 忍者の反射神経！追加ターンを得た！`, turnIndicator: (t, n) => `${t} ${n}のターン`
+                    turnWin: (t, n) => `👑 ${t} ${n} の勝利！👑`, logNinja: (n) => `🥷 忍者の反射神経！追加ターンを得た！`, turnIndicator: (t, n) => `${t} ${n}のターン`,
+                    eggDodiaRoll: " (園長の特技: +2 🎲)"
                 }
             },
             es: {
@@ -569,10 +710,12 @@
                 rulePortals: "<strong>Portales y Trampas:</strong> <span class='hl'>Portales 🌀</span> te adelantan. <span class='hl'>Trampas 🔥</span> te retrasan.",
                 ruleShield: "<strong>Escudo:</strong> ¡Gasta <span class='hl'>💎 Joyas x 3</span> para destruir una trampa!",
                 ruleMilestone: "<strong>Hitos:</strong> Pasar <span class='hl'>25, 50 y 75</span> te otorga <span class='hl'>Cofres</span> con 💎 Joyas x 1.",
+                ruleTile55: "<strong>Casilla Especial:</strong> ¡Caer en la <span class='hl'>Casilla 55</span> significa que debes APLAUDIR en la vida real!",
                 ruleClasses: "<strong>Clases:</strong> Cada Héroe tiene una <span class='hl'>habilidad única</span>.",
                 prepBattle: "⚔️ Preparar Batalla ⚔️", btnRandom: "🎲 Aleatorio", btnStart: "Iniciar", btnMenu: "⬅️ Menú", btnRoll: "Tirar 🎲",
                 btnAINames: "✨ IA Auto-nombrar", btnSummoning: "⏳ Invocando...",
                 btnSimulate: "Avance Rápido ⏩", btnStopSim: "Detener ⏸",
+                expertUnlocked: "🔓 ¡Roles Avanzados Desbloqueados!",
                 classes: {
                     '🛡️': { name: 'Caballero', desc: 'El escudo cuesta 2 Joyas. +1 Joya de Cofres.' }, '🏹': { name: 'Explorador', desc: '+1 a cada tirada de dado, excepto al sacar un 6.' },
                     '🧙': { name: 'Mago', desc: 'Gana 3 Joyas en Portales. Gasta 5 Joyas para forjar portal.' }, '🥷': { name: 'Ninja', desc: 'Sacar un 6 otorga turno extra.' },
@@ -581,6 +724,17 @@
                     '🦉': { name: 'Erudito', desc: 'Estudia el tablero. Gana 1 Joya cada vez que CUALQUIER jugador use un Portal.' },
                     '🦹': { name: 'Pícaro', desc: 'En tiradas impares (1, 3, 5) roba 1 Joya al jugador más rico (pierde su próximo turno si roba al Caballero o Realeza). Si ya es el más rico, le da 1 Joya al más pobre.' },
                     '🔮': { name: 'Oráculo', desc: 'Visión: Sus tiradas siempre son mayores que su tirada anterior. Se reinicia al sacar 6.' }
+                },
+                eggs: {
+                    'Colette': 'Privilegio: Empieza con +10 Joyas.',
+                    'Claire': 'Mejor Amiga: +1 Joya al compartir casilla.',
+                    'Kingsley': 'Hermano: Empieza en Casilla 10 (ignora trampas/portales).',
+                    'Bonnie': "Profe: Empieza con +5 Joyas.",
+                    'Matthew': 'Papá: Empieza con -5 Joyas!',
+                    'Stella': 'Subdirectora: +3 en casillas vacías (ignora trampas/portales de destino).',
+                    'Nikki': "Mamá: El costo del escudo es 0 Joyas.",
+                    'Dodia': 'Directora: ¡+2 a cada tirada de dado!',
+                    'Jenny': 'Talentos: +2 Joyas extra en Cofres.'
                 },
                 logs: {
                     logStart: "Sistema: ¡Comienza!", logRoll: (t, n, r) => `¡${t} ${n} sacó un ${r}!`, logRangerBonus: " (+1 Velocidad)",
@@ -601,8 +755,10 @@
                     logResting: (n) => `⏳ ¡${n} está descansando y pierde este turno!`,
                     logTrap: (t, n, s, e) => `🔥 ¡TRAMPA! Cayó a ${e}!`, 
                     logMoveSafe: (t, n, p) => `Se movió con seguridad a ${p}.`, logMilestone: (t, n, p, a) => `🎁 ¡HITO! ¡Encontró 💎 ${a} Joyas!`,
+                    logClap: (n) => `👏 ¡CASILLA 55! ¡${n} debe APLAUDIR en la vida real!`,
                     logMagePortal: (t, n, s, e) => `🌌 ¡FORJAR PORTAL!`, logWin: (t, n) => `⚔️ ¡${t} ${n} derrotó al Dragón!`,
-                    turnWin: (t, n) => `👑 ¡${t} ${n} GANA! 👑`, logNinja: (n) => `🥷 ¡REFLEJOS NINJA! ¡Turno extra!`, turnIndicator: (t, n) => `Turno de ${t} ${n}`
+                    turnWin: (t, n) => `👑 ¡${t} ${n} GANA! 👑`, logNinja: (n) => `🥷 ¡REFLEJOS NINJA! ¡Turno extra!`, turnIndicator: (t, n) => `Turno de ${t} ${n}`,
+                    eggDodiaRoll: " (Especialidad: +2 🎲)"
                 }
             }
         };
@@ -620,19 +776,23 @@
                 simBtn.innerHTML = isSimulating ? i18n[currentLang].btnStopSim : i18n[currentLang].btnSimulate;
             }
 
-            if (document.getElementById('setup-screen').style.display !== 'none') updatePlayerInputs();
-            else updateUI();
+            if (document.getElementById('setup-screen').style.display !== 'none') {
+                updatePlayerInputs();
+                const notice = document.getElementById('expert-mode-notice');
+                if (showAdvancedRoles) notice.innerText = i18n[currentLang].expertUnlocked;
+            } else {
+                updateUI();
+            }
         }
 
         const WINNING_TILE = 100;
         const COLORS = ['#ef4444', '#3b82f6', '#8b5cf6', '#10b981', '#f59e0b', '#ec4899']; 
-        const HERO_KEYS = ['🛡️', '🏹', '🧙', '🥷', '🧛', '🧚', '🐺', '👑', '🦉', '🦹', '🔮'];
         
         let PORTALS = {}; let TRAPS = {};  let players = []; let currentPlayerIndex = 0; let gameWon = false;
         let suddenDeathTriggered = false;
 
         window.onload = function() {
-            const savedTheme = localStorage.getItem('preferred-theme') || 'theme-future';
+            const savedTheme = localStorage.getItem('preferred-theme') || 'theme-colette';
             document.getElementById('theme-select').value = savedTheme; document.body.className = savedTheme;
             document.getElementById('lang-select').value = currentLang; changeLanguage();
         };
@@ -646,32 +806,47 @@
         function updatePlayerInputs() {
             const count = parseInt(document.getElementById('player-count').value);
             const container = document.getElementById('player-inputs');
+            
             const currentNames = [];
+            const currentIcons = [];
             for (let i = 1; i <= 6; i++) {
                 const input = document.getElementById(`p${i}-name`);
+                const iconSel = document.getElementById(`p${i}-icon`);
                 currentNames[i] = input ? input.value : null;
+                currentIcons[i] = iconSel ? iconSel.value : null;
             }
+            
             container.innerHTML = '';
-            let iconOptionsHTML = '';
-            for (const icon of HERO_KEYS) iconOptionsHTML += `<option value="${icon}">${icon} ${i18n[currentLang].classes[icon].name}</option>`;
+            const availableKeys = showAdvancedRoles ? [...BASIC_HERO_KEYS, ...ADVANCED_HERO_KEYS] : BASIC_HERO_KEYS;
 
             for (let i = 1; i <= count; i++) {
                 let defaultName = currentNames[i] || i18n[currentLang].classes['🛡️'].name;
+                let activeIcon = currentIcons[i];
+                
+                if (!availableKeys.includes(activeIcon)) activeIcon = '🛡️';
+                
+                let iconOptionsHTML = '';
+                for (const icon of availableKeys) {
+                    let isSelected = (icon === activeIcon) ? 'selected' : '';
+                    iconOptionsHTML += `<option value="${icon}" ${isSelected}>${icon} ${i18n[currentLang].classes[icon].name}</option>`;
+                }
+
                 container.innerHTML += `
                     <div class="player-setup-box">
                         <div class="player-row">
                             <select id="p${i}-icon" onchange="changeHeroDesc(${i})" style="flex: 1; min-width: 140px;">${iconOptionsHTML}</select>
                             <input type="text" id="p${i}-name" placeholder="Name" value="${defaultName}" style="flex: 2; min-width: 150px;">
                         </div>
-                        <span id="p${i}-desc" class="skill-desc">${i18n[currentLang].classes['🛡️'].desc}</span>
+                        <span id="p${i}-desc" class="skill-desc">${i18n[currentLang].classes[activeIcon].desc}</span>
                     </div>`;
             }
         }
 
         function randomizeHeroes() {
             const count = document.getElementById('player-count').value;
+            const availableKeys = showAdvancedRoles ? [...BASIC_HERO_KEYS, ...ADVANCED_HERO_KEYS] : BASIC_HERO_KEYS;
             for (let i = 1; i <= count; i++) {
-                document.getElementById(`p${i}-icon`).value = HERO_KEYS[Math.floor(Math.random() * HERO_KEYS.length)];
+                document.getElementById(`p${i}-icon`).value = availableKeys[Math.floor(Math.random() * availableKeys.length)];
                 changeHeroDesc(i);
             }
         }
@@ -718,16 +893,34 @@
             const count = document.getElementById('player-count').value;
             for (let i = 1; i <= count; i++) {
                 let icon = document.getElementById(`p${i}-icon`).value;
+                let playerName = document.getElementById(`p${i}-name`).value || `Hero ${i}`;
+                
                 players.push({ 
-                    name: document.getElementById(`p${i}-name`).value || `Hero ${i}`, position: 1, jewels: (icon === '🧚') ? 3 : 0, 
+                    name: playerName, position: 1, jewels: (icon === '🧚') ? 3 : 0, 
                     token: icon, color: COLORS[i-1], milestones: { 25: false, 50: false, 75: false },
-                    fairyWardTurns: 0, isWerewolf: (icon === '🐺'), skipTurns: 0, lastRoll: 0
+                    fairyWardTurns: 0, isWerewolf: (icon === '🐺'), skipTurns: 0, lastRoll: 0, easterEgg: null
                 });
             }
+            
+            players.forEach(p => {
+                let lower = p.name.toLowerCase();
+                if (lower === 'colette') { p.jewels += 10; p.easterEgg = 'Colette'; logMessage(`✨ Designer Privilege activated!`); }
+                if (lower === 'kingsley') { p.position = 10; p.easterEgg = 'Kingsley'; logMessage(`🚀 Brother Sneak activated!`); }
+                if (lower === 'bonnie') { p.jewels += 5; p.easterEgg = 'Bonnie'; logMessage(`🍎 Teacher's Apple activated!`); }
+                if (lower === 'matthew') { p.jewels -= 5; p.easterEgg = 'Matthew'; logMessage(`🐛 Dad Tax applied!`); }
+                
+                if (lower === 'claire') p.easterEgg = 'Claire';
+                if (lower === 'stella') p.easterEgg = 'Stella';
+                if (lower === 'nikki') p.easterEgg = 'Nikki';
+                if (lower === 'dodia') p.easterEgg = 'Dodia';
+                if (lower === 'jenny') p.easterEgg = 'Jenny';
+            });
+            
             generateRandomMaze(); 
             document.getElementById('setup-screen').style.display = 'none';
             document.getElementById('game-screen').style.display = 'block';
             createBoard(); updateUI(); logMessage(i18n[currentLang].logs.logStart);
+            playSound('start');
         }
 
         function createBoard() {
@@ -758,7 +951,14 @@
             [25, 50, 75].forEach(ms => {
                 if (newPos >= ms && !p.milestones[ms]) {
                     p.milestones[ms] = true;
-                    let amount = (p.token === '🛡️') ? 2 : 1; p.jewels += amount;
+                    let amount = (p.token === '🛡️') ? 2 : 1;
+                    
+                    if (p.easterEgg === 'Jenny') {
+                        amount += 2;
+                        logMessage(`🎓 ${p.name} (Talents) collected +2 extra Jewels from the bank!`);
+                    }
+                    
+                    p.jewels += amount;
                     logMessage(i18n[currentLang].logs.logMilestone(p.token, p.name, ms, amount));
                     playSound('jewel'); triggerParticles('💎', 15);
                 }
@@ -769,8 +969,8 @@
             if (gameWon) return;
 
             let p = players[currentPlayerIndex];
+            let lowerName = p.name.toLowerCase();
             
-            // Check for Skip Turn Status
             if (p.skipTurns > 0) {
                 if (p.token === '🧛') logMessage(i18n[currentLang].logs.logVampireSleep(p.name));
                 else logMessage(i18n[currentLang].logs.logResting(p.name)); 
@@ -785,7 +985,6 @@
             let baseRoll;
             let rollMsg = "";
 
-            // 🔮 Oracle: Foresight Base Roll Logic
             if (p.token === '🔮') {
                 let minRoll = (p.lastRoll === 6 || p.lastRoll === 0) ? 1 : p.lastRoll + 1;
                 baseRoll = Math.floor(Math.random() * (6 - minRoll + 1)) + minRoll;
@@ -802,51 +1001,35 @@
             
             playSound('roll');
 
-            // 🏹 Ranger is debuffed: +1 only if they don't roll a 6
             if (p.token === '🏹' && baseRoll < 6) { moveAmount += 1; rollMsg += i18n[currentLang].logs.logRangerBonus; }
-            
-            // 🔥 Underdog boost: guaranteed +1 if far behind
             if (isUnderdog) { moveAmount += 1; rollMsg += i18n[currentLang].logs.logUnderdog; }
+            if (lowerName === 'dodia') { moveAmount += 2; rollMsg += i18n[currentLang].logs.eggDodiaRoll; }
 
-            // 🦹 Rogue Pickpocket / Robin Hood Logic
             if (p.token === '🦹' && (baseRoll === 1 || baseRoll === 3 || baseRoll === 5)) {
                 let otherPlayers = players.filter(op => op !== p);
                 if (otherPlayers.length > 0) {
                     let maxJewelsAll = Math.max(...players.map(pl => pl.jewels));
-                    
                     if (p.jewels >= maxJewelsAll && p.jewels > 0) {
-                        // Robin Hood: Give to poorest
                         let minJewelsOther = Math.min(...otherPlayers.map(op => op.jewels));
                         let poorest = otherPlayers.filter(op => op.jewels === minJewelsOther);
                         let target = poorest[Math.floor(Math.random() * poorest.length)];
-                        
-                        p.jewels--;
-                        target.jewels++;
-                        logMessage(i18n[currentLang].logs.logRogueGive(p.name, target.name));
-                        playSound('jewel');
+                        p.jewels--; target.jewels++;
+                        logMessage(i18n[currentLang].logs.logRogueGive(p.name, target.name)); playSound('jewel');
                     } else {
-                        // Pickpocket: Steal from richest other
                         let maxJewelsOther = Math.max(...otherPlayers.map(op => op.jewels));
                         if (maxJewelsOther > 0) {
                             let wealthiest = otherPlayers.filter(op => op.jewels === maxJewelsOther);
                             let target = wealthiest[Math.floor(Math.random() * wealthiest.length)];
-                            
-                            target.jewels--; 
-                            p.jewels++;
-                            logMessage(i18n[currentLang].logs.logRogueSteal(p.name, target.name));
-                            playSound('jewel');
-
+                            target.jewels--; p.jewels++;
+                            logMessage(i18n[currentLang].logs.logRogueSteal(p.name, target.name)); playSound('jewel');
                             if (target.token === '🛡️' || target.token === '👑') {
-                                p.skipTurns = 1;
-                                logMessage(i18n[currentLang].logs.logRogueCaught(p.name, target.name));
-                                playSound('trap');
+                                p.skipTurns = 1; logMessage(i18n[currentLang].logs.logRogueCaught(p.name, target.name)); playSound('trap');
                             }
                         }
                     }
                 }
             }
             
-            // 🧚 Fairy Magic
             if (p.token === '🧚' && baseRoll === 6) {
                 logMessage(i18n[currentLang].logs.logFairyMagic); playSound('jewel');
                 players.forEach(op => {
@@ -859,10 +1042,16 @@
             p.position += moveAmount;
 
             if (p.position > WINNING_TILE) {
-                if (p.token === '👑') {
-                    p.position = WINNING_TILE; logMessage(i18n[currentLang].logs.logRoyalStop(p.name));
-                } else {
-                    p.position = WINNING_TILE - (p.position - WINNING_TILE); logMessage(i18n[currentLang].logs.logBounce(displayToken, p.name, p.position));
+                if (p.token === '👑') { p.position = WINNING_TILE; logMessage(i18n[currentLang].logs.logRoyalStop(p.name)); } 
+                else { p.position = WINNING_TILE - (p.position - WINNING_TILE); logMessage(i18n[currentLang].logs.logBounce(displayToken, p.name, p.position)); }
+            }
+            
+            if (p.easterEgg === 'Claire') {
+                let shared = players.some(op => op !== p && op.position === p.position && p.position !== 1);
+                if (shared) {
+                    p.jewels += 1;
+                    logMessage(`💖 ${p.name} (Best Friend) shared a tile and gained 💎 1 Jewel!`);
+                    playSound('jewel');
                 }
             }
 
@@ -877,14 +1066,23 @@
                 });
             } 
             else if (TRAPS[p.position]) {
-                let trapStart = p.position; let trapEnd = TRAPS[trapStart]; let shieldCost = (p.token === '🛡️') ? 2 : 3; 
+                let trapStart = p.position; let trapEnd = TRAPS[trapStart]; 
+                
+                let shieldCost = (p.token === '🛡️') ? 2 : 3; 
+                if (p.easterEgg === 'Nikki') shieldCost = 0; 
 
                 if (p.token === '🐺' && p.isWerewolf) {
                     logMessage(i18n[currentLang].logs.logWerewolfImmune(p.position)); p.isWerewolf = false; 
                 } else if (p.fairyWardTurns > 0) {
                     logMessage(i18n[currentLang].logs.logFairyWard(displayToken, p.name, p.position)); p.fairyWardTurns = 0; 
                 } else if (p.jewels >= shieldCost) {
-                    p.jewels -= shieldCost; logMessage(i18n[currentLang].logs.logShielded(displayToken, p.name, shieldCost, p.position)); playSound('jewel');
+                    p.jewels -= shieldCost; 
+                    logMessage(i18n[currentLang].logs.logShielded(displayToken, p.name, shieldCost, p.position)); 
+                    
+                    if (p.easterEgg === 'Nikki') logMessage(`🛡️ Mum's Love made the shield FREE!`);
+                    if (p.easterEgg === 'Dodia' && shieldCost === 0) logMessage(`📚 Dodia magically found the budget for a FREE shield!`);
+                    
+                    playSound('jewel');
                     if (p.token === '🐺' && !p.isWerewolf) { p.isWerewolf = true; logMessage(i18n[currentLang].logs.logWolfTransform(p.name)); }
                 } else {
                     triggerBoardAnim('shake'); playSound('trap');
@@ -897,7 +1095,7 @@
                             p.jewels -= 1;
                             const targetPlayer = playersAhead[Math.floor(Math.random() * playersAhead.length)];
                             p.position = targetPlayer.position; targetPlayer.position = trapEnd;
-                            p.skipTurns = 1; // BAT SLUMBER TRIGGER
+                            p.skipTurns = 1; 
                             logMessage(i18n[currentLang].logs.logVampireSwap(p.name, targetPlayer.name, trapEnd));
                         } else {
                             p.position = trapEnd; logMessage(i18n[currentLang].logs.logVampireFail(p.name, trapEnd));
@@ -908,7 +1106,17 @@
                     if (p.token === '🐺' && !p.isWerewolf) { p.isWerewolf = true; logMessage(i18n[currentLang].logs.logWolfTransform(p.name)); }
                 }
             } else {
-                logMessage(i18n[currentLang].logs.logMoveSafe(displayToken, p.name, p.position));
+                if (p.easterEgg === 'Stella' && p.position < WINNING_TILE) {
+                    logMessage(`✨ ${p.name} (VP Speed) landed on an empty space and dashed +3 tiles!`);
+                    p.position += 3;
+                    if (p.position > WINNING_TILE) {
+                        if (p.token === '👑') { p.position = WINNING_TILE; logMessage(i18n[currentLang].logs.logRoyalStop(p.name)); } 
+                        else { p.position = WINNING_TILE - (p.position - WINNING_TILE); logMessage(i18n[currentLang].logs.logBounce(displayToken, p.name, p.position)); }
+                    }
+                    logMessage(`🛡️ ${p.name} ignores any traps or portals at Tile ${p.position}!`);
+                } else {
+                    logMessage(i18n[currentLang].logs.logMoveSafe(displayToken, p.name, p.position));
+                }
             }
 
             checkMilestones(p, p.position);
@@ -932,12 +1140,17 @@
                 });
             }
 
+            if (p.position === 55) {
+                logMessage(i18n[currentLang].logs.logClap(p.name));
+                triggerParticles('👏', 15);
+            }
+
             let maxPos = Math.max(...players.map(pl => pl.position));
             if (!suddenDeathTriggered && maxPos >= 90 && maxPos < WINNING_TILE) {
                 suddenDeathTriggered = true;
                 document.body.classList.add('sudden-death-active');
                 logMessage(i18n[currentLang].logs.logSuddenDeath);
-                triggerBoardAnim('shake'); playSound('trap');
+                triggerBoardAnim('shake'); playSound('dragon');
             }
 
             updateUI();
@@ -971,10 +1184,15 @@
                 let className = i18n[currentLang].classes[p.token].name;
                 let classDesc = i18n[currentLang].classes[p.token].desc;
                 
+                let eggHTML = '';
+                if (p.easterEgg && i18n[currentLang].eggs[p.easterEgg]) {
+                    eggHTML = `<br><span class="stat-ability" style="color: var(--accent); padding-top: 5px; margin-top: 5px; border-top: 1px dashed var(--accent);"><strong>✨ Secret Skill:</strong> ${i18n[currentLang].eggs[p.easterEgg]}</span>`;
+                }
+                
                 statsHTML += `
                 <div class="player-stat" style="border-left: 6px solid ${p.color};">
                     <div class="stat-header"><span>${displayToken} ${p.name}${wardIcon}${sleepIcon}${underdogIcon}</span><span>💎 ${p.jewels} | Tile: ${p.position}</span></div>
-                    <span class="stat-ability"><strong>${className}:</strong> ${classDesc}</span>
+                    <span class="stat-ability"><strong>${className}:</strong> ${classDesc}</span>${eggHTML}
                 </div>`;
             });
             document.getElementById('stats-container').innerHTML = statsHTML;
@@ -1005,9 +1223,7 @@
 
         function logMessage(msg) {
             const log = document.getElementById('log');
-            // Use insertAdjacentHTML for ultra-fast DOM updates during Simulation
             log.insertAdjacentHTML('afterbegin', `<div>> ${msg}</div>`);
-            // Trim memory to keep simulation lighting fast
             if (log.children.length > 50) log.lastElementChild.remove();
         }
     </script>

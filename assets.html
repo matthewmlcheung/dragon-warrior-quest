@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asset Studio - Glowing Ultimate Edition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Nunito', sans-serif; background-color: #0f172a; text-align: center; padding: 20px; color: #f8fafc; margin: 0;}
+        h1 { color: #22d3ee; font-size: 36px; font-weight: 900; margin-bottom: 10px; letter-spacing: 1px; text-shadow: 0 4px 20px rgba(34, 211, 238, 0.4);}
+        .gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 25px; max-width: 1200px; margin: 0 auto; padding-bottom: 50px;}
+        .card { background: #1e293b; padding: 20px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 1px solid #334155; display: flex; flex-direction: column; align-items: center; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);}
+        .card:hover { transform: translateY(-8px); border-color: #22d3ee; box-shadow: 0 15px 40px rgba(34, 211, 238, 0.2); }
+        .img-container { width: 180px; height: 180px; background: radial-gradient(circle at center, #1e293b, #020617); border-radius: 16px; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; box-shadow: inset 0 4px 20px rgba(0,0,0,0.8); position: relative;}
+        .card h3 { margin: 0 0 15px 0; font-size: 18px; color: #e2e8f0;}
+        .instructions { background: linear-gradient(135deg, #1e293b, #0f172a); padding: 25px; border-radius: 16px; max-width: 800px; margin: 0 auto 40px auto; text-align: left; border-left: 6px solid #22d3ee; box-shadow: 0 10px 25px rgba(0,0,0,0.3);}
+        button { background: linear-gradient(135deg, #0ea5e9, #2563eb); color: white; border: none; padding: 12px 20px; border-radius: 10px; font-weight: 800; cursor: pointer; font-family: inherit; font-size: 15px; width: 100%; transition: all 0.2s; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);}
+        button:hover { background: linear-gradient(135deg, #22d3ee, #3b82f6); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(34, 211, 238, 0.6); }
+        button:active { transform: translateY(1px); }
+        svg { width: 100%; height: 100%; filter: drop-shadow(0px 8px 6px rgba(0,0,0,0.5)); }
+    </style>
+</head>
+<body>
+
+    <h1>✨ Ultimate Glowing Edition</h1>
+    
+    <div class="instructions">
+        <strong>The Magical Upgrade:</strong>
+        <ol>
+            <li>Every character now features a dynamic radial neon glow using advanced SVG blending.</li>
+            <li>Click the blue <strong>"Download Glowing PNG"</strong> button.</li>
+            <li>The engine will bake the lights and shadows into a clean, transparent <code>.png</code>.</li>
+        </ol>
+    </div>
+
+    <div class="gallery" id="gallery"></div>
+
+    <script>
+        // Shared Neon Glow Defs injected into every SVG for flawless Canvas exporting
+        const glowDefs = `
+            <radialGradient id="g-blue" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#3b82f6" stop-opacity="1"/><stop offset="100%" stop-color="#3b82f6" stop-opacity="0"/></radialGradient>
+            <radialGradient id="g-green" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#4ade80" stop-opacity="1"/><stop offset="100%" stop-color="#4ade80" stop-opacity="0"/></radialGradient>
+            <radialGradient id="g-red" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#ef4444" stop-opacity="1"/><stop offset="100%" stop-color="#ef4444" stop-opacity="0"/></radialGradient>
+            <radialGradient id="g-gold" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#fde047" stop-opacity="1"/><stop offset="100%" stop-color="#ca8a04" stop-opacity="0"/></radialGradient>
+            <radialGradient id="g-purple" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#c084fc" stop-opacity="1"/><stop offset="100%" stop-color="#9333ea" stop-opacity="0"/></radialGradient>
+            <radialGradient id="g-cyan" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="#22d3ee" stop-opacity="1"/><stop offset="100%" stop-color="#0891b2" stop-opacity="0"/></radialGradient>
+        `;
+
+        const svgTemplates = {
+            knight: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs>${glowDefs}
+                    <linearGradient id="k-steel" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#f8fafc"/><stop offset="50%" stop-color="#94a3b8"/><stop offset="100%" stop-color="#475569"/>
+                    </linearGradient>
+                </defs>
+                <ellipse cx="50" cy="92" rx="30" ry="6" fill="rgba(0,0,0,0.3)"/>
+                <!-- Sword -->
+                <path d="M 75 20 L 75 90" stroke="url(#k-steel)" stroke-width="8" stroke-linecap="round"/>
+                <path d="M 60 70 L 90 70" stroke="#b45309" stroke-width="6" stroke-linecap="round"/>
+                <!-- Glowing Sword Gem -->
+                <circle cx="75" cy="70" r="12" fill="url(#g-red)" opacity="0.8"/>
+                <circle cx="75" cy="70" r="4" fill="#ef4444"/>
+                <circle cx="73" cy="68" r="1.5" fill="#fff"/>
+                <!-- Body -->
+                <path d="M 25 85 L 30 45 Q 50 20 70 45 L 75 85 Z" fill="url(#k-steel)" stroke="#0f172a" stroke-width="3" stroke-linejoin="round"/>
+                <!-- Visor -->
+                <rect x="36" y="38" width="28" height="16" rx="4" fill="#0f172a" stroke="#1e293b" stroke-width="2"/>
+                <line x1="50" y1="38" x2="50" y2="54" stroke="#1e293b" stroke-width="3"/>
+                <!-- Glowing Shield Aura -->
+                <circle cx="30" cy="60" r="30" fill="url(#g-blue)" opacity="0.8"/>
+                <!-- Shield -->
+                <path d="M 10 45 L 50 45 L 50 75 Q 30 95 10 75 Z" fill="#1d4ed8" stroke="#0f172a" stroke-width="3" stroke-linejoin="round"/>
+                <path d="M 30 45 L 30 82 M 10 60 L 50 60" stroke="#bfdbfe" stroke-width="3"/>
+                <!-- Shield Specular -->
+                <path d="M 15 50 L 45 50" stroke="#fff" stroke-width="2" opacity="0.8"/>
+            </svg>`,
+            
+            ranger: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs>${glowDefs}</defs>
+                <ellipse cx="50" cy="92" rx="25" ry="5" fill="rgba(0,0,0,0.3)"/>
+                <!-- Bow -->
+                <path d="M 75 15 Q 105 50 75 85" fill="none" stroke="#78350f" stroke-width="6" stroke-linecap="round"/>
+                <line x1="75" y1="15" x2="75" y2="85" stroke="#cbd5e1" stroke-width="1.5"/>
+                <!-- Glowing Arrowhead -->
+                <circle cx="85" cy="50" r="18" fill="url(#g-green)" opacity="0.9"/>
+                <line x1="40" y1="50" x2="88" y2="50" stroke="#f1f5f9" stroke-width="3" stroke-linecap="round"/>
+                <polygon points="88,50 78,44 78,56" fill="#4ade80" stroke="#fff" stroke-width="1"/>
+                <polygon points="40,50 45,47 45,53" fill="#ef4444"/>
+                <!-- Cloak -->
+                <path d="M 25 88 L 35 40 Q 50 15 65 40 L 75 88 Z" fill="#22c55e" stroke="#0f172a" stroke-width="3" stroke-linejoin="round"/>
+                <!-- Face -->
+                <circle cx="50" cy="42" r="14" fill="#fed7aa" stroke="#0f172a" stroke-width="3"/>
+                <circle cx="44" cy="40" r="3" fill="#0f172a"/><circle cx="56" cy="40" r="3" fill="#0f172a"/>
+                <path d="M 30 40 Q 50 20 70 40" fill="#166534" stroke="#0f172a" stroke-width="3"/> 
+            </svg>`,
+
+            mage: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs>${glowDefs}</defs>
+                <ellipse cx="50" cy="92" rx="25" ry="5" fill="rgba(0,0,0,0.3)"/>
+                <!-- Staff & Glow -->
+                <line x1="75" y1="20" x2="75" y2="90" stroke="#78350f" stroke-width="5" stroke-linecap="round"/>
+                <circle cx="75" cy="18" r="22" fill="url(#g-gold)" opacity="0.9"/>
+                <circle cx="75" cy="18" r="6" fill="#fff" stroke="#facc15" stroke-width="2"/>
+                <!-- Robe -->
+                <path d="M 25 88 L 35 50 L 65 50 L 75 88 Z" fill="#9333ea" stroke="#0f172a" stroke-width="3" stroke-linejoin="round"/>
+                <!-- Face -->
+                <circle cx="50" cy="45" r="12" fill="#fed7aa" stroke="#0f172a" stroke-width="3"/>
+                <!-- Glowing Eyes -->
+                <circle cx="45" cy="43" r="10" fill="url(#g-cyan)" opacity="0.8"/>
+                <circle cx="55" cy="43" r="10" fill="url(#g-cyan)" opacity="0.8"/>
+                <circle cx="45" cy="43" r="2.5" fill="#fff"/><circle cx="55" cy="43" r="2.5" fill="#fff"/>
+                <!-- Hat -->
+                <path d="M 15 40 Q 50 50 85 40 L 50 5 Z" fill="#7e22ce" stroke="#0f172a" stroke-width="3" stroke-linejoin="round"/>
+                <path d="M 40 25 L 60 25" stroke="#fde047" stroke-width="4"/> 
+            </svg>`,
+
+            ninja: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs>${glowDefs}</defs>
+                <ellipse cx="50" cy="92" rx="20" ry="4" fill="rgba(0,0,0,0.4)"/>
+                <!-- Glowing Plasma Katana -->
+                <path d="M 10 10 L 90 90" stroke="url(#g-cyan)" stroke-width="20" stroke-linecap="round" opacity="0.6"/>
+                <line x1="20" y1="20" x2="80" y2="80" stroke="#22d3ee" stroke-width="8" stroke-linecap="round"/>
+                <line x1="25" y1="25" x2="75" y2="75" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+                <line x1="28" y1="20" x2="20" y2="28" stroke="#0f172a" stroke-width="6"/>
+                <!-- Body -->
+                <path d="M 30 85 L 35 45 Q 50 35 65 45 L 70 85 Z" fill="#1e293b" stroke="#0f172a" stroke-width="3" stroke-linejoin="round"/>
+                <!-- Head -->
+                <circle cx="50" cy="38" r="16" fill="#0f172a" stroke="#020617" stroke-width="3"/>
+                <!-- Mask opening -->
+                <rect x="36" y="32" width="28" height="10" rx="5" fill="#fed7aa" stroke="#0f172a" stroke-width="2"/>
+                <circle cx="43" cy="37" r="2.5" fill="#0f172a"/><circle cx="57" cy="37" r="2.5" fill="#0f172a"/>
+                <!-- Headband -->
+                <path d="M 66 32 Q 90 20 85 45 M 66 32 Q 90 40 80 55" fill="none" stroke="#ef4444" stroke-width="5" stroke-linecap="round"/>
+            </svg>`,
+
+            vampire: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs>${glowDefs}</defs>
+                <ellipse cx="50" cy="92" rx="25" ry="5" fill="rgba(0,0,0,0.3)"/>
+                <!-- Cape -->
+                <path d="M 15 35 Q 50 -5 85 35 L 75 88 L 25 88 Z" fill="#991b1b" stroke="#0f172a" stroke-width="3" stroke-linejoin="round"/>
+                <!-- Suit -->
+                <path d="M 35 88 L 40 45 L 60 45 L 65 88 Z" fill="#1e293b" stroke="#0f172a" stroke-width="3"/>
+                <polygon points="40,45 50,75 60,45" fill="#f8fafc" stroke="#0f172a" stroke-width="2"/>
+                <!-- Glowing Amulet -->
+                <circle cx="50" cy="55" r="15" fill="url(#g-red)" opacity="0.8"/>
+                <polygon points="45,50 50,60 55,50" fill="#f87171" stroke="#fff" stroke-width="1"/>
+                <!-- Head -->
+                <circle cx="50" cy="38" r="14" fill="#f1f5f9" stroke="#0f172a" stroke-width="3"/>
+                <!-- Glowing Eyes -->
+                <circle cx="44" cy="35" r="8" fill="url(#g-red)" opacity="0.8"/>
+                <circle cx="56" cy="35" r="8" fill="url(#g-red)" opacity="0.8"/>
+                <circle cx="44" cy="35" r="2.5" fill="#ef4444"/><circle cx="56" cy="35" r="2.5" fill="#ef4444"/>
+                <!-- Fangs -->
+                <polygon points="47,44 49,49 51,44" fill="#fff" stroke="#0f172a" stroke-width="1"/><polygon points="49,44 51,49 53,44" fill="#fff" stroke="#0f172a" stroke-width="1"/>
+            </svg>`,
+
+            fairy: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs>${glowDefs}</defs>
+                <ellipse cx="50" cy="90" rx="15" ry="3" fill="rgba(0,0,0,0.2)"/>
+                <!-- Glowing Wings Aura -->
+                <circle cx="20" cy="50" r="30" fill="url(#g-cyan)" opacity="0.7"/>
+                <circle cx="80" cy="50" r="30" fill="url(#g-purple)" opacity="0.7"/>
+                <!-- Wings -->
+                <path d="M 50 45 Q 95 0 90 40 Q 80 65 50 50" fill="#a5f3fc" stroke="#0ea5e9" stroke-width="2" stroke-linejoin="round"/>
+                <path d="M 50 45 Q 5 0 10 40 Q 20 65 50 50" fill="#e879f9" stroke="#c026d3" stroke-width="2" stroke-linejoin="round"/>
+                <!-- Body -->
+                <path d="M 35 85 L 42 45 L 58 45 L 65 85 Z" fill="#f472b6" stroke="#0f172a" stroke-width="3" stroke-linejoin="round"/>
+                <!-- Head -->
+                <circle cx="50" cy="38" r="13" fill="#fed7aa" stroke="#0f172a" stroke-width="3"/>
+                <circle cx="45" cy="36" r="2.5" fill="#0f172a"/><circle cx="55" cy="36" r="2.5" fill="#0f172a"/>
+                <!-- Glowing Wand -->
+                <line x1="75" y1="40" x2="60" y2="70" stroke="#d97706" stroke-width="3" stroke-linecap="round"/>
+                <circle cx="78" cy="35" r="18" fill="url(#g-gold)" opacity="0.9"/>
+                <polygon points="78,25 85,35 91,25 78,17" fill="#fff" stroke="#fde047" stroke-width="2"/>
+            </svg>`,
+
+            werewolf: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs>${glowDefs}</defs>
+                <ellipse cx="50" cy="92" rx="30" ry="6" fill="rgba(0,0,0,0.3)"/>
+                <!-- Glowing Magic Claws -->
+                <path d="M 10 40 L 30 70 M 20 30 L 40 60 M 30 20 L 50 50" stroke="url(#g-blue)" stroke-width="15" stroke-linecap="round" opacity="0.4"/>
+                <path d="M 10 40 L 30 70 M 20 30 L 40 60 M 30 20 L 50 50" stroke="#60a5fa" stroke-width="3" stroke-linecap="round"/>
+                <!-- Body -->
+                <path d="M 25 85 L 35 45 Q 50 35 65 45 L 75 85 Z" fill="#78350f" stroke="#0f172a" stroke-width="3" stroke-linejoin="round"/>
+                <path d="M 30 70 L 45 88 L 55 75 L 65 88 L 70 70 Z" fill="#1e3a8a" stroke="#0f172a" stroke-width="3"/>
+                <!-- Head -->
+                <circle cx="50" cy="38" r="16" fill="#92400e" stroke="#0f172a" stroke-width="3"/>
+                <!-- Glowing Red Eyes -->
+                <circle cx="42" cy="35" r="12" fill="url(#g-red)" opacity="0.8"/>
+                <circle cx="58" cy="35" r="12" fill="url(#g-red)" opacity="0.8"/>
+                <circle cx="42" cy="35" r="3" fill="#fff"/><circle cx="58" cy="35" r="3" fill="#fff"/>
+                <!-- Snout -->
+                <path d="M 38 42 Q 50 55 62 42 Z" fill="#b45309" stroke="#0f172a" stroke-width="2"/>
+                <polygon points="46,42 50,47 54,42" fill="#0f172a"/>
+            </svg>`,
+
+            royal: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs>${glowDefs}</defs>
+                <ellipse cx="50" cy="92" rx="35" ry="6" fill="rgba(0,0,0,0.3)"/>
+                <!-- Glowing Crown Aura -->
+                <circle cx="50" cy="20" r="35" fill="url(#g-gold)" opacity="0.8"/>
+                <!-- Cape -->
+                <path d="M 20 85 L 35 45 L 65 45 L 80 85 Z" fill="#dc2626" stroke="#0f172a" stroke-width="3" stroke-linejoin="round"/>
+                <path d="M 20 85 L 35 45 L 45 85 Z M 80 85 L 65 45 L 55 85 Z" fill="#f8fafc" stroke="#e2e8f0" stroke-width="2"/>
+                <circle cx="28" cy="70" r="1.5" fill="#0f172a"/><circle cx="72" cy="70" r="1.5" fill="#0f172a"/>
+                <!-- Face -->
+                <circle cx="50" cy="45" r="13" fill="#fed7aa" stroke="#0f172a" stroke-width="3"/>
+                <circle cx="45" cy="43" r="2.5" fill="#0f172a"/><circle cx="55" cy="43" r="2.5" fill="#0f172a"/>
+                <!-- Majestic Crown -->
+                <path d="M 32 35 L 30 10 L 41 22 L 50 5 L 59 22 L 70 10 L 68 35 Z" fill="#fde047" stroke="#0f172a" stroke-width="3" stroke-linejoin="round"/>
+                <circle cx="30" cy="10" r="3" fill="#3b82f6"/><circle cx="50" cy="5" r="4" fill="#ef4444" stroke="#fff" stroke-width="1"/><circle cx="70" cy="10" r="3" fill="#22c55e"/>
+            </svg>`,
+
+            scholar: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs>${glowDefs}</defs>
+                <ellipse cx="50" cy="92" rx="25" ry="5" fill="rgba(0,0,0,0.3)"/>
+                <!-- Glowing Book Aura -->
+                <circle cx="60" cy="65" r="25" fill="url(#g-purple)" opacity="0.8"/>
+                <!-- Robe -->
+                <path d="M 28 88 L 35 45 L 65 45 L 72 88 Z" fill="#0284c7" stroke="#0f172a" stroke-width="3" stroke-linejoin="round"/>
+                <!-- Big Book -->
+                <rect x="43" y="53" width="35" height="25" rx="3" fill="#f8fafc" stroke="#0f172a" stroke-width="2" transform="rotate(-10 50 65)"/>
+                <line x1="48" y1="58" x2="70" y2="54" stroke="#c084fc" stroke-width="3"/>
+                <line x1="48" y1="64" x2="70" y2="60" stroke="#c084fc" stroke-width="3"/>
+                <!-- Face -->
+                <circle cx="50" cy="36" r="13" fill="#fed7aa" stroke="#0f172a" stroke-width="3"/>
+                <!-- Glowing Glasses -->
+                <circle cx="42" cy="34" r="12" fill="url(#g-cyan)" opacity="0.8"/>
+                <circle cx="58" cy="34" r="12" fill="url(#g-cyan)" opacity="0.8"/>
+                <circle cx="42" cy="34" r="6" fill="#fff" stroke="#0f172a" stroke-width="3"/>
+                <circle cx="58" cy="34" r="6" fill="#fff" stroke="#0f172a" stroke-width="3"/>
+                <line x1="48" y1="34" x2="52" y2="34" stroke="#0f172a" stroke-width="3"/>
+            </svg>`,
+
+            rogue: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs>${glowDefs}</defs>
+                <ellipse cx="50" cy="92" rx="25" ry="5" fill="rgba(0,0,0,0.3)"/>
+                <!-- Body -->
+                <path d="M 28 88 L 35 45 L 65 45 L 72 88 Z" fill="#166534" stroke="#0f172a" stroke-width="3" stroke-linejoin="round"/>
+                <!-- Glowing Loot Aura -->
+                <circle cx="22" cy="72" r="30" fill="url(#g-gold)" opacity="0.8"/>
+                <!-- Loot Bag -->
+                <circle cx="22" cy="72" r="16" fill="#b45309" stroke="#0f172a" stroke-width="3"/>
+                <polygon points="22,55 15,48 29,48" fill="#d97706" stroke="#0f172a" stroke-width="2"/>
+                <!-- Spilling Glowing Coins -->
+                <circle cx="12" cy="85" r="4" fill="#fff" stroke="#ca8a04" stroke-width="1"/>
+                <circle cx="8" cy="80" r="3" fill="#fff" stroke="#ca8a04" stroke-width="1"/>
+                <text x="16" y="78" font-family="sans-serif" font-weight="900" font-size="18" fill="#fff">$</text>
+                <!-- Face -->
+                <circle cx="50" cy="38" r="13" fill="#fed7aa" stroke="#0f172a" stroke-width="3"/>
+                <rect x="35" y="32" width="30" height="12" rx="5" fill="#0f172a"/>
+                <circle cx="43" cy="38" r="3" fill="#fff"/><circle cx="57" cy="38" r="3" fill="#fff"/>
+            </svg>`,
+
+            oracle: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs>${glowDefs}</defs>
+                <ellipse cx="50" cy="92" rx="25" ry="5" fill="rgba(0,0,0,0.3)"/>
+                <!-- Robe -->
+                <path d="M 28 88 L 38 45 Q 50 35 62 45 L 72 88 Z" fill="#9333ea" stroke="#0f172a" stroke-width="3" stroke-linejoin="round"/>
+                <!-- Face -->
+                <circle cx="50" cy="38" r="13" fill="#fed7aa" stroke="#0f172a" stroke-width="3"/>
+                <circle cx="45" cy="36" r="2" fill="#0f172a"/><circle cx="55" cy="36" r="2" fill="#0f172a"/>
+                <!-- Glowing Third Eye -->
+                <circle cx="50" cy="28" r="10" fill="url(#g-gold)" opacity="0.9"/>
+                <polygon points="50,25 47,29 50,33 53,29" fill="#fff"/>
+                <!-- Massive Crystal Ball Glow -->
+                <circle cx="50" cy="65" r="35" fill="url(#g-cyan)" opacity="0.9"/>
+                <circle cx="50" cy="65" r="16" fill="#cffafe" stroke="#0891b2" stroke-width="2"/>
+                <path d="M 42 62 Q 48 58 52 62" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+                <polygon points="50,75 45,85 55,85" fill="#94a3b8" stroke="#0f172a" stroke-width="3" stroke-linejoin="round"/> 
+            </svg>`,
+
+            human: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs>${glowDefs}</defs>
+                <ellipse cx="50" cy="92" rx="20" ry="4" fill="rgba(0,0,0,0.3)"/>
+                <!-- Tunic -->
+                <path d="M 32 88 L 38 45 L 62 45 L 68 88 Z" fill="#d97706" stroke="#0f172a" stroke-width="3" stroke-linejoin="round"/>
+                <!-- Glowing Soul Heart -->
+                <circle cx="50" cy="65" r="25" fill="url(#g-red)" opacity="0.9"/>
+                <path d="M 50 68 L 45 63 A 4 4 0 0 1 50 58 A 4 4 0 0 1 55 63 Z" fill="#fff"/>
+                <!-- Face -->
+                <circle cx="50" cy="38" r="14" fill="#fed7aa" stroke="#0f172a" stroke-width="3"/>
+                <circle cx="45" cy="36" r="2.5" fill="#0f172a"/><circle cx="55" cy="36" r="2.5" fill="#0f172a"/>
+                <path d="M 46 44 Q 50 48 54 44" fill="none" stroke="#0f172a" stroke-width="2" stroke-linecap="round"/>
+                <path d="M 36 38 Q 50 15 64 38 Q 60 25 50 25 Q 40 25 36 38 Z" fill="#451a03" stroke="#0f172a" stroke-width="2"/>
+            </svg>`,
+
+            dragon: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs>${glowDefs}</defs>
+                <ellipse cx="50" cy="95" rx="35" ry="5" fill="rgba(0,0,0,0.4)"/>
+                <!-- Wings -->
+                <path d="M 40 45 Q 15 10 5 35 Q 25 55 40 45" fill="#16a34a" stroke="#0f172a" stroke-width="3" stroke-linejoin="round"/>
+                <path d="M 60 45 Q 85 10 95 35 Q 75 55 60 45" fill="#16a34a" stroke="#0f172a" stroke-width="3" stroke-linejoin="round"/>
+                <!-- Glowing Belly -->
+                <circle cx="50" cy="75" r="25" fill="url(#g-green)" opacity="0.8"/>
+                <path d="M 20 90 Q 50 30 80 90 Z" fill="#22c55e" stroke="#0f172a" stroke-width="3" stroke-linejoin="round"/>
+                <path d="M 35 90 Q 50 50 65 90 Z" fill="#fef08a" stroke="#0f172a" stroke-width="2"/>
+                <!-- Head -->
+                <circle cx="50" cy="35" r="18" fill="#22c55e" stroke="#0f172a" stroke-width="3"/>
+                <circle cx="43" cy="32" r="3" fill="#0f172a"/><circle cx="57" cy="32" r="3" fill="#0f172a"/>
+                <!-- Blazing Fire Glow -->
+                <circle cx="50" cy="65" r="30" fill="url(#g-gold)" opacity="0.8"/>
+                <circle cx="50" cy="60" r="20" fill="url(#g-red)" opacity="0.9"/>
+                <path d="M 45 46 Q 30 65 42 75 L 50 65 L 58 75 Q 70 65 55 46 Z" fill="#fff"/>
+            </svg>`,
+
+            chest: `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <defs>${glowDefs}</defs>
+                <ellipse cx="50" cy="85" rx="35" ry="8" fill="rgba(0,0,0,0.5)"/>
+                
+                <!-- Open Lid Back -->
+                <path d="M 20 50 Q 50 10 80 50 L 75 50 Q 50 20 25 50 Z" fill="#78350f" stroke="#0f172a" stroke-width="2"/>
+                
+                <!-- Blinding Golden Glow -->
+                <circle cx="50" cy="45" r="45" fill="url(#g-gold)" opacity="0.9"/>
+                <circle cx="50" cy="45" r="25" fill="#fff" opacity="0.6" filter="blur(2px)"/>
+                
+                <!-- Gold Inside -->
+                <path d="M 25 55 Q 50 20 75 55 Z" fill="#fde047"/>
+                <circle cx="50" cy="40" r="5" fill="#ef4444" stroke="#7f1d1d" stroke-width="1"/>
+                
+                <!-- Base -->
+                <path d="M 15 55 L 85 55 L 80 85 L 20 85 Z" fill="#b45309" stroke="#0f172a" stroke-width="4" stroke-linejoin="round"/>
+                
+                <!-- Metal Bands -->
+                <path d="M 30 55 L 30 85 M 70 55 L 70 85" stroke="#94a3b8" stroke-width="6"/>
+                <path d="M 15 55 L 85 55" stroke="#94a3b8" stroke-width="6" stroke-linecap="round"/>
+                
+                <!-- Giant Shiny Lock & Glow -->
+                <circle cx="50" cy="54" r="15" fill="url(#g-cyan)" opacity="0.8"/>
+                <rect x="42" y="48" width="16" height="20" rx="3" fill="#fff" stroke="#0f172a" stroke-width="3"/>
+                <circle cx="50" cy="54" r="3" fill="#0f172a"/>
+                <path d="M 49 54 L 49 62 L 51 62 L 51 54 Z" fill="#0f172a"/>
+            </svg>`
+        };
+
+        const gallery = document.getElementById("gallery");
+
+        Object.keys(svgTemplates).forEach(id => {
+            gallery.innerHTML += `
+                <div class="card">
+                    <div class="img-container" id="container-${id}">
+                        ${svgTemplates[id]}
+                    </div>
+                    <h3>${id}.png</h3>
+                    <button onclick="downloadPNG('${id}')">Download Glowing PNG 💾</button>
+                </div>
+            `;
+        });
+
+        // HTML5 Canvas engine: Safely extracts <defs>, renders gradients/shadows, exports to transparent PNG
+        function downloadPNG(id) {
+            const container = document.getElementById(`container-${id}`);
+            const svgElement = container.querySelector('svg');
+            
+            const svgString = new XMLSerializer().serializeToString(svgElement);
+            const canvas = document.createElement('canvas');
+            canvas.width = 512;
+            canvas.height = 512;
+            const ctx = canvas.getContext('2d');
+            
+            const img = new Image();
+            const base64SVG = btoa(unescape(encodeURIComponent(svgString)));
+            const url = `data:image/svg+xml;base64,${base64SVG}`;
+            
+            img.onload = function() {
+                ctx.drawImage(img, 0, 0, 512, 512);
+                const pngUrl = canvas.toDataURL('image/png');
+                const a = document.createElement('a');
+                a.href = pngUrl;
+                a.download = `${id}.png`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            };
+            img.src = url;
+        }
+    </script>
+</body>
+</html>
